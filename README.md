@@ -77,6 +77,13 @@ Set your environmental variables for each node. Variables explained below:
   }
 }
 ```
+#### EOS  Environment
+In this challenge we used an EOS Environment. 
+
+1. Generate a keypair, an easy way to do this is by using scatter or https://nadejde.github.io/eos-token-sale/
+1. Create accounts. Once for the contract holder and one account for every ork you plan to use.
+1. Fund the accounts and seed the contract holder account with enough ram using cleos. Example: ```cleos -u http://jungle2.cryptolions.io:80 system buyram buyeraccount contractholderaccount "5 EOS"```
+1. Compile the onboarding contract using ```eosio-cpp -abigen -o onboarding.wasm onboarding.cpp``` and push it to the contract holder account using ```cleos -u http://jungle2.cryptolions.io:80 set contract contractholderaccount ./onboarding -p contractholderaccount @active``` 
 
 ### Deploying the Environment
 
