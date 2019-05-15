@@ -17,10 +17,10 @@ Below are concepts that are important to understand within the context of the Ti
 
 
 ## Architecture
-![alt text](https://github.com/tidefoundation/Tide-h4x-for-Privacy/blob/master/Tide%20h4x%20Architecture.png "Architecture Diagram")
+![alt text](https://github.com/tide-foundation/Tide-h4x-for-Privacy/blob/master/Tide%20h4x%20Architecture.png "Architecture Diagram")
 
 ## Flow Diagram
-![alt text](https://github.com/tidefoundation/Tide-h4x-for-Privacy/blob/master/Tide%20h4x%20Workflow.png "Flow Diagram")
+![alt text](https://github.com/tide-foundation/Tide-h4x-for-Privacy/blob/master/Tide%20h4x%20Workflow.png "Flow Diagram")
 
 
 ### Components
