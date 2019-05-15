@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\raziel-ork-1 - Web Deploy.pubxml.user" />
+    <None Include="Properties\PublishProfiles\raziel-ork-10 - Web Deploy.pubxml.user" />
+    <None Include="Properties\PublishProfiles\raziel-ork-11 - Web Deploy.pubxml.user" />
+    <None Include="Properties\PublishProfiles\raziel-ork-12 - Web Deploy.pubxml.user" />
+    <None Include="Properties\PublishProfiles\raziel-ork-13 - Web Deploy.pubxml.user" />
+    <None Include="Properties\PublishProfiles\raziel-ork-14 - Web Deploy.pubxml.user" />
+    <None Include="Properties\PublishProfiles\raziel-ork-15 - Web Deploy.pubxml.user" />
+    <None Include="Properties\PublishProfiles\raziel-ork-16 - Web Deploy.pubxml.user" />
+    <None Include="Properties\PublishProfiles\raziel-ork-17 - Web Deploy.pubxml.user" />
+    <None Include="Properties\PublishProfiles\raziel-ork-18 - Web Deploy.pubxml.user" />
+    <None Include="Properties\PublishProfiles\raziel-ork-19 - Web Deploy.pubxml.user" />
+    <None Include="Properties\PublishProfiles\raziel-ork-2 - Web Deploy.pubxml.user" />
+    <None Include="Properties\PublishProfiles\raziel-ork-20 - Web Deploy.pubxml.user" />
+    <None Include="Properties\PublishProfiles\raziel-ork-21 - Web Deploy.pubxml.user" />
+    <None Include="Properties\PublishProfiles\raziel-ork-3 - Web Deploy.pubxml.user" />
+    <None Include="Properties\PublishProfiles\raziel-ork-4 - Web Deploy.pubxml.user" />
+    <None Include="Properties\PublishProfiles\raziel-ork-5 - Web Deploy.pubxml.user" />
+    <None Include="Properties\PublishProfiles\raziel-ork-6 - Web Deploy.pubxml.user" />
+    <None Include="Properties\PublishProfiles\raziel-ork-7 - Web Deploy.pubxml.user" />
+    <None Include="Properties\PublishProfiles\raziel-ork-8 - Web Deploy.pubxml.user" />
+    <None Include="Properties\PublishProfiles\raziel-ork-9 - Web Deploy.pubxml.user" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="eos-sharp" Version="1.0.7" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Raziel.Library\Raziel.Library.csproj" />
+  </ItemGroup>
+
+</Project>
