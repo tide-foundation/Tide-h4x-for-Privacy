@@ -1,0 +1,336 @@
+
+				Tide Community Open Source License
+
+	Preamble:
+	  The Tide Community Open Source License is a copyright License for 
+	software and other kinds of works designed to encourage the adoption 
+	of the Tide Protocol.  The aim of the Tide Protocol is to create the 
+	technological infrastructure to drive the new personal data economy, 
+	addressing the data sovereignty needs of consumers, the 
+	revenue-generating and cost minimization needs of vendors who collect 
+	data from consumers, and the data reliability needs of seekers of 
+	consumer data.
+
+	  To that end, the Tide Community Open Source License gives you the 
+	freedom to modify and distribute copies of software and other works 
+	for free, or for a fee, as long as you do so in accordance with these 
+	terms and the software adopts the Tide Protocol in full.
+
+	License Terms
+	Version: 1
+	Date of last revision: 8 May 2019
+
+	1	Acceptance of these terms
+	  (a)	These terms are between the copyright holder (“we”, “us” and 
+			“our”) identified in the notice embedded in or provided with 
+			the source code, technical documentation or other material 
+			relating to the Tide Foundation Limited’s (ACN 630 011 371) 
+			(“Tide”) data encryption and exchange platform 
+			known as the “Tide Protocol” (“Tide Protocol”) and with which 
+			these terms are packaged (“Materials”)  and the person or 
+			entity (“you” and “your”) accessing and/or using the Materials.
+	  (b)	By using, modifying or publishing the Materials or any Modified
+			Materials (as defined in clause 2(c) below), you agree to be 
+			bound by these terms.  If you are doing any of the foregoing in 
+			the context of your employment with your employer or on behalf 
+			of another entity, you are agreeing to be bound by these terms 
+			on behalf of that employer or other entity and you represent 
+			and warrant that you have the authority of that employer or 
+			other entity to enter into these terms on their behalf. In such 
+			circumstances, each reference in these terms “you” or “your” 
+			includes that employer or other entity. 
+	  (c)	These terms will remain in effect until terminated under 
+			clause 9.
+
+	2	Intellectual property rights
+	  (a)	In these terms, “Intellectual Property Rights” means all 
+			intellectual property rights of whatever nature throughout the 
+			world, including all rights conferred under statute, common 
+			law or equity, whether existing now or at any time in the 
+			future, including all rights in and to any patents, patent 
+			applications, business names, trade names, domain names, trade 
+			marks, copyright, trade secrets, circuit layout rights, 
+			designs, confidential information, know-how, technical 
+			information, data or developments. All of our Intellectual 
+			Property Rights are protected by the laws in force in 
+			Australia from time to time.
+	  (b)	You acknowledge and agree that we (or our licensors) retain all
+			right, title, and interest (including all Intellectual Property 
+			Rights) in and to the Materials, and nothing you do with or in 
+			relation to the Materials will transfer any right, title or 
+			interest (including Intellectual Property Rights) to you or 
+			License or otherwise permit you to exercise any Intellectual 
+			Property Rights except as expressly granted under these terms.
+	  (c)	In these terms, “Modified Materials” means any work based on 
+			one or more of the Materials, including a revision, 
+			modification, adaptation, subset, addition, enhancement, 
+			improvement, combination, translation, abridgment, 
+			condensation, expansion, collection, compilation or any other 
+			form in which such Materials may be recast, transformed or 
+			adapted or any other new material derived from the Materials.
+
+	3	Your License to the Materials 
+	  (a)	Subject to paragraph (c) below and your compliance with these 
+			terms, we grant you a limited, non-exclusive,  
+			non-sub-licensable, revocable, worldwide, royalty free License 
+			for the term of these terms to access, use, copy, modify, 
+			adapt, distribute, publish and exploit the Materials, provided 
+			that such License is exercised:
+			(i)		solely in connection with the adoption and use of the 
+					Tide Protocol;
+			(ii)	solely in a manner which requires any payment or 
+					exchange of value to be made via Tide Tokens (as 
+					defined in paragraph (c) below); and
+			(iii)	in accordance with clause 6 and on these terms in 
+					respect of the right to distribute and publish the 
+					Materials and Modified Materials.
+			The foregoing rights to distribute, publish and exploit the 
+			Materials include the right to do so for a fee and applies 
+			in respect of the Materials and the Modified Materials. 
+	  (b)	Any access, use, copy, modification, adaptation, distribution, 
+			publication or exploitation of any of the Materials for use 
+			with applications that do not fully use, adopt and implement 
+			the Tide Protocol is prohibited. This prohibition includes any 
+			use or adaptation of the Materials for the purposes of any 
+			protocol, system or platform competing with the Tide Protocol 
+			or which facilitates any form of payment or exchange of value 
+			other than through use of Tide Tokens (as defined in paragraph 
+			(c) below). 
+	  (c)	Without limiting paragraph (b), the License granted under 
+			paragraph (a) does not permit you to, and in exercising the 
+			rights granted to you under paragraph (a) you must not, under 
+			any circumstances:
+			(i)		remove, omit or in any way modify any component of the 
+					Materials, including source code components, which 
+					requires payment or exchange of value to be made via 
+					Tide cryptographic tokens designed for settling 
+					transactions entered into via the Tide Protocol (“Tide 
+					Tokens”); 
+			(ii)	use the Materials which are source code or object code:
+				(A)		in combination with any other code, script or 
+						software (whether in source or object code form), 
+						or otherwise in any manner, which would in any way 
+						circumvent the requirement for any payment or 
+						exchange of value to be made via Tide Tokens; or
+				(B)		in any other way which does not properly use, adopt 
+						and implement the Tide Protocol in its entirety, 
+						including for the purposes of both data encryption 
+						and data exchange;  
+			(iii)	violate any applicable laws or any rights of any person, 
+					or use or permit or facilitate the use of the Materials 
+					in any manner or for any purpose that is unlawful or is 
+					in breach of any laws of jurisdiction anywhere in the 
+					world;
+			(iv)	distribute viruses, spyware, corrupted files, or any 
+					other similar software or programs that may damage the 
+					operation of any computer hardware or software, or the 
+					Tide Protocol; or
+			(v)		engage in any other conduct that is improper or brings 
+					or is likely to bring us, the Materials, the Tide 
+					Protocol or Tide Tokens into disrepute,
+			and you must ensure that where any third party is being engaged 
+			to make modifications to the Materials on your behalf, their 
+			rights to do so are subject to terms which incorporate the 
+			restrictions in this clause 3.
+	  (d)	You must take your own precautions to ensure that the processes 
+			which you employ for accessing and using the Materials do not 
+			expose you to the risk of viruses, malicious computer code or 
+			other forms of interference which may damage your computer 
+			systems.  We recommend that you install and use up-to-date 
+			anti-virus, anti-spyware and firewall software on your computer 
+			systems.  
+
+	4	Data security and privacy	
+	  You are fully responsible for ensuring:
+	  (a)	any use, adoption or implementation of the Materials, any 
+			Modified Materials and/or the Tide Protocol appropriately 
+			protects, encrypts and stores data; and 
+	  (b)	all aspects of compliance with privacy and data protection laws. 
+	  We disclaim all warranties and liability regarding the same.
+	  
+	5	Modification of Tide Protocol and Materials 
+	  You acknowledge that Tide may at any time without notice to you change 
+	  or update the whole or any part of the Tide Protocol and/or any of the 
+	  Materials, including in a manner which may result in applications or 
+	  processes you may have developed or implemented no longer being 
+	  compatible or otherwise working in the same manner with the Tide 
+	  Protocol or any Material, including any software development kit. We 
+	  may also withdraw or remove any part of the Materials or the Tide 
+	  Protocol at any stage without notice to you.
+
+	6	Distribution 
+	  (a)	Without limiting clause 3, in exercising the rights granted to 
+			you under clause 3(a) to distribute or publish one or more 
+			copies of any Materials verbatim as you receive the Materials,
+			you may do so in any medium, provided that:
+		(i)		you provide all recipients of the Materials with a copy of 
+				these terms along with the Materials: 
+		(ii)	you keep intact and do not remove, omit, or in any way 
+				modify any of the following:
+			(A)		any notices stating that these License terms apply; 
+			(B)		any hyperlink to these License terms; and
+			(C)		any notices of the absence of any warranty;
+	  (b)	You may charge any price or no price for each copy of the 
+			Materials or Modified Materials that you distribute or publish,
+			and you may offer support or warranty protection for a fee.
+	  (c)	Without limiting clause 3, in exercising the rights granted to 
+			you under clause 3(a) to distribute or publish one or more 
+			copies of any Modified Materials you create or cause to be 
+			created, you may do so in any medium, provided that:
+		(i)		you provide all recipients of the Modified Materials with 
+				a copy of these terms along with the Modified Materials; 
+		(ii)	you keep intact and do not remove, omit, or in any way 
+				modify any of the following:
+			(A)		any notices stating that these License terms apply to 
+					the unmodified Materials;
+			(B)		any hyperlink to these License terms; and
+			(C)		any notices of the absence of any warranty in respect 
+					of the unmodified Materials; and
+		(iii)	the whole of any Modified Materials must be licensed under 
+				these terms (although this does not limit the operation of 
+				paragraph (d)), but you may impose further restrictions 
+				that do not conflict with or override these terms.
+	  (d)	Where you compile any source code Materials or Modified 
+			Materials in an aggregate with any proprietary program, the 
+			Materials remain governed by these License terms. For the 
+			purposes of the foregoing, a compilation of any Materials with 
+			other separate and independent works, which are not by their 
+			nature extensions of the Materials, and which are not combined 
+			with the Materials such as to form a larger program, in or on 
+			a volume of a storage or distribution medium, is an “aggregate” 
+			if the compilation and its resulting copyright are not used to 
+			limit the access or legal rights of the compilation's users 
+			beyond what the individual Materials permit. Inclusion of any 
+			Materials in an aggregate does not cause these terms to apply 
+			to the other parts of the aggregate.
+	  (e)	You may not initiate any proceedings or claims in respect of 
+			infringement of any patent rights in respect of the access, 
+			use, copy, modification, adaptation, distribution, publication 
+			or exploitation of any of the Materials or Modified Materials 
+			in accordance with these terms.
+
+	7	Liability
+	  (a)	All express or implied guarantees, warranties, representations, 
+			statements, terms or conditions relating to these terms or the 
+			Materials that are not contained in these terms, are excluded 
+			to the maximum extent permitted by law. Without limiting the 
+			foregoing:
+		(i)		the Materials are provided ‘as-is’ and neither we nor Tide 
+				warrant or represent that they will work in any way, that 
+				they are fit for any particular purpose, that your 
+				requirements will be met, that your use of the Materials 
+				will be uninterrupted or error free or that the Materials 
+				are free of viruses or other harmful components; and
+		(ii)	we and Tide are not responsible for any loss, corruption or 
+				interception of data which occurs in connection with your 
+				use or misuse of the Materials.
+	  (b)	Nothing in these terms excludes, restricts or modifies any 
+			guarantee, term, condition, warranty, or any right or remedy, 
+			implied or imposed by any law which cannot lawfully be excluded 
+			or limited. (a “Non-Excludable Provision”). If any guarantee, 
+			term, condition or warranty is implied into these terms under a 
+			Non-Excludable Provision and we or Tide can limit your remedy 
+			for a breach of the Non-Excludable Provision, then our and 
+			Tide’s liability for breach of the Non-Excludable Provision is 
+			limited to one or more of the following at our option:
+		(i)		in the case of goods, the replacement of the goods or the 
+				supply of equivalent goods, the repair of the goods, the 
+				payment of the cost of replacing the goods or of acquiring 
+				equivalent goods, or the payment of the cost of having the 
+				goods repaired; or
+		(ii)	in the case of services, the supplying of the services 
+				again, or the payment of the cost of having the services 
+				supplied again. 
+	  (c)	To the maximum extent permitted by law but despite any other 
+			clause in these terms, your use of the Materials is at your own 
+			risk and neither we nor Tide are liable to you for any loss or 
+			damage you (or any of your representatives or sub-licensees) 
+			suffer, sustain or incur in connection with these terms, 
+			exercise of any rights granted under these terms or otherwise 
+			in connection with any access or use of the Materials, including 
+			in respect of any loss, corruption or interception of data or 
+			breach of privacy or security.  
+	  (d)	Without limiting paragraph (c), to the maximum extent permitted 
+			by law, neither we nor Tide are not liable to you for and no 
+			measure of damages will under any circumstances include: 
+		(i)		special, indirect, consequential, incidental or punitive 
+				damages; or
+		(ii)	damages for loss of profits, revenue, goodwill, 
+				opportunity, anticipated savings or loss or corruption of 
+				data.
+	  (e)	The exclusions and limitations of liability in this clause 8 
+			apply regardless of the basis on which such liability arises, 
+			whether in contract, breach of warranty, tort (including 
+			negligence), in equity, under statute, under an indemnity or 
+			on any other basis.
+	  (f)	You will indemnify us and hold us, Tide and each of our 
+			directors, officers, employees and contractors harmless from 
+			and against any loss suffered or incurred by us or any of 
+			those indemnified, arising out of or in connection with: 
+		(i)		your or any of your sub-licensee’s access or use of any of 
+				the Materials or any other exercise of any of the rights 
+				granted to you under these terms in connection with any of 
+				the Materials;
+		(ii)	your negligence or breach of these terms; 
+		(iii)	your violation of any applicable law or infringement of any 
+				rights (including Intellectual Property Rights) of a third 
+				party; or
+		(iv)	any claim made by any third party arising out of or in 
+				connection with any Modified Materials, including any 
+				application developed using any of the Materials, and 
+				including in respect of infringement of any person’s 
+				Intellectual Property Rights. 
+	8	Termination
+	  (a)	Your License to use the Materials under clause 3(a) immediately 
+			and automatically terminates without the need for us to give 
+			notice to you if you breach these terms.
+	  (b)	You may terminate these terms at any time by ceasing all use 
+			and removing all implementations of the Materials and the Tide 
+			Protocol.
+	  (c)	Upon termination of these terms, all rights and Licenses 
+			granted to you under these terms will also terminate and you 
+			must immediately cease using the Materials and remove all 
+			implementations of the Materials. 
+	9	General
+	  (a)	You remain fully responsible and liable for the acts and 
+			omissions of any third party to whom you subcontract the 
+			exercise or performance any of your rights or obligations under 
+			these terms, as if such acts and omissions were your acts and 
+			omissions. 
+	  (b)	If any part of these terms is held to be unenforceable, the 
+			unenforceable part is to be given effect to the greatest extent 
+			possible and the remainder will remain in full force and effect.   
+	  (c)	No waiver, delay or failure by us to take any action shall 
+			constitute or be construed as a waiver of that or any other term, 
+			condition, option, privilege or right we may have.
+	  (d)	The word “including” when used in these terms is not a term of 
+			limitation.
+
+	====================
+	End of License terms
+	====================
+
+	If you develop a Modified Material and want to assert your copyright, 
+	attach the following notices to the Modified Material. It is best to 
+	attach them to the start of each source file to most effectively state 
+	the exclusion of warranty and each file should have at least the 
+	“copyright” line and a pointer to where the full notice is found.
+
+	<INSERT PROGRAM NAME and PURPOSE.>
+
+	Copyright (c) <year> <name of author>    
+
+	This program is free software and is subject to the terms of the Tide 
+	Community Open Source License as published by the Tide Foundation 
+	Limited. You may modify it and redistribute it in accordance with 
+	and subject to the terms of that License.
+
+	This program is distributed WITHOUT WARRANTY of any kind, including 
+	without any implied warranty of MERCHANTABILITY or FITNESS FOR A 
+	PARTICULAR PURPOSE.  See the Tide Community Open Source License for 
+	more details.
+
+	You should have received a copy of the Tide Community Open Source 
+	License along with this program.
+	
+	If not, see https://tide.org/licenses_tcosl-1-0-en
