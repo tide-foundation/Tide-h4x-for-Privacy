@@ -1,6 +1,7 @@
 # Tide h4x for Privacy Challenge
 
-Welcome to the Tide h4x Challenge. 
+ Welcome to the TIDE H4x Challenge. Tide Protocol is a technological infrastructure that is designed to underpin a fair and sustainable personal data economy. The Tide economy is designed to bolster the right of individuals to maintain control over their personal data, while businesses and marketers can utilize it in a mutually beneficial environment. This demo allows the setup of all the different components within the Tide ecosystem in order to showcase the transaction workflow, encryption and economy.
+
 
 ### Terminology 
 Below are concepts that are important to understand within the context of the Tide h4x challenge. 
