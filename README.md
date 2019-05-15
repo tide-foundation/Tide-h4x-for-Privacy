@@ -39,10 +39,10 @@ Below are concepts that are important to understand within the context of the Ti
 
 ### Project Setup
 1. Git Clone
-1. Run *Raziel.Ork\dotnet restore* 
-1. Run *Raziel.Library\dotnet restore*
-1. Run *Raziel.Vendor\dotnet restore*
-1. Run *Raziel.Front\npm install*
+1. Run ```Raziel.Ork\dotnet restore``` 
+1. Run ```Raziel.Library\dotnet restore```
+1. Run ```Raziel.Vendor\dotnet restore```
+1. Run ```Raziel.Front\npm install```
 
 ### Environment Setup
 Set your environmental variables for each node. Variables explained below:
@@ -91,7 +91,7 @@ In this challenge we used an EOS Environment.
 1. Publish your selected number of orks to the cloud (AWS, Google, Azure) and take note of the endpoints for these will be required when setting up the frontend.
 
 #### Deploying the Vendor 
-1. After the vendor connection settings have been filled in, open a console in the root folder and run *dotnet ef migrations database update* to push the structure to the database. 
+1. After the vendor connection settings have been filled in, open a console in the root folder and run ```dotnet ef migrations database update``` to push the structure to the database. 
 1. Publish the vendor to the cloud. 
 
 #### Deploying the Smart Contract
@@ -101,8 +101,8 @@ In this challenge we used an EOS Environment.
 1. For EOS, compile the onboarding smart contract and push it to your master EOS account.  Also included are multiple interfaces for your chosen blockchain. 
 
 #### Running the Frontend Website
-1. In the frontend folder, open a console and run *npm run build*. This will build a production instance. 
-1. Publish the results to your web app endpoint. An easy way to do this is via FTP. Alternatively you can run it locally by running *npm run serve* and open the browser to the endpoint shown.
+1. In the frontend folder, open a console and run ```npm run build```. This will build a production instance. 
+1. Publish the results to your web app endpoint. An easy way to do this is via FTP. Alternatively you can run it locally by running ```npm run serve``` and open the browser to the endpoint shown.
 
 
 ### Social
