@@ -19,12 +19,9 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 
-namespace Raziel.Library.Classes.Crypto
-{
-    public class CryptideKey
-    {
-        public CryptideKey(bool secret, BigInteger p, BigInteger g, BigInteger key, BigInteger? id = null)
-        {
+namespace Raziel.Library.Classes.Crypto {
+    public class CryptideKey {
+        public CryptideKey(bool secret, BigInteger p, BigInteger g, BigInteger key, BigInteger? id = null) {
             Secret = secret;
             P = p;
             G = g;
@@ -33,8 +30,7 @@ namespace Raziel.Library.Classes.Crypto
             Q = (p - 1) / 2;
         }
 
-        public CryptideKey(string secret)
-        {
+        public CryptideKey(string secret) {
             var bytes = Convert.FromBase64String(secret);
             var length = (bytes[0] & 1) == 1 ? 4 : 3;
             Secret = (bytes[0] & 0b10) == 1;
@@ -52,15 +48,13 @@ namespace Raziel.Library.Classes.Crypto
         public BigInteger Q { get; }
         public BigInteger Key { get; }
         public BigInteger? Id { get; }
-        public int Bits { get => P.GetByteCount(true) * 8; }
+        public int Bits => P.GetByteCount(true) * 8;
 
-        public static (CryptideKey sec, CryptideKey pub) Generate(int bitSize = 128)
-        {
+        public static (CryptideKey sec, CryptideKey pub) Generate(int bitSize = 128) {
             var (p, q) = Utils.RandomPrime(bitSize);
             var g = Utils.getPrimitiveRoot(p);
 
-            using (var rdmGen = new RandomField(q))
-            {
+            using (var rdmGen = new RandomField(q)) {
                 var x = rdmGen.Generate(BigInteger.One);
                 var y = BigInteger.ModPow(g, x, p);
 
@@ -68,45 +62,38 @@ namespace Raziel.Library.Classes.Crypto
             }
         }
 
-        public string Encrypt(string data)
-        {
+        public string Encrypt(string data) {
             var buffer = EncryptBuffer(data);
             return Convert.ToBase64String(buffer, 0, buffer.Length);
         }
 
-        public byte[] EncryptBuffer(string data)
-        {
-            var ms = Utils.Decode(data, this.Bits);
+        public byte[] EncryptBuffer(string data) {
+            var ms = Utils.Decode(data, Bits);
             var nums = new List<BigInteger>();
 
-            using (var rdm = new RandomField(P))
-            {
-                for (var i = 0; i < ms.Count; i++)
-                {
+            using (var rdm = new RandomField(P)) {
+                for (var i = 0; i < ms.Count; i++) {
                     var r = rdm.Generate();
                     var c1 = BigInteger.ModPow(G, r, P);
-                    var c2 = BigInteger.Remainder(ms[i] * BigInteger.ModPow(this.Key, r, this.P), P);
+                    var c2 = BigInteger.Remainder(ms[i] * BigInteger.ModPow(Key, r, P), P);
 
                     nums.Add(c1);
                     nums.Add(c2);
                 }
             }
 
-            return Utils.EncodeByteArray(nums, this.Bits, true);
+            return Utils.EncodeByteArray(nums, Bits, true);
         }
 
-        public string Decrypt(string cypher)
-        {
+        public string Decrypt(string cypher) {
             var buffer = DecryptBuffer(cypher);
             return Encoding.UTF8.GetString(buffer, 0, buffer.Length);
         }
 
-        public byte[] DecryptBuffer(string cypher)
-        {
-            var chunks = Utils.Decode(cypher, Bits, isBase64: true);
+        public byte[] DecryptBuffer(string cypher) {
+            var chunks = Utils.Decode(cypher, Bits, true);
             var numbers = new List<BigInteger>();
-            for (var i = 0; i < chunks.Count; i += 2)
-            {
+            for (var i = 0; i < chunks.Count; i += 2) {
                 var c1 = chunks[i];
                 var c2 = chunks[i + 1];
 
@@ -119,15 +106,14 @@ namespace Raziel.Library.Classes.Crypto
             return Utils.EncodeByteArray(numbers, Bits);
         }
 
-        public override string ToString()
-        {
-            var values = new List<BigInteger>() { P, G, Key };
+        public override string ToString() {
+            var values = new List<BigInteger> {P, G, Key};
             if (Id.HasValue)
-                values.Add(this.Id.Value);
+                values.Add(Id.Value);
 
             var bytes = Utils.EncodeByteArray(values, Bits, true);
-            var falgs = (byte)((this.Secret ? 1 : 0) << 1 | (Id.HasValue ? 1 : 0));
-            return Convert.ToBase64String((new byte[] { falgs }).Concat(bytes).ToArray());
+            var falgs = (byte) (((Secret ? 1 : 0) << 1) | (Id.HasValue ? 1 : 0));
+            return Convert.ToBase64String(new[] {falgs}.Concat(bytes).ToArray());
         }
     }
 }

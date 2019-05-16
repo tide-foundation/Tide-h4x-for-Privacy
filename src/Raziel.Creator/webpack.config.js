@@ -15,14 +15,8 @@
  * If not, see https://tide.org/licenses_tcosl-1-0-en
  */
 
-export default {
-  orkNodes: getOrks()
-}
-
-function getOrks() {
-  var list = [];
-  for (var i = 1; i < 26; i++) {
-    list.push(`https://raziel-ork-${i}.azurewebsites.net/`);
-  }
-  return list;
-}
+module.exports = {
+    entry: {
+        main: './index.js'
+    }
+};

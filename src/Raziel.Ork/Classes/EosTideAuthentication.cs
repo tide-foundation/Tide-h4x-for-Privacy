@@ -25,7 +25,7 @@ using Raziel.Library.Classes;
 using Raziel.Library.Classes.Crypto;
 using Raziel.Library.Models;
 
-namespace Raziel.Ork.Models {
+namespace Raziel.Ork.Classes {
     public class EosTideAuthentication : ITideAuthentication {
         private readonly ILogger _logger;
         private readonly IMemoryCache _memoryCache;

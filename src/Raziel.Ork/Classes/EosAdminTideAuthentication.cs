@@ -22,7 +22,7 @@ using Raziel.Library.Classes;
 using Raziel.Library.Models;
 using Action = EosSharp.Api.v1.Action;
 
-namespace Raziel.Ork.Models {
+namespace Raziel.Ork.Classes {
     public class EosAdminTideAuthentication : IAdminTideAuthentication {
         private readonly Eos _eos;
         private readonly ILogger _logger;
@@ -66,7 +66,7 @@ namespace Raziel.Ork.Models {
             }
             catch (Exception e) {
                 _logger.LogMsg("Failed creating user account", ex: e);
-                return new TideResponse(false, null, "Failed creating user account");
+                return new TideResponse(false, e, "Failed creating user account.");
             }
         }
 

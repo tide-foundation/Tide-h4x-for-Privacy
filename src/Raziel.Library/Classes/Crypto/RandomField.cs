@@ -19,50 +19,40 @@ using System.Linq;
 using System.Numerics;
 using System.Security.Cryptography;
 
-namespace Raziel.Library.Classes.Crypto
-{
-    public class RandomField : IDisposable
-    {
-        public BigInteger Field { get; }
-        private int Bytes { get => Field.GetByteCount(true); }
+namespace Raziel.Library.Classes.Crypto {
+    public class RandomField : IDisposable {
+        private readonly RNGCryptoServiceProvider rdm;
 
-        private RNGCryptoServiceProvider rdm;
-
-        public RandomField(int field) : this(new BigInteger(field))
-        {
+        public RandomField(int field) : this(new BigInteger(field)) {
         }
 
-        public RandomField(BigInteger field)
-        {
+        public RandomField(BigInteger field) {
             Field = field;
             rdm = new RNGCryptoServiceProvider();
         }
 
-        public void Dispose()
-        {
+        public BigInteger Field { get; }
+        private int Bytes => Field.GetByteCount(true);
+
+        public void Dispose() {
             rdm.Dispose();
         }
 
-        public BigInteger Generate(BigInteger? min = null)
-        {
+        public BigInteger Generate(BigInteger? min = null) {
             var bytes = new byte[Bytes];
             BigInteger number;
 
-            do
-            {
+            do {
                 rdm.GetBytes(bytes);
                 number = new BigInteger(bytes, true, true);
-            }
-            while (number >= Field || (min.HasValue && number < min.Value));
+            } while (number >= Field || min.HasValue && number < min.Value);
 
             return number;
         }
 
-        public List<BigInteger> GenerateUniqueSet(int num)
-        {
+        public List<BigInteger> GenerateUniqueSet(int num) {
             var numbers = new List<BigInteger>();
-            while (numbers.Count < num)
-            {
+            while (numbers.Count < num) {
                 var rdm = Generate();
                 if (!numbers.Any(n => n == rdm))
                     numbers.Add(rdm);

@@ -15,7 +15,6 @@
  * If not, see https://tide.org/licenses/tcosl-1.0.en.html
  */
 
-
 import './cryptide.js'
 
 export default class Tide {

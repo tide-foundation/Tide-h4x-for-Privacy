@@ -13,15 +13,20 @@
 // Source License along with this program.
 // If not, see https://tide.org/licenses_tcosl-1-0-en
 
-using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using Newtonsoft.Json;
 using Raziel.Library.Models;
 
-namespace Raziel.Vendor {
-    public class RazielContext : DbContext {
-        public RazielContext(DbContextOptions<RazielContext> options)
-            : base(options) {
-        }
+namespace Raziel.Ork.Classes {
+    public class TideUser : BaseModel {
+        [JsonProperty("nodes")] public List<Node> Nodes { get; set; }
+    }
 
-        public DbSet<User> Users { get; set; }
+    public class Node {
+        [JsonProperty("ork_node")] public string OrkNode { get; set; }
+
+        [JsonProperty("ork_url")] public string OrkUrl { get; set; }
+
+        [JsonProperty("ork_public")] public string PublicKey { get; set; }
     }
 }

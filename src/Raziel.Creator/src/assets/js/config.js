@@ -16,13 +16,7 @@
  */
 
 export default {
-  orkNodes: getOrks()
+    nodes: ["https://raziel-ork-test-1.azurewebsites.net", "https://raziel-ork-test-2.azurewebsites.net", "https://raziel-ork-test-3.azurewebsites.net"]
 }
 
-function getOrks() {
-  var list = [];
-  for (var i = 1; i < 26; i++) {
-    list.push(`https://raziel-ork-${i}.azurewebsites.net/`);
-  }
-  return list;
-}
+document.addEventListener("tide-log", (e) => console.log(e.detail.msg));
