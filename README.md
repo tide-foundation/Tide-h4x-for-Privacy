@@ -1,6 +1,6 @@
 # Tide h4x for Privacy Challenge
 
- Welcome to the TIDE H4x Challenge. Tide Protocol is a technological infrastructure that is designed to underpin a fair and sustainable personal data economy. The Tide economy is designed to bolster the right of individuals to maintain control over their personal data, while businesses and marketers can utilize it in a mutually beneficial environment. This demo allows the setup of all the different components within the Tide ecosystem in order to showcase the transaction workflow, encryption and economy.
+The concept for the challenge is quite simple: The details of 1 Bitcoin were stored in the simplest website setup: on a database record behind a web server. Anyone logging in to that website using the correct username and password will see those details. All typical defences around that set up were removed. No firewalls, no added security. It should be easy work for any hacker to crack that. The twist: Tide's unique protection mechanism was used on the data and the website authentication. Supposedly, even if one cracks the whole thing, it would be impractical to crack the authentication or extract the data. Anyone who does, the bitcoin is theirs, and Tide is back to the drawing board. This project is an open-source code repository for the challenge and provides ability to recreate the entire environment locally.
 
 
 ### Terminology 
@@ -109,5 +109,6 @@ In this challenge we used an EOS Environment.
 ### Social
 [Tide Telegram group](https://t.me/TideFoundation)
 
-[Tide Reddit group](https://www.reddit.com/r/TideFoundation)
+[Tide Subreddit channel](https://www.reddit.com/r/TideFoundation)
+
 
