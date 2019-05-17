@@ -111,7 +111,7 @@ In this challenge we used an EOS Environment.
 #### Running the Frontend Website
 1. In the frontend folder, open a console and run ```npm run build```. This will build a production instance. 
 1. Publish the results to your web app endpoint. An easy way to do this is via FTP. Alternatively you can run it locally by running ```npm run serve``` and open the browser to the endpoint shown.
-
+1. Login using your credentials from ‘Miscellaneous’ step 2
 
 ### Social
 [Tide Telegram group](https://t.me/TideFoundation)
