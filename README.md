@@ -50,34 +50,36 @@ This guide assists you to replicate the entire environment using EOS jungle test
 1. Clone of Repository `git clone https://github.com/tide-foundation/Tide-h4x-for-Privacy`
 
 #### Installing Cleos in Windows 10 
-There are two options when running EOS in a Windows environment: docker or a Linux for Windows.  Provided below are the steps in running Cleos using Ubuntu for Windows 10.  
+There are two options when running EOS in a Windows environment: Docker or Linux for Windows.  Provided below are the steps in running Cleos using Linux/Ubuntu for Windows 10.  
 
 1. Get Ubuntu from Windows Store [Ubuntu Windows 10](https://www.microsoft.com/en-au/p/ubuntu/9nblggh4msv6?activetab=pivot:overviewtab "Ubuntu Windows 10")
-1. Install Ubuntu by clicking on the Icon once downloaded. Should you get the following error, 
+2. Install Ubuntu by clicking on the Icon once downloaded. Should you get the following error, 
 ```
 The WSL optional component is not enabled. Please enable it and try again.
 See https://aka.ms/wslinstall for details.
 Error: 0x8007007e
 Press any key to continue...
 ```
-
-   - Open PowerShell as Administrator and run the following command.  
-   ```
-   Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
-   ```
-1.  Login to Ubuntu
-1. 
-
+Open PowerShell as Administrator and run the following command.  
+```
+Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
+```
+3. Login to Ubuntu
+4. Download and install EOS binaries 
+```
+wget https://github.com/EOSIO/eos/releases/download/v1.7.0/eosio_1.7.0-1-ubuntu-18.04_amd64.deb
+sudo apt install ./eosio_1.7.0-1-ubuntu-18.04_amd64.deb
+```
 ### Deployment
 
 #### EOS
 
 This deployment utilizes EOS "jungle" testnet environment.
 
-1. Generate a keypair for your master account and once for each of the 3 ork nodes using cleos. Run `cleos create key --to-console`.
+1. Generate a keypair for your master account and once for each of the 3 ork nodes using cleos.  `cleos create key --to-console`.
 1. Import the private keys into your cleos wallet by running `cleos wallet import --private-key YOUR_PRIVATE_KEY`.
 1. Using your master account create a new eos account for each of the 3 ork nodes by running `cleos create account YOURMASTERACCOUNT YOURORKACCOUNT YOURORKACCOUNT_PUBLIC_KEY`.
-1. Fund the master account with enough RAM to run the challenge. 10-15 should be sufficient. Example: `cleos system buyram YOURMASTERACCOUNT YOURMASTERACCOUNT "15 EOS"`.
+1. Fund the master account with enough RAM to run the challenge. 10-15 should be sufficient. Example:`cleos system buyram YOURMASTERACCOUNT YOURMASTERACCOUNT "15 EOS"`.
 1. Compile the onboarding contract using `eosio-cpp -abigen -o onboarding.wasm onboarding.cpp` and push it to the contract holder account using `cleos set contract YOURMASTERACCOUNT ./onboarding -p YOURMASTERACCOUNT @active`.
 
 #### Miscellaneous
