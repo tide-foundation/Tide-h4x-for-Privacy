@@ -78,24 +78,32 @@ Set your environmental variables for each node. Variables explained below:
   }
 }
 ```
-#### EOS  Environment
+
+### Deployment
+#### EOS
 In this challenge we used an EOS Environment. 
 
 1. Generate a keypair, an easy way to do this is by using scatter or https://nadejde.github.io/eos-token-sale/
-1. Create accounts. Once for the contract holder and one account for every ork you plan to use.
+1. Import the private key into your cleos wallet.
+1. Create accounts. Once for the contract holder and one account for every ork you plan on using.
 1. Fund the accounts and seed the contract holder account with enough ram using cleos. Example: ```cleos -u http://jungle2.cryptolions.io:80 system buyram buyeraccount contractholderaccount "5 EOS"```
 1. Compile the onboarding contract using ```eosio-cpp -abigen -o onboarding.wasm onboarding.cpp``` and push it to the contract holder account using ```cleos -u http://jungle2.cryptolions.io:80 set contract contractholderaccount ./onboarding -p contractholderaccount @active``` 
 
-### Deploying the Environment
+#### Miscellaneous 
+1. Run the Raziel.Generator project once for each ORK Node. Save the generated credentials for reference.
+1. Run Raziel.Creator and create a the test account.  Ensure to remember the credentials created. This will be need for the h4x challenge. 
 
-#### Deploying the ORKs
-1. Publish your selected number of orks to the cloud (AWS, Google, Azure) and take note of the endpoints for these will be required when setting up the frontend.
-
-#### Deploying the Vendor 
+#### Vendor 
 1. After the vendor connection settings have been filled in, open a console in the root folder and run ```dotnet ef migrations database update``` to push the structure to the database. 
 1. Publish the vendor to the cloud. 
 
-#### Deploying the Smart Contract
+#### ORKs
+1. Publish ORKs to web services. This can be done easily via right clicking in Visual Studio or via powershell using ```dotnet publish Raziel.Ork.csproj /p:PublishProfile=$profile /p:Password=$pass’```
+1. Open each web service and edit the environmental variables to align with the blockchain you’re using the account created in EOS setup and the keys created in ‘Misc’. 
+1. Restart the web apps for the changes to take effect. 
+1. Test their viability by visiting yourorkendpoint.com/discover. It should give you a json object similar to this: ```{"success":true,"content":{"account":"yourorkaccount","url":"https://yourorkendpoint.net","publicKey":"ALdwxVN4QlL9DSySq65hwkStfpSuuwz__EXAMPLE_PUBLICKEY__oD8PpStPQ0BXqHQd6vV5bjf79NAD9LGzQLujEXg=="},"error":null}```
+
+#### Smart Contract
 1. Open *\Raziel.Front\config.js* 
 1. Populate the ORK nodes endpoint array. The generation is looped as the endpoints follow a strict naming convention. 
 1. Open the .env production file and set your vendor endpoint there.
