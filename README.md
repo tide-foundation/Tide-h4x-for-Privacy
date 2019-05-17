@@ -77,7 +77,19 @@ In this challenge we used an EOS Environment.
 1. Open Raziel.Ork and Publish to your endpoints. This can be done easily via right clicking the project in Visual Studio -> publish or via powershell using `dotnet publish Raziel.Ork.csproj /p:PublishProfile=$profile /p:Password=$pass’`.
 1. Open each web service and edit the environmental variables to align with the blockchain you’re using, the account created in EOS setup and the keys created in ‘Miscellaneous’ step 1 (the public key, private key and password).
 1. Restart the web apps for the changes to take effect.
-1. Test their viability by visiting yourorkendpoint.com/discover. It should give you a json object similar to this: `{"success":true,"content":{"account":"yourorkaccount","url":"https://yourorkendpoint.net","publicKey":"ALdwxVN4QlL9DSySq65hwkStfpSuuwz__EXAMPLE_PUBLIC_KEY__oD8PpStPQ0BXqHQd6vV5bjf79NAD9LGzQLujEXg=="},"error":null}`
+1. Test their viability by visiting yourorkendpoint.com/discover. It should give you a json object similar to this:
+
+```
+{
+    "success": true,
+    "content": {
+        "account": "yourorkaccount",
+        "url": "https://yourorkendpoint.net",
+        "publicKey": "ALdwxVN4QlL9DSySq65hwkStfpSuuwz__EXAMPLE_PUBLIC_KEY__oD8PpStPQ0BXqHQd6vV5bjf79NAD9LGzQLujEXg=="
+    },
+    "error": null
+}
+```
 
 ### Environment Setup
 
