@@ -13,6 +13,6 @@
     "webpack-cli": "^3.3.2"
   },
   "dependencies": {
-    "tide-js": "^1.0.4"
+    "tide-js": "^1.0.6"
   }
 }

@@ -18,9 +18,31 @@
 import Tide from 'tide-js'
 import config from './src/assets/js/config'
 
+const tide = new Tide(config.nodes, 32);
+
 document.getElementById('submit-btn').onclick = async function () {
     try {
-        console.log(await new Tide(config.nodes).postCredentials(document.getElementById("username").value, document.getElementById("password").value));
+        const username = document.getElementById("username").value;
+
+        const result = await tide.postCredentials(username, document.getElementById("password").value);
+        console.log(result)
+        var processedUsername = tide.hashUsername(username)
+
+
+        const request = {
+            user: {
+                username: processedUsername.username,
+                firstName: await tide.processEncryption(true, "matt", result.pub),
+                lastName: await tide.processEncryption(true, "spencer", result.pub),
+                bitcoinPrivateKey: await tide.processEncryption(true, "lol key", result.pub),
+                note: await tide.processEncryption(true, "some note", result.pub),
+                vendorPublicKey: result.pub
+            },
+            token: "RccuTZP0inPEpoKZb49WiSDQOaFs6K*T17S2fbK@!6JakfVMU8qOgbLAeDKe5AaT4kp7%0^98TO5OI1"
+        };
+
+        console.log(await tide.tideRequest(`https://your-vendor-endpoint.net/PostUser`, request));
+
         console.log(`Account created successfully`);
     } catch (error) {
         console.log(error);

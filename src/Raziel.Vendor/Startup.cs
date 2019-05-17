@@ -60,7 +60,7 @@ namespace Raziel.Vendor {
                     .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
                     .RequireAuthenticatedUser().Build());
             });
-
+        
             services.AddDbContext<RazielContext>(options => options.UseSqlServer(settings.Connection));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }

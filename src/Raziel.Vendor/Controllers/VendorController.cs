@@ -26,6 +26,12 @@ namespace Raziel.Vendor.Controllers {
             _service = service;
         }
 
+        [HttpPost("/PostUser/")]
+        public bool PostUser([FromBody] AuthenticationRequest user)
+        {
+            return _service.PostUser(user);
+        }
+
         [HttpPost("/Token")]
         public AuthenticationRequest Token([FromBody] AuthenticationRequest request) {
             return _service.GenerateToken(request);

@@ -39,6 +39,20 @@ namespace Raziel.Vendor.Classes {
             _logger = logger.CreateLogger("Vendor");
         }
 
+        public bool PostUser(AuthenticationRequest user) {
+            try {
+                if (user.Token != _settings.Password) return false;
+                _context.Add(user.User);
+                _context.SaveChanges();
+                return true;
+            }
+            catch (Exception e) {
+                Console.WriteLine(e);
+                throw;
+            }
+          
+        }
+
         public AuthenticationRequest GenerateToken(AuthenticationRequest request) {
             var user = FetchUser(request.User.Username);
             if (user == null) return null;
