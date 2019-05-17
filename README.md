@@ -26,7 +26,7 @@ Below are concepts that are important to understand within the context of the Ti
 
 ### Components
 
-1. **cryptide library** - Tide encryption library
+1. **Cryptide Library** - Tide encryption library
 1. **h4x frontend Website** - website for this h4x challenge.
 1. **h4x Tide SDK API** - API for the h4x challenge.
 1. **h4x SQL Database** - Database for the h4x challenge.
