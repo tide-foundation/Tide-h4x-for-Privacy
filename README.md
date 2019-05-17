@@ -30,7 +30,7 @@ Below are concepts that are important to understand within the context of the Ti
 1. **h4x frontend Website** - website for this h4x challenge.
 1. **h4x Tide SDK API** - API for the h4x challenge.
 1. **h4x SQL Database** - Database for the h4x challenge.
-1. **ORK Nodes** - ORK nodes running in Azure, AWS and Google.
+1. **ORK Nodes** - ORK nodes running in Local.
 
 ## Installation
 
@@ -39,6 +39,7 @@ Below are concepts that are important to understand within the context of the Ti
 1. [.NET Core 2.2 SDK](https://dotnet.microsoft.com/download/dotnet-core/2.2 ".net Core 2.2 Download")
 1. [Node.js](https://nodejs.org/en/download/ "node.js Download")
 1. [Cleos](https://developers.eos.io/eosio-nodeos/v1.2.0/docs/cleos-overview "Cleos")
+1. [SQL Express](https://www.microsoft.com/en-au/sql-server/sql-server-editions-express "SQL Express")
 
 ### Project Setup
 
