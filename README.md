@@ -43,10 +43,7 @@ This guide assumes you are using the eos jungle testnet, local deployment and 3 
 1. [Cleos](https://developers.eos.io/eosio-nodeos/v1.2.0/docs/cleos-overview "Cleos")
 1. [SQL Express](https://www.microsoft.com/en-au/sql-server/sql-server-editions-express "SQL Express")
 
-### Project Setup
-
-1. Run `Git Clone https://github.com/tide-foundation/Tide-h4x-for-Privacy`
-1. Run `Raziel.Front\npm install`
+`Git Clone https://github.com/tide-foundation/Tide-h4x-for-Privacy`
 
 ### Deployment
 
@@ -131,6 +128,7 @@ Environmental variables are explained below:
 
 #### Frontend Setup
 
+1. Run `Raziel.Front\npm install`.
 1. Open Raziel.Front\src\assets\js\config.js. Populate the ORK node endpoints array. The generation is looped as the endpoints follow a strict naming convention but this can be easily changed.
 1. Open the .env.production file and set your vendor endpoint there.
 
