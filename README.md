@@ -103,11 +103,10 @@ In this challenge we used an EOS Environment.
 1. Restart the web apps for the changes to take effect. 
 1. Test their viability by visiting yourorkendpoint.com/discover. It should give you a json object similar to this: ```{"success":true,"content":{"account":"yourorkaccount","url":"https://yourorkendpoint.net","publicKey":"ALdwxVN4QlL9DSySq65hwkStfpSuuwz__EXAMPLE_PUBLICKEY__oD8PpStPQ0BXqHQd6vV5bjf79NAD9LGzQLujEXg=="},"error":null}```
 
-#### Smart Contract
+#### Frontend Setup
 1. Open *\Raziel.Front\config.js* 
 1. Populate the ORK nodes endpoint array. The generation is looped as the endpoints follow a strict naming convention. 
 1. Open the .env production file and set your vendor endpoint there.
-1. For EOS, compile the onboarding smart contract and push it to your master EOS account.  Also included are multiple interfaces for your chosen blockchain. 
 
 #### Running the Frontend Website
 1. In the frontend folder, open a console and run ```npm run build```. This will build a production instance. 
