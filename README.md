@@ -14,7 +14,7 @@ Below are concepts that are important to understand within the context of the Ti
 
 **Smart Contract** - a computer protocol intended to digitally facilitate, verify, or enforce the negotiation or performance of a contract.
 
-**ORK** - Orchestrated Recluder of Keys
+**ORK** - Orchestrated Recluder of Keys - The Tide Protocol nodes
 
 ## Architecture
 
@@ -30,26 +30,26 @@ Below are concepts that are important to understand within the context of the Ti
 1. **h4x frontend Website** - website for this h4x challenge.
 1. **h4x Tide SDK API** - API for the h4x challenge.
 1. **h4x SQL Database** - Database for the h4x challenge.
-1. **ORK Nodes** - ORK nodes running in Local.
+1. **ORK Nodes** - Decentralized ORK nodes.
 
 ## Installation
 
-This guide assumes you are using the eos jungle testnet, local deployment and 3 ork nodes.
+This guide assists you to replicate the entire environment using EOS jungle testnet (free), local deployment with 3 ORK nodes.
 ![alt text](https://github.com/tide-foundation/Tide-h4x-for-Privacy/blob/master/Tide%20h4x%20Local.png "Local Setup")
 
 ### Prerequisite
 
-1. [.NET Core 2.2 SDK](https://dotnet.microsoft.com/download/dotnet-core/2.2 ".net Core 2.2 Download")
-1. [Node.js](https://nodejs.org/en/download/ "node.js Download")
+1. [.NET Core 2.2 Build apps - SDK](https://dotnet.microsoft.com/download/dotnet-core/2.2 ".net Core 2.2 Download")
+1. [Node.js - LTS](https://nodejs.org/en/download/ "node.js Download")
 1. [Cleos](https://developers.eos.io/eosio-nodeos/v1.2.0/docs/cleos-overview "Cleos")
 1. [SQL Express](https://www.microsoft.com/en-au/sql-server/sql-server-editions-express "SQL Express")
-1. Clone of Repository `Git Clone https://github.com/tide-foundation/Tide-h4x-for-Privacy`
+1. Clone of Repository `git clone https://github.com/tide-foundation/Tide-h4x-for-Privacy`
 
 ### Deployment
 
 #### EOS
 
-In this challenge we used an EOS Environment.
+This deployment utilizes EOS "jungle" testnet environment.
 
 1. Generate a keypair for your master account and once for each of the 3 ork nodes using cleos. Run `cleos create key --to-console`.
 1. Import the private keys into your cleos wallet by running `cleos wallet import --private-key YOUR_PRIVATE_KEY`.
@@ -67,7 +67,7 @@ In this challenge we used an EOS Environment.
 #### Vendor
 
 1. Run `Raziel.Vendor\dotnet restore`.
-1. Open a cli in the Raziel.Vendor project folder and run `dotnet ef migrations database update` to push the structure to the database. Ensure you have your connection settings set in appsettings before executing.
+1. Open a shell in the Raziel.Vendor project folder and run `dotnet ef migrations database update` to push the structure to the database. Ensure you have your connection settings set in appsettings before executing.
 1. Publish the project to your endpoint.
 
 #### ORKs
@@ -76,14 +76,14 @@ In this challenge we used an EOS Environment.
 1. Run 3 instances of Raziel.Ork, each with their own environmental variables set.
 1. Open each web service and edit the environmental variables to align with the EOS jungle testnet, the account created in EOS setup and the keys created in ‘Miscellaneous’ step 1 (the public key, private key and password).
 1. Restart the web apps for the changes to take effect.
-1. Test their viability by visiting localhost:orkport.com/discover. It should give you a json object similar to this:
+1. Test their viability by visiting localhost:orkport/discover. It should give you a json object similar to this:
 
 ```json
 {
     "success": true,
     "content": {
         "account": "yourorkaccount",
-        "url": "https://localhost:orkport.com",
+        "url": "https://localhost:orkport",
         "publicKey": "ALdwxVNySq65hwkStfpSuuwz__EXAMPLE_PUBLIC_KEY__oD8PpStPQ0BXqHQd69NAD9LGzQLujEXg=="
     },
     "error": null
