@@ -34,6 +34,8 @@ Below are concepts that are important to understand within the context of the Ti
 
 ## Installation
 
+This guide assumes you are using the eos jungle testnet, local deployment and 3 ork nodes.
+
 ### Prerequisite
 
 1. [.NET Core 2.2 SDK](https://dotnet.microsoft.com/download/dotnet-core/2.2 ".net Core 2.2 Download")
@@ -44,12 +46,7 @@ Below are concepts that are important to understand within the context of the Ti
 ### Project Setup
 
 1. Run `Git Clone https://github.com/tide-foundation/Tide-h4x-for-Privacy`
-1. Run `Raziel.Ork\dotnet restore`
-1. Run `Raziel.Library\dotnet restore`
-1. Run `Raziel.Vendor\dotnet restore`
-1. Run `Raziel.Generator\dotnet restore`
 1. Run `Raziel.Front\npm install`
-1. Run `Raziel.Creator\npm install`
 
 ### Deployment
 
@@ -57,36 +54,40 @@ Below are concepts that are important to understand within the context of the Ti
 
 In this challenge we used an EOS Environment.
 
-1. Generate a keypair for your master account and each of your ork nodes using cleos. Run `cleos create key --to-console`.
+1. Generate a keypair for your master account and once for each of the 3 ork nodes using cleos. Run `cleos create key --to-console`.
 1. Import the private keys into your cleos wallet by running `cleos wallet import --private-key YOUR_PRIVATE_KEY`.
-1. Using your master account create a new eos account for each of your ORKS by running `cleos create account YOURMASTERACCOUNT YOURORKACCOUNT YOURORKACCOUNT_PUBLIC_KEY`.
+1. Using your master account create a new eos account for each of the 3 ork nodes by running `cleos create account YOURMASTERACCOUNT YOURORKACCOUNT YOURORKACCOUNT_PUBLIC_KEY`.
 1. Fund the master account with enough RAM to run the challenge. 10-15 should be sufficient. Example: `cleos system buyram YOURMASTERACCOUNT YOURMASTERACCOUNT "15 EOS"`.
 1. Compile the onboarding contract using `eosio-cpp -abigen -o onboarding.wasm onboarding.cpp` and push it to the contract holder account using `cleos set contract YOURMASTERACCOUNT ./onboarding -p YOURMASTERACCOUNT @active`.
 
 #### Miscellaneous
 
+1. Run `Raziel.Generator\dotnet restore`.
 1. Build the Raziel.Generator project and run it once for each ORK Node. You can generate them all at once by indluding the optional parameter, example: `./Raziel.Generator 12`. Save the generated credentials as we will be using them for the ORK environmental variables.
-1. Run the Raziel.Creator and create an account to use for the challenge. Ensure you write down the credentials used in it's creation.
+1. Run `Raziel.Creator\npm install`.
+1. Open Index.html inside the Razial.Creator root folder and create an account to use for the challenge. Ensure you write down the credentials used in it's creation.
 
 #### Vendor
 
+1. Run `Raziel.Vendor\dotnet restore`.
 1. Open a cli in the Raziel.Vendor project folder and run `dotnet ef migrations database update` to push the structure to the database. Ensure you have your connection settings set in appsettings before executing.
 1. Publish the project to your endpoint.
 
 #### ORKs
 
-1. Open Raziel.Ork and Publish to your endpoints. This can be done easily via right clicking the project in Visual Studio -> publish or via powershell using `dotnet publish Raziel.Ork.csproj /p:PublishProfile=$profile /p:Password=$pass’`.
-1. Open each web service and edit the environmental variables to align with the blockchain you’re using, the account created in EOS setup and the keys created in ‘Miscellaneous’ step 1 (the public key, private key and password).
+1. Run `Raziel.Ork\dotnet restore`.
+1. Run 3 instances of Raziel.Ork, each with their own environmental variables set.
+1. Open each web service and edit the environmental variables to align with the EOS jungle testnet, the account created in EOS setup and the keys created in ‘Miscellaneous’ step 1 (the public key, private key and password).
 1. Restart the web apps for the changes to take effect.
-1. Test their viability by visiting yourorkendpoint.com/discover. It should give you a json object similar to this:
+1. Test their viability by visiting localhost:orkport.com/discover. It should give you a json object similar to this:
 
 ```
 {
     "success": true,
     "content": {
         "account": "yourorkaccount",
-        "url": "https://yourorkendpoint.net",
-        "publicKey": "ALdwxVN4QlL9DSySq65hwkStfpSuuwz__EXAMPLE_PUBLIC_KEY__oD8PpStPQ0BXqHQd6vV5bjf79NAD9LGzQLujEXg=="
+        "url": "https://localhost:orkport.com",
+        "publicKey": "ALdwxVNySq65hwkStfpSuuwz__EXAMPLE_PUBLIC_KEY__oD8PpStPQ0BXqHQd69NAD9LGzQLujEXg=="
     },
     "error": null
 }
@@ -135,8 +136,7 @@ Environmental variables are explained below:
 
 #### Running the Frontend Website
 
-1. In the Raziel.Front\ folder, open a console and run `npm run build`. This will build a production instance.
-1. Publish the results to your web app endpoint. An easy way to do this is via FTP. Alternatively you can run it locally by running `npm run serve` and open the browser to the endpoint shown.
+1. In the Raziel.Front\ folder, open a console and run `npm run serve` and open the browser to the endpoint shown.
 1. Login using your credentials from ‘Miscellaneous’ step 2
 
 ### Social
