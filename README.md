@@ -49,6 +49,25 @@ This guide assists you to replicate the entire environment using EOS jungle test
 1. [SQL Express](https://www.microsoft.com/en-au/sql-server/sql-server-editions-express "SQL Express")
 1. Clone of Repository `git clone https://github.com/tide-foundation/Tide-h4x-for-Privacy`
 
+#### Installing Cleos in Windows 10 
+There are two options when running EOS in a Windows environment: docker or a Linux for Windows.  Provided below are the steps in running Cleos using Ubuntu for Windows 10.  
+
+1. Get Ubuntu from Windows Store [Ubuntu Windows 10](https://www.microsoft.com/en-au/p/ubuntu/9nblggh4msv6?activetab=pivot:overviewtab "Ubuntu Windows 10")
+1. Install Ubuntu by clicking on the Icon once downloaded. Should you get the following error, 
+```
+The WSL optional component is not enabled. Please enable it and try again.
+See https://aka.ms/wslinstall for details.
+Error: 0x8007007e
+Press any key to continue...
+```
+
+   - Open PowerShell as Administrator and run the following command.  
+   ```
+   Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
+   ```
+1.  Login to Ubuntu
+1. 
+
 ### Deployment
 
 #### EOS
