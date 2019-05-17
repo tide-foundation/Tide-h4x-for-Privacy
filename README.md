@@ -43,8 +43,7 @@ This guide assumes you are using the eos jungle testnet, local deployment and 3 
 1. [Node.js](https://nodejs.org/en/download/ "node.js Download")
 1. [Cleos](https://developers.eos.io/eosio-nodeos/v1.2.0/docs/cleos-overview "Cleos")
 1. [SQL Express](https://www.microsoft.com/en-au/sql-server/sql-server-editions-express "SQL Express")
-
-`Git Clone https://github.com/tide-foundation/Tide-h4x-for-Privacy`
+1. Clone of Repository `Git Clone https://github.com/tide-foundation/Tide-h4x-for-Privacy`
 
 ### Deployment
 
