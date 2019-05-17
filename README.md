@@ -42,7 +42,7 @@ Below are concepts that are important to understand within the context of the Ti
 
 ### Project Setup
 
-1. Git Clone
+1. Run `Git Clone https://github.com/tide-foundation/Tide-h4x-for-Privacy`
 1. Run `Raziel.Ork\dotnet restore`
 1. Run `Raziel.Library\dotnet restore`
 1. Run `Raziel.Vendor\dotnet restore`
@@ -56,11 +56,11 @@ Below are concepts that are important to understand within the context of the Ti
 
 In this challenge we used an EOS Environment.
 
-1. Generate a keypair, an easy way to do this is by using scatter or https://nadejde.github.io/eos-token-sale/
-1. Import the private key into your cleos wallet.
-1. Create accounts. Once for the contract holder and one account for every ork you plan on using.
-1. Fund the accounts and seed the contract holder account with enough ram using cleos. Example: `cleos -u http://jungle2.cryptolions.io:80 system buyram buyeraccount contractholderaccount "5 EOS"`
-1. Compile the onboarding contract using `eosio-cpp -abigen -o onboarding.wasm onboarding.cpp` and push it to the contract holder account using `cleos -u http://jungle2.cryptolions.io:80 set contract contractholderaccount ./onboarding -p contractholderaccount @active`
+1. Generate a keypair for your master account and each of your ork nodes using cleos. Run `cleos create key --to-console`.
+1. Import the private keys into your cleos wallet by running `cleos wallet import --private-key YOUR_PRIVATE_KEY`.
+1. Using your master account create a new eos account for each of your ORKS by running `cleos create account YOURMASTERACCOUNT YOURORKACCOUNT YOURORKACCOUNT_PUBLIC_KEY`.
+1. Fund the master account with enough RAM to run the challenge. 10-15 should be sufficient. Example: `cleos system buyram YOURMASTERACCOUNT YOURMASTERACCOUNT "15 EOS"`.
+1. Compile the onboarding contract using `eosio-cpp -abigen -o onboarding.wasm onboarding.cpp` and push it to the contract holder account using `cleos set contract YOURMASTERACCOUNT ./onboarding -p YOURMASTERACCOUNT @active`.
 
 #### Miscellaneous
 
@@ -70,18 +70,18 @@ In this challenge we used an EOS Environment.
 #### Vendor
 
 1. Open a cli in the Raziel.Vendor project folder and run `dotnet ef migrations database update` to push the structure to the database. Ensure you have your connection settings set in appsettings before executing.
-1. Publish the project.
+1. Publish the project to your endpoint.
 
 #### ORKs
 
-1. Publish ORKs to web services. This can be done easily via right clicking the project in Visual Studio -> publish or via powershell using `dotnet publish Raziel.Ork.csproj /p:PublishProfile=$profile /p:Password=$pass’`.
-1. Open each web service and edit the environmental variables to align with the blockchain you’re using, the account created in EOS setup and the keys created in ‘Misc’ (the public key, private key and password).
+1. Open Raziel.Ork and Publish to your endpoints. This can be done easily via right clicking the project in Visual Studio -> publish or via powershell using `dotnet publish Raziel.Ork.csproj /p:PublishProfile=$profile /p:Password=$pass’`.
+1. Open each web service and edit the environmental variables to align with the blockchain you’re using, the account created in EOS setup and the keys created in ‘Miscellaneous’ step 1 (the public key, private key and password).
 1. Restart the web apps for the changes to take effect.
-1. Test their viability by visiting yourorkendpoint.com/discover. It should give you a json object similar to this: `{"success":true,"content":{"account":"yourorkaccount","url":"https://yourorkendpoint.net","publicKey":"ALdwxVN4QlL9DSySq65hwkStfpSuuwz__EXAMPLE_PUBLICKEY__oD8PpStPQ0BXqHQd6vV5bjf79NAD9LGzQLujEXg=="},"error":null}`
+1. Test their viability by visiting yourorkendpoint.com/discover. It should give you a json object similar to this: `{"success":true,"content":{"account":"yourorkaccount","url":"https://yourorkendpoint.net","publicKey":"ALdwxVN4QlL9DSySq65hwkStfpSuuwz__EXAMPLE_PUBLIC_KEY__oD8PpStPQ0BXqHQd6vV5bjf79NAD9LGzQLujEXg=="},"error":null}`
 
 ### Environment Setup
 
-Set your environmental variables for each node. Variables explained below:
+Environmental variables are explained below:
 
 #### ORK nodes
 
@@ -118,7 +118,7 @@ Set your environmental variables for each node. Variables explained below:
 #### Frontend Setup
 
 1. Open Raziel.Front\src\assets\js\config.js. Populate the ORK node endpoints array. The generation is looped as the endpoints follow a strict naming convention but this can be easily changed.
-1. Open the .env production file and set your vendor endpoint there.
+1. Open the .env.production file and set your vendor endpoint there.
 
 #### Running the Frontend Website
 
