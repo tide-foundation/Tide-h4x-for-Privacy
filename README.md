@@ -78,7 +78,7 @@ In this challenge we used an EOS Environment.
 1. Restart the web apps for the changes to take effect.
 1. Test their viability by visiting localhost:orkport.com/discover. It should give you a json object similar to this:
 
-```
+```json
 {
     "success": true,
     "content": {
@@ -96,7 +96,7 @@ Environmental variables are explained below:
 
 #### ORK nodes
 
-```
+```json
 {
   "Settings": {
     "Account": "Blockchain account identifier",
@@ -117,7 +117,7 @@ Environmental variables are explained below:
 
 #### Vendor
 
-```
+```json
 {
   "VendorSettings": {
     "Connection": "Database endpoint",
