@@ -35,6 +35,7 @@ Below are concepts that are important to understand within the context of the Ti
 ## Installation
 
 This guide assumes you are using the eos jungle testnet, local deployment and 3 ork nodes.
+![alt text](https://github.com/tide-foundation/Tide-h4x-for-Privacy/blob/master/Tide%h4x%Local.png "Local Setup")
 
 ### Prerequisite
 
