@@ -131,9 +131,9 @@ This deployment utilizes EOS "jungle" testnet environment.
 #### ORKs
 
 1. Open appsettings.ork1.json and fill in the credentials you created in the previous section. Do this for for the other two nodes.
-
-  <details>
-  <summary>appsettings.ork1.json</summary>
+   
+   <details>
+   <summary>appsettings.ork1.json</summary>
 
    ```json
       {
@@ -147,7 +147,6 @@ This deployment utilizes EOS "jungle" testnet environment.
             }
        }
    ```
-    
    </details>
 
 1. Open appsettings.ork1.json and fill in the credentials you created in the previous section.
