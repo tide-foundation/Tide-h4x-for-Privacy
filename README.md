@@ -102,7 +102,7 @@ This deployment utilizes EOS "jungle" testnet environment.
    Should the wallet lock run the following command
    
    ```
-   cleos wallet unlock --password YOUR_WALLET_PASSWORD
+   cleos wallet unlock --password WALLET_PASSWORD
    ```
 1. Generate a keypair for each of the 3 ORK nodes using cleos. Take a note of the 3 created keys ORK 1 **PK_ORK1 SK_ORK1**, ORK 2 **PK_ORK2 SK_ORK2**, ORK 3 **PK_ORK3 SK_ORK3**. 
 1. Using your Master Account create a new eos account for each of the 3 ORK nodes by running 
