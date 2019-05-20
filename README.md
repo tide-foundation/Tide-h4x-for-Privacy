@@ -116,7 +116,7 @@ This deployment utilizes EOS "jungle" testnet environment.
    *Note:  ORKx_ACCOUNT needs to be 12 characters with a-z and 1-9 eg ork1accountx)*
 1. Navigate to the onboarding folder `../src/Raziel-Contracts/onboarding/`
 1. Compile the onboarding contract using `eosio-cpp -abigen -o onboarding.wasm onboarding.cpp` 
-1. Go up a folder (../src/Raziel-Contracts/) and run the command `cleos -u http://jungle2.cryptolions.io:80 set contract MASTER_ACCOUNT ./onboarding -p MASTER_ACCOUNT @active`.
+1. Go up a folder (../src/Raziel-Contracts/) and run the command `cleos -u http://jungle2.cryptolions.io:80 set contract MASTER_ACCOUNT ./onboarding -p MASTER_ACCOUNT@active`.
 
 
 #### Miscellaneous
