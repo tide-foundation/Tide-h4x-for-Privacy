@@ -130,35 +130,34 @@ This deployment utilizes EOS "jungle" testnet environment.
 
 #### ORKs
 
-1. (Optionsl) If you plan to use a different blockchain other than Jungle, navigate to the Raziel.Ork folder and open appsettings.json and edit the variables.
-2. Open appsettings.ork1.json and fill in the credentials you created in the previous section. Do this for for the other two nodes.
+1. Open appsettings.ork1.json and fill in the credentials you created in the previous section. Do this for for the other two nodes.
 
-<details>
- <summary>appsettings.ork1.json</summary>
+  <details>
+  <summary>appsettings.ork1.json</summary>
 
-```json
-{
-  "Settings": {
-    "Account": "The 12 character eos account you made for the ork nodes",
-    "PublicKey": "The public key created in Raziel.Generator",
-    "PrivateKey": "The private key created in Raziel.Generator",
-    "EosPrivateKey": "The EOS private key associated to this ork node",
-    "Password": "The password created in Raziel.Generator",
-    "Key": "The key created in Raziel.Generator"
-  }
-}
-```
+   ```json
+   {
+    "Settings": {
+      "Account": "The 12 character eos account you made for the ork nodes",
+      "PublicKey": "The public key created in Raziel.Generator",
+      "PrivateKey": "The private key created in Raziel.Generator",
+      "EosPrivateKey": "The EOS private key associated to this ork node",
+      "Password": "The password created in Raziel.Generator",
+      "Key": "The key created in Raziel.Generator"
+      }
+   }
+    ```
 
  </details>
  
- 3.	Open appsettings.ork1.json and fill in the credentials you created in the previous section.
- 4.	Run your ORK nodes with the following commands in seperate terminals: 
- ```
- dotnet run "https://localhost:5401" --environment "Ork1"
- dotnet run "https://localhost:5402" --environment "Ork2"
- dotnet run "https://localhost:5403" --environment "Ork3"
- ```
- 5.	Test the nodes are working by visiting https://localhost:5401/discover in a web browser. You should be greeted with an object similar to this one:
+ 1.	Open appsettings.ork1.json and fill in the credentials you created in the previous section.
+ 1.	Run your ORK nodes with the following commands in seperate terminals: 
+    ```
+    dotnet run "https://localhost:5401" --environment "Ork1"
+    dotnet run "https://localhost:5402" --environment "Ork2"
+    dotnet run "https://localhost:5403" --environment "Ork3"
+    ```
+ 1.	Test the nodes are working by visiting https://localhost:5401/discover in a web browser. You should be greeted with an object similar to this one:
  
  <details>
  <summary>Response</summary>
