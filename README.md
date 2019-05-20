@@ -136,19 +136,19 @@ This deployment utilizes EOS "jungle" testnet environment.
   <summary>appsettings.ork1.json</summary>
 
    ```json
-   {
-    "Settings": {
-      "Account": "The 12 character eos account you made for the ork nodes",
-      "PublicKey": "The public key created in Raziel.Generator",
-      "PrivateKey": "The private key created in Raziel.Generator",
-      "EosPrivateKey": "The EOS private key associated to this ork node",
-      "Password": "The password created in Raziel.Generator",
-      "Key": "The key created in Raziel.Generator"
-      }
-   }
-    ```
-
- </details>
+      {
+          "Settings": {
+            "Account": "The 12 character eos account you made for the ork nodes",
+            "PublicKey": "The public key created in Raziel.Generator",
+            "PrivateKey": "The private key created in Raziel.Generator",
+            "EosPrivateKey": "The EOS private key associated to this ork node",
+            "Password": "The password created in Raziel.Generator",
+            "Key": "The key created in Raziel.Generator"
+            }
+       }
+   ```
+    
+   </details>
  
  1.	Open appsettings.ork1.json and fill in the credentials you created in the previous section.
  1.	Run your ORK nodes with the following commands in seperate terminals: 
@@ -175,8 +175,8 @@ This deployment utilizes EOS "jungle" testnet environment.
 ```
 
  </details>
-<<<<<<< Updated upstream
-=======
+
+*Option: If you plan to use a different blockchain other than Jungle, navigate to the Raziel.Ork folder and open appsettings.json and edit the variables.*
 
 #### Miscellaneous
 
