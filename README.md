@@ -89,7 +89,7 @@ sudo apt install ./eosio_1.7.0-1-ubuntu-18.04_amd64.deb
 
 This deployment utilizes EOS "jungle" testnet environment.
 
-1. Create EOS Wallet `cleos wallet create --to-console`.  Take not of the **WALLET_PASSWORD**
+1. Create EOS Wallet `cleos wallet create --to-console`.  Take note of the **WALLET_PASSWORD**
 1. Generate a keypair for your master account `cleos create key --to-console`.  Take note of the generated **PK_MASTER SK_MASTER** Key Pair.
 1.  Generate a keypair for each of the 3 ork nodes using cleos. Take a note 3 created keys for **PK_ORK1 SK_ORK1,PK_ORK2 SK_ORK2, PK_ORK3 SK_ORK3**. 
 1. Import the private keys into your cleos wallet by running `cleos wallet import --private-key SK_MASTER`.
