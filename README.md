@@ -176,6 +176,8 @@ This deployment utilizes EOS "jungle" testnet environment.
 ```
 
  </details>
+<<<<<<< Updated upstream
+=======
 
 #### Miscellaneous
 
@@ -191,8 +193,44 @@ This deployment utilizes EOS "jungle" testnet environment.
 1. Publish the project to your endpoint.
 
 ### Environment Setup
+>>>>>>> Stashed changes
+
+#### Miscellaneous
+
+1. Run `Raziel.Generator\dotnet restore`.
+1. Build the Raziel.Generator project and run it once for each ORK Node. You can generate them all at once by indluding the optional parameter, example: `./Raziel.Generator 12`. Save the generated credentials as we will be using them for the ORK environmental variables.
+1. Run `Raziel.Creator\npm install`.
+1. Open Index.html inside the Razial.Creator root folder and create an account to use for the challenge. Ensure you write down the credentials used in it's creation.
+
+<<<<<<< Updated upstream
+#### Vendor
+
+1. Run `Raziel.Vendor\dotnet restore`.
+1. Open a shell in the Raziel.Vendor project folder and run `dotnet ef migrations database update` to push the structure to the database. Ensure you have your connection settings set in appsettings before executing.
+1. Publish the project to your endpoint.
+
+### Environment Setup
 
 Environmental variables are explained below:
+=======
+```json
+{
+  "Settings": {
+    "Account": "Blockchain account identifier",
+    "PublicKey": "elGamal public key",
+    "PrivateKey": " elGamal private key ",
+    "Onboarding": "Authentication smart contract",
+    "EosPrivateKey": "Blockchain account private key",
+    "Password": "AES encryption passphrase",
+    "Key": "Key used for generation of junk data",
+    "BlockchainChainId": "Blockchain Chain Id",
+    "BlockchainEndpoint": "Blockchain API Endpoint",
+    "UsersTable": "Users table in the authentication contract",
+    "FragmentsTable": " Fragment table in the authentication contract "
+  }
+}
+```
+>>>>>>> Stashed changes
 
 #### Vendor
 

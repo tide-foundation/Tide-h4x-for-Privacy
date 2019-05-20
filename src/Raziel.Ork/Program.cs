@@ -14,6 +14,7 @@
 // If not, see https://tide.org/licenses_tcosl-1-0-en
 
 using System;
+using System.Linq;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Logging;
@@ -27,6 +28,7 @@ namespace Raziel.Ork {
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) {
             return WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
+                .UseUrls(args.Any() ? args[0] : "https://localhost:5401")
                 .ConfigureLogging(logging => {
                     logging.SetMinimumLevel(LogLevel.Error);
                     logging.AddFilter((provider, category, logLevel) => category == $"Ork-{Environment.GetEnvironmentVariable("Settings:Account")}");

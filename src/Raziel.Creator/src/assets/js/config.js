@@ -16,7 +16,8 @@
  */
 
 export default {
-    nodes: ["https://raziel-ork-test-1.azurewebsites.net", "https://raziel-ork-test-2.azurewebsites.net", "https://raziel-ork-test-3.azurewebsites.net"]
+    nodes: ["https://localhost:5401", "https://localhost:5402", "https://localhost:5403"],
+    vendorEndpoint: "https://localhost:5405"
 }
 
 document.addEventListener("tide-log", (e) => console.log(e.detail.msg));
