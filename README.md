@@ -96,11 +96,11 @@ This deployment utilizes EOS "jungle" testnet environment.
 1. Create a Jungle Testnet account by *Create Account*.  This will be your **MASTER_ACCOUNT**
 1. Generate a keypair for each of the 3 ORK nodes using cleos. Take a note of the 3 created keys ORK 1 **PK_ORK1 SK_ORK1**, ORK 2 **PK_ORK2 SK_ORK2**, ORK 3 **PK_ORK3 SK_ORK3**. 
 1. Using your Master Account create a new eos account for each of the 3 ork nodes by running 
-```
-cleos create account MASTER_ACCOUNT ORK1_ACCOUNT PK_ORK1
-cleos create account MASTER_ACCOUNT ORK2_ACCOUNT PK_ORK2
-cleos create account MASTER_ACCOUNT ORK3_ACCOUNT PK_ORK3
-```
+   ```
+   cleos create account MASTER_ACCOUNT ORK1_ACCOUNT PK_ORK1
+   cleos create account MASTER_ACCOUNT ORK2_ACCOUNT PK_ORK2
+   cleos create account MASTER_ACCOUNT ORK3_ACCOUNT PK_ORK3
+   ```
 
 1. Fund the master account with enough RAM to run the challenge. 10-15 should be sufficient. Example:`cleos system buyram YOURMASTERACCOUNT YOURMASTERACCOUNT "15 EOS"`.
 1. Compile the onboarding contract using `eosio-cpp -abigen -o onboarding.wasm onboarding.cpp` and push it to the contract holder account using `cleos set contract MASTER_ACCOUNT ./onboarding -p MASTER_ACCOUNT @active`.
