@@ -140,9 +140,6 @@ appsettings.Ork3.json
 ```
 
 2. Open appsettings.json and populate it with the following code (change the variables if you're using a different blockchain):
-
-   <details>
-    <summary>appsettings.json code</summary>
 ```json
 {
   "Settings": {
@@ -161,11 +158,7 @@ appsettings.Ork3.json
 }
 ```
 
-</details>
-
 3. Open appsettings.ork1.json and populate it with the following code. Replacing the variables with the details you generated in 'Credential Generation'. Do this for all 3 ork setting files.
-   <details>
-    <summary>appsettings.orkX.json code</summary>
 ```json
 {
   "Settings": {
@@ -179,8 +172,6 @@ appsettings.Ork3.json
 }
 ```
 
-</details>
-
 4.  Run your ORK nodes with the following commands in seperate terminals:
 
 ```
@@ -190,9 +181,6 @@ dotnet run "https://localhost:5403" --environment "Ork3"
 ```
 
 5.  Test the nodes are working by visiting https://localhost:5401/discover in a web browser. You should be greeted with an object similar to this one:
-
- <details>
- <summary>Response</summary>
  ```json
  {
     "success": true,
@@ -205,13 +193,9 @@ dotnet run "https://localhost:5403" --environment "Ork3"
 }
 ```
 
- </details>
-
 #### Database & Vendor
 
 1. Navigate to Raziel/Raziel.Vendor and create a file called appsettings.json and populate it with the following code:
-   <details>
-    <summary>appsettings.json code</summary>
 ```json
 {
   "VendorSettings": {
@@ -219,8 +203,6 @@ dotnet run "https://localhost:5403" --environment "Ork3"
   }
 }
 ```
-
- </details>
 
 2. Run `dotnet ef migrations add Initial` to create a migration. Run `dotnet ef database update` to push the scaffolding to your local database.
 3. Run the vendor using `dotnet run`. Take note of the endpoint shown on screen.
