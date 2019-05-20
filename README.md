@@ -93,7 +93,7 @@ This deployment utilizes EOS "jungle" testnet environment.
 1. Generate a keypair for your master account `cleos create key --to-console`.  Take note of the generated **PK_MASTER SK_MASTER** keypair.
 1. Import the private keys into your cleos wallet by running `cleos wallet import --private-key SK_MASTER`.
 1. Navigate to Jungle Testnet for the Account Creation [Jungle Test Net](https://monitor.jungletestnet.io/ "Jungle"). 
-1. Create a Jungle Testnet account by *Create Account*.  This will be your **MASTER_ACCOUNT**
+1. Create a Jungle Testnet account by *Create Account*.  Use the generated PK_MASTER for the Owner Public Key and Active Public Key field.  This will be your **MASTER_ACCOUNT**
 1. The contract holder account will need some RAM delegated to it for the smartcontract and process transactions. Use the faucet on the [Jungle Test Net](https://monitor.jungletestnet.io/ "Jungle") to give your **MASTER_ACCOUNT** some EOS. 
 1. In cleos, run the command `cleos -u http://jungle2.cryptolions.io:80 system buyram MASTER_ACCOUNT MASTER_ACCOUNT "15 EOS"`. The -u parameter is telling cleos to run this command using the jungle testnet.
 1. Generate a keypair for each of the 3 ORK nodes using cleos. Take a note of the 3 created keys ORK 1 **PK_ORK1 SK_ORK1**, ORK 2 **PK_ORK2 SK_ORK2**, ORK 3 **PK_ORK3 SK_ORK3**. 
@@ -104,8 +104,10 @@ This deployment utilizes EOS "jungle" testnet environment.
    cleos create account MASTER_ACCOUNT ORK3_ACCOUNT PK_ORK3
    ```
 
-1. Fund the master account with enough RAM to run the challenge. 10-15 should be sufficient. Example:`cleos system buyram YOURMASTERACCOUNT YOURMASTERACCOUNT "15 EOS"`.
-1. Compile the onboarding contract using `eosio-cpp -abigen -o onboarding.wasm onboarding.cpp` and push it to the contract holder account using `cleos set contract MASTER_ACCOUNT ./onboarding -p MASTER_ACCOUNT @active`.
+1. Move the cli working folder to the location of the onboarding contract provided when pulling the repo (./src/Raziel-Contracts/onboarding)
+1. Compile the onboarding contract using `eosio-cpp -abigen -o onboarding.wasm onboarding.cpp` 
+1. Go up a folder (../Raziel-Contracts/) and run the command `cleos -u http://jungle2.cryptolions.io:80 set contract MASTER_ACCOUNT ./onboarding -p MASTER_ACCOUNT @active`.
+
 
 #### Miscellaneous
 
