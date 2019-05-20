@@ -180,7 +180,7 @@ dotnet run "https://localhost:5402" --environment "Ork2"
 dotnet run "https://localhost:5403" --environment "Ork3"
 ```
 
-5.  Test the nodes are working by visiting https://localhost:5401/discover in a web browser. You should be greeted with an object similar to this one:
+5.  Test the nodes are working by visiting https://localhost:5401/discover in a web browser. You should be get  a result similar to this one:
  ```json
  {
     "success": true,
