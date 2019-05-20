@@ -1,4 +1,5 @@
 # Tide h4x for Privacy Challenge
+
 <p>
   <a href="https://tide.org/licenses_tcosl-1-0-en">
     <img src="https://img.shields.io/badge/license-TCOS-green.svg" alt="license">
@@ -49,12 +50,14 @@ This guide assists you to replicate the entire environment using EOS jungle test
 1. [Node.js - LTS](https://nodejs.org/en/download/ "node.js Download")
 1. [Cleos](https://developers.eos.io/eosio-nodeos/v1.2.0/docs/cleos-overview "Cleos")
 1. [SQL Express](https://www.microsoft.com/en-au/sql-server/sql-server-editions-express "SQL Express")
-1. Clone Repository 
+1. Clone Repository
    Using Windows Powershell
+
    ```
    wget "https://github.com/tide-foundation/Tide-h4x-for-Privacy/archive/master.zip" -outfile "h4x.zip"
    Expand-Archive "h4x.zip" -Force -DestinationPath "C:\code"
-   ``` 
+   ```
+
    <details>
    <summary>Linux</summary>
       
@@ -62,62 +65,117 @@ This guide assists you to replicate the entire environment using EOS jungle test
       git clone https://github.com/tide-foundation/Tide-h4x-for-Privacy
       ```
    </details>
-   
 
-#### Installing Cleos in Windows 10 
-There are two options when running EOS in a Windows environment: Docker or Linux for Windows.  Provided below are the steps in running Cleos using Linux/Ubuntu for Windows 10.  
+#### Installing Cleos in Windows 10
+
+There are two options when running EOS in a Windows environment: Docker or Linux for Windows. Provided below are the steps in running Cleos using Linux/Ubuntu for Windows 10.
 
 1. Get Ubuntu from Windows Store [Ubuntu Windows 10](https://www.microsoft.com/en-au/p/ubuntu/9nblggh4msv6?activetab=pivot:overviewtab "Ubuntu Windows 10")
-1. Install Ubuntu from the Windows Store. Ignore the following error: 
+1. Install Ubuntu from the Windows Store. Ignore the following error:
    ```
    See https://aka.ms/wslinstall for details.
    Error: 0x8007007e
    Press any key to continue...
    ```
-   Open PowerShell as Administrator and run the following command.  
+   Open PowerShell as Administrator and run the following command.
    ```
    Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
    ```
 1. Install Ubuntu and Login.
-1. Download and install EOS binaries 
+1. Download and install EOS binaries
    ```
    wget https://github.com/EOSIO/eos/releases/download/v1.7.0/eosio_1.7.0-1-ubuntu-18.04_amd64.deb
    sudo apt install ./eosio_1.7.0-1-ubuntu-18.04_amd64.deb
    wget https://github.com/EOSIO/eosio.cdt/releases/download/v1.6.1/eosio.cdt_1.6.1-1_amd64.deb
    sudo apt install ./eosio.cdt_1.6.1-1_amd64.deb
    ```
+
 ### Deployment
 
 #### EOS
 
 This deployment utilizes EOS "jungle" testnet environment.
 
-1. Create EOS Wallet `cleos wallet create --to-console`.  This will create a *default* wallet.  Take note of the **WALLET_PASSWORD**
-1. Generate a keypair for your master account `cleos create key --to-console`.  Take note of the generated **PK_MASTER SK_MASTER** keypair.
+1. Create EOS Wallet `cleos wallet create --to-console`. This will create a _default_ wallet. Take note of the **WALLET_PASSWORD**
+1. Generate a keypair for your master account `cleos create key --to-console`. Take note of the generated **PK_MASTER SK_MASTER** keypair.
 1. Import the private keys into your cleos wallet by running `cleos wallet import --private-key SK_MASTER`.
-1. Navigate to Jungle Testnet for the Account Creation [Jungle Test Net](https://monitor.jungletestnet.io/#account "Jungle"). 
-1. Create a Jungle Testnet account by *Create Account*.  Use the generated PK_MASTER for the Owner Public Key and Active Public Key field.  This will be your **MASTER_ACCOUNT**
-1. The MASTER_ACCOUNT will need some RAM delegated to it for the smartcontract and transaction processing. Use the *faucet* on the [Jungle Test Net](https://monitor.jungletestnet.io/#faucet "Jungle") to give your **MASTER_ACCOUNT** some EOS.  Your main account should get 100 EOS.   
-1. In cleos, run the command `cleos -u http://jungle2.cryptolions.io:80 system buyram MASTER_ACCOUNT MASTER_ACCOUNT "15 EOS"`. The -u parameter is telling cleos to run this command using the jungle testnet.  
+1. Navigate to Jungle Testnet for the Account Creation [Jungle Test Net](https://monitor.jungletestnet.io/#account "Jungle").
+1. Create a Jungle Testnet account by _Create Account_. Use the generated PK_MASTER for the Owner Public Key and Active Public Key field. This will be your **MASTER_ACCOUNT**
+1. The MASTER_ACCOUNT will need some RAM delegated to it for the smartcontract and transaction processing. Use the _faucet_ on the [Jungle Test Net](https://monitor.jungletestnet.io/#faucet "Jungle") to give your **MASTER_ACCOUNT** some EOS. Your main account should get 100 EOS.
+1. In cleos, run the command `cleos -u http://jungle2.cryptolions.io:80 system buyram MASTER_ACCOUNT MASTER_ACCOUNT "15 EOS"`. The -u parameter is telling cleos to run this command using the jungle testnet.
+
    <details>
    <summary>Unlock Wallet</summary>
    Should the wallet lock run the following command
-   
+
    ```
    cleos wallet unlock --password WALLET_PASSWORD
    ```
-1. Generate a keypair for each of the 3 ORK nodes using cleos. Take a note of the 3 created keys ORK 1-**PK_ORK1 SK_ORK1**, ORK 2-**PK_ORK2 SK_ORK2**, ORK 3-**PK_ORK3 SK_ORK3**. 
-1. Using your Master Account create a new eos account for each of the 3 ORK nodes by running 
+
+1. Generate a keypair for each of the 3 ORK nodes using cleos. Take a note of the 3 created keys ORK 1-**PK_ORK1 SK_ORK1**, ORK 2-**PK_ORK2 SK_ORK2**, ORK 3-**PK_ORK3 SK_ORK3**.
+1. Using your Master Account create a new eos account for each of the 3 ORK nodes by running
    ```
    cleos -u http://jungle2.cryptolions.io:80 system newaccount --stake-net "1.0000 EOS" --stake-cpu "1.0000 EOS" --buy-ram-kbytes 8 MASTER_ACCOUNT ORK1xACCOUNT PK_ORK1 PK_ORK1
    cleos -u http://jungle2.cryptolions.io:80 system newaccount --stake-net "1.0000 EOS" --stake-cpu "1.0000 EOS" --buy-ram-kbytes 8 MASTER_ACCOUNT ORK2xACCOUNT PK_ORK2 PK_ORK2
    cleos -u http://jungle2.cryptolions.io:80 system newaccount --stake-net "1.0000 EOS" --stake-cpu "1.0000 EOS" --buy-ram-kbytes 8 MASTER_ACCOUNT ORK3xACCOUNT PK_ORK3 PK_ORK3
    ```
-   *Note:  ORKx_ACCOUNT needs to be 12 characters with a-z and 1-9 eg ork1accountx)*
+   _Note: ORKx_ACCOUNT needs to be 12 characters with a-z and 1-9 eg ork1accountx)_
 1. Navigate to the onboarding folder `../src/Raziel-Contracts/onboarding/`
-1. Compile the onboarding contract using `eosio-cpp -abigen -o onboarding.wasm onboarding.cpp` 
+1. Compile the onboarding contract using `eosio-cpp -abigen -o onboarding.wasm onboarding.cpp`
 1. Go up a folder (../src/Raziel-Contracts/) and run the command `cleos -u http://jungle2.cryptolions.io:80 set contract MASTER_ACCOUNT ./onboarding -p MASTER_ACCOUNT@active`.
 
+#### Credential Generation
+
+1. Navigate to the Raziel.Generator folder and run `dotnet run 4`. This will generate 4 sets of credentials. One for the master account and 1 for each ork node.
+
+#### ORKs
+
+1. (Optionsl) If you plan to use a different blockchain other than Jungle, navigate to the Raziel.Ork folder and open appsettings.json and edit the variables.
+2. Open appsettings.ork1.json and fill in the credentials you created in the previous section. Do this for for the other two nodes.
+
+<details>
+ <summary>appsettings.ork1.json</summary>
+
+```json
+{
+  "Settings": {
+    "Account": "The 12 character eos account you made for the ork nodes",
+    "PublicKey": "The public key created in Raziel.Generator",
+    "PrivateKey": "The private key created in Raziel.Generator",
+    "EosPrivateKey": "The EOS private key associated to this ork node",
+    "Password": "The password created in Raziel.Generator",
+    "Key": "The key created in Raziel.Generator"
+  }
+}
+```
+
+ </details>
+ 
+ 3.	Open appsettings.ork1.json and fill in the credentials you created in the previous section.
+ 4.	Run your ORK nodes with the following commands in seperate terminals: 
+ ```
+ dotnet run "https://localhost:5401" --environment "Ork1"
+ dotnet run "https://localhost:5402" --environment "Ork2"
+ dotnet run "https://localhost:5403" --environment "Ork3"
+ ```
+ 5.	Test the nodes are working by visiting https://localhost:5401/discover in a web browser. You should be greeted with an object similar to this one:
+ 
+ <details>
+ <summary>Response</summary>
+ 
+ ```json
+ {
+    "success": true,
+    "content": {
+        "account": "yourorkaccount",
+        "url": "https://localhost:orkport",
+        "publicKey": "ALdwxVNySq65hwkStfpSuuwz__EXAMPLE_PUBLIC_KEY__oD8PpStPQ0BXqHQd69NAD9LGzQLujEXg=="
+    },
+    "error": null
+}
+```
+
+ </details>
 
 #### Miscellaneous
 
@@ -132,50 +190,9 @@ This deployment utilizes EOS "jungle" testnet environment.
 1. Open a shell in the Raziel.Vendor project folder and run `dotnet ef migrations database update` to push the structure to the database. Ensure you have your connection settings set in appsettings before executing.
 1. Publish the project to your endpoint.
 
-#### ORKs
-
-1. Run `Raziel.Ork\dotnet restore`.
-1. Run 3 instances of Raziel.Ork, each with their own environmental variables set.
-1. Open each web service and edit the environmental variables to align with the EOS jungle testnet, the account created in EOS setup and the keys created in ‘Miscellaneous’ step 1 (the public key, private key and password).
-1. Restart the web apps for the changes to take effect.
-1. Test their viability by visiting localhost:orkport/discover. It should give you a json object similar to this:
-
-```json
-{
-    "success": true,
-    "content": {
-        "account": "yourorkaccount",
-        "url": "https://localhost:orkport",
-        "publicKey": "ALdwxVNySq65hwkStfpSuuwz__EXAMPLE_PUBLIC_KEY__oD8PpStPQ0BXqHQd69NAD9LGzQLujEXg=="
-    },
-    "error": null
-}
-```
-
 ### Environment Setup
 
 Environmental variables are explained below:
-
-#### ORK nodes
-
-```json
-{
-  "Settings": {
-    "Account": "Blockchain account identifier",
-    "PublicKey": "elGamal public key",
-    "PrivateKey": " elGamal private key ",
-    "Onboarding": "Authentication smart contract",
-    "EosPrivateKey": "Blockchain account private key",
-    "Password": "AES encryption passphrase",
-    "Key": "Key used for generation of junk data",
-    "BlockchainChainId": "Blockchain Chain Id",
-    "BlockchainEndpoint": "Blockchain API Endpoint",
-    "UsersTable": "Users table in the authentication contract",
-    "FragmentsTable": " Fragment table in the authentication contract "
-
-  }
-}
-```
 
 #### Vendor
 
