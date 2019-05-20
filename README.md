@@ -89,12 +89,12 @@ sudo apt install ./eosio_1.7.0-1-ubuntu-18.04_amd64.deb
 
 This deployment utilizes EOS "jungle" testnet environment.
 
-1. Connect to Jungle Testnet by `blah blah`.
-1. Create a Jungle Testnet account `blah blah`.  This will be your **MASTER_ACCOUNT**
-1. Create EOS Wallet `cleos wallet create --to-console`.  Take note of the **WALLET_PASSWORD**
+1. Create EOS Wallet `cleos wallet create --to-console`.  This will create a *default* wallet.  Take note of the **WALLET_PASSWORD**
 1. Generate a keypair for your master account `cleos create key --to-console`.  Take note of the generated **PK_MASTER SK_MASTER** keypair.
 1. Import the private keys into your cleos wallet by running `cleos wallet import --private-key SK_MASTER`.
-1.  Generate a keypair for each of the 3 ORK nodes using cleos. Take a note of the 3 created keys ORK 1 **PK_ORK1 SK_ORK1**, ORK 2 **PK_ORK2 SK_ORK2**, ORK 3 **PK_ORK3 SK_ORK3**. 
+1. Navigate to Jungle Testnet for the Account Creation [Jungle Test Net](https://monitor.jungletestnet.io/ "Jungle"). 
+1. Create a Jungle Testnet account by *Create Account*.  This will be your **MASTER_ACCOUNT**
+1. Generate a keypair for each of the 3 ORK nodes using cleos. Take a note of the 3 created keys ORK 1 **PK_ORK1 SK_ORK1**, ORK 2 **PK_ORK2 SK_ORK2**, ORK 3 **PK_ORK3 SK_ORK3**. 
 1. Using your Master Account create a new eos account for each of the 3 ork nodes by running 
 ```
 cleos create account MASTER_ACCOUNT ORK1_ACCOUNT PK_ORK1
