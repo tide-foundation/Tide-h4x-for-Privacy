@@ -143,7 +143,6 @@ appsettings.Ork3.json
 
    <details>
     <summary>appsettings.json code</summary>
-
 ```json
 {
   "Settings": {
@@ -167,7 +166,6 @@ appsettings.Ork3.json
 3. Open appsettings.ork1.json and populate it with the following code. Replacing the variables with the details you generated in 'Credential Generation'. Do this for all 3 ork setting files.
    <details>
     <summary>appsettings.orkX.json code</summary>
-
 ```json
 {
   "Settings": {
@@ -195,7 +193,6 @@ dotnet run "https://localhost:5403" --environment "Ork3"
 
  <details>
  <summary>Response</summary>
- 
  ```json
  {
     "success": true,
@@ -215,7 +212,6 @@ dotnet run "https://localhost:5403" --environment "Ork3"
 1. Navigate to Raziel/Raziel.Vendor and create a file called appsettings.json and populate it with the following code:
    <details>
     <summary>appsettings.json code</summary>
-
 ```json
 {
   "VendorSettings": {
