@@ -113,10 +113,10 @@ This deployment utilizes EOS "jungle" testnet environment.
    cleos -u http://jungle2.cryptolions.io:80 system newaccount --stake-net "1.0000 EOS" --stake-cpu "1.0000 EOS" --buy-ram-kbytes 8 MASTER_ACCOUNT ORK2xACCOUNT PK_ORK2 PK_ORK2
    cleos -u http://jungle2.cryptolions.io:80 system newaccount --stake-net "1.0000 EOS" --stake-cpu "1.0000 EOS" --buy-ram-kbytes 8 MASTER_ACCOUNT ORK3xACCOUNT PK_ORK3 PK_ORK3
    ```
-   *Note:  ORKx_ACCOUNT needs to be 12 characters with a-z and 1-9 eg ork1accountx)
-1. Move the cli working folder to the location of the onboarding contract provided when pulling the repo (./src/Raziel-Contracts/onboarding)
+   *Note:  ORKx_ACCOUNT needs to be 12 characters with a-z and 1-9 eg ork1accountx)*
+1. Navigate to the onboarding folder `../src/Raziel-Contracts/onboarding/`
 1. Compile the onboarding contract using `eosio-cpp -abigen -o onboarding.wasm onboarding.cpp` 
-1. Go up a folder (../Raziel-Contracts/) and run the command `cleos -u http://jungle2.cryptolions.io:80 set contract MASTER_ACCOUNT ./onboarding -p MASTER_ACCOUNT @active`.
+1. Go up a folder (../src/Raziel-Contracts/) and run the command `cleos -u http://jungle2.cryptolions.io:80 set contract MASTER_ACCOUNT ./onboarding -p MASTER_ACCOUNT @active`.
 
 
 #### Miscellaneous
