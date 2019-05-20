@@ -48,7 +48,7 @@ This guide assists you to replicate the entire environment using EOS jungle test
 1. [Cleos](https://developers.eos.io/eosio-nodeos/v1.2.0/docs/cleos-overview "Cleos")
 1. [SQL Express](https://www.microsoft.com/en-au/sql-server/sql-server-editions-express "SQL Express")
 1. [Git for Windows](https://gitforwindows.org/ "Git Windows")
-1. Clone of Repository 
+1. Clone Repository 
 
 Linux
 ```
