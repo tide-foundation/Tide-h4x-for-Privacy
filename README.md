@@ -48,7 +48,17 @@ This guide assists you to replicate the entire environment using EOS jungle test
 1. [Cleos](https://developers.eos.io/eosio-nodeos/v1.2.0/docs/cleos-overview "Cleos")
 1. [SQL Express](https://www.microsoft.com/en-au/sql-server/sql-server-editions-express "SQL Express")
 1. [Git for Windows](https://gitforwindows.org/ "Git Windows")
-1. Clone of Repository `git clone https://github.com/tide-foundation/Tide-h4x-for-Privacy`
+1. Clone of Repository 
+
+Linux
+```
+git clone https://github.com/tide-foundation/Tide-h4x-for-Privacy
+```
+or Windows Powershell
+```
+wget "https://github.com/tide-foundation/Tide-h4x-for-Privacy/archive/master.zip" -outfile "h4x.zip"
+Expand-Archive "h4x.zip" -Force
+``` 
 
 #### Installing Cleos in Windows 10 
 There are two options when running EOS in a Windows environment: Docker or Linux for Windows.  Provided below are the steps in running Cleos using Linux/Ubuntu for Windows 10.  
