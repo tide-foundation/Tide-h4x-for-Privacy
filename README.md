@@ -107,11 +107,11 @@ This deployment utilizes EOS "jungle" testnet environment.
 1. Generate a keypair for each of the 3 ORK nodes using cleos. Take a note of the 3 created keys ORK 1-**PK_ORK1 SK_ORK1**, ORK 2-**PK_ORK2 SK_ORK2**, ORK 3-**PK_ORK3 SK_ORK3**. 
 1. Using your Master Account create a new eos account for each of the 3 ORK nodes by running 
    ```
-   cleos -u http://jungle2.cryptolions.io:80 create account MASTER_ACCOUNT ORK1_ACCOUNT PK_ORK1
-   cleos -u http://jungle2.cryptolions.io:80 create account MASTER_ACCOUNT ORK2_ACCOUNT PK_ORK2
-   cleos -u http://jungle2.cryptolions.io:80 create account MASTER_ACCOUNT ORK3_ACCOUNT PK_ORK3
+   cleos -u http://jungle2.cryptolions.io:80 system newaccount --stake-net "1.0000 EOS" --stake-cpu "1.0000 EOS" --buy-ram-kbytes 8 MASTER_ACCOUNT ORK1xACCOUNT PK_ORK1 PK_ORK1
+   cleos -u http://jungle2.cryptolions.io:80 system newaccount --stake-net "1.0000 EOS" --stake-cpu "1.0000 EOS" --buy-ram-kbytes 8 MASTER_ACCOUNT ORK2xACCOUNT PK_ORK2 PK_ORK2
+   cleos -u http://jungle2.cryptolions.io:80 system newaccount --stake-net "1.0000 EOS" --stake-cpu "1.0000 EOS" --buy-ram-kbytes 8 MASTER_ACCOUNT ORK3xACCOUNT PK_ORK3 PK_ORK3
    ```
-
+   *Note:  ORKx_ACCOUNT needs to be 12 characters with a-z and 1-9 eg ork1accountx)
 1. Move the cli working folder to the location of the onboarding contract provided when pulling the repo (./src/Raziel-Contracts/onboarding)
 1. Compile the onboarding contract using `eosio-cpp -abigen -o onboarding.wasm onboarding.cpp` 
 1. Go up a folder (../Raziel-Contracts/) and run the command `cleos -u http://jungle2.cryptolions.io:80 set contract MASTER_ACCOUNT ./onboarding -p MASTER_ACCOUNT @active`.
