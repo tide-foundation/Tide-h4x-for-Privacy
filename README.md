@@ -149,15 +149,15 @@ This deployment utilizes EOS "jungle" testnet environment.
    ```
     
    </details>
- 
- 1.	Open appsettings.ork1.json and fill in the credentials you created in the previous section.
- 1.	Run your ORK nodes with the following commands in seperate terminals: 
+
+1. Open appsettings.ork1.json and fill in the credentials you created in the previous section.
+1. Run your ORK nodes with the following commands in seperate terminals: 
     ```
     dotnet run "https://localhost:5401" --environment "Ork1"
     dotnet run "https://localhost:5402" --environment "Ork2"
     dotnet run "https://localhost:5403" --environment "Ork3"
     ```
- 1.	Test the nodes are working by visiting https://localhost:5401/discover in a web browser. You should be greeted with an object similar to this one:
+1. Test the nodes are working by visiting https://localhost:5401/discover in a web browser. You should be greeted with an object similar to this one:
  
  <details>
  <summary>Response</summary>
