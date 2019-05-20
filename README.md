@@ -49,40 +49,41 @@ This guide assists you to replicate the entire environment using EOS jungle test
 1. [Node.js - LTS](https://nodejs.org/en/download/ "node.js Download")
 1. [Cleos](https://developers.eos.io/eosio-nodeos/v1.2.0/docs/cleos-overview "Cleos")
 1. [SQL Express](https://www.microsoft.com/en-au/sql-server/sql-server-editions-express "SQL Express")
-1. [Git for Windows](https://gitforwindows.org/ "Git Windows")
 1. Clone Repository 
-
-Using Windows Powershell
-```
-wget "https://github.com/tide-foundation/Tide-h4x-for-Privacy/archive/master.zip" -outfile "h4x.zip"
-Expand-Archive "h4x.zip" -Force
-``` 
-or using Linux
-```
-git clone https://github.com/tide-foundation/Tide-h4x-for-Privacy
-```
+   Using Windows Powershell
+   ```
+   wget "https://github.com/tide-foundation/Tide-h4x-for-Privacy/archive/master.zip" -outfile "h4x.zip"
+   Expand-Archive "h4x.zip" -Force
+   ``` 
+   <details>
+   <summary>Linux</summary>
+      
+      ```
+      git clone https://github.com/tide-foundation/Tide-h4x-for-Privacy
+      ```
+   </details>
+   
 
 #### Installing Cleos in Windows 10 
 There are two options when running EOS in a Windows environment: Docker or Linux for Windows.  Provided below are the steps in running Cleos using Linux/Ubuntu for Windows 10.  
 
 1. Get Ubuntu from Windows Store [Ubuntu Windows 10](https://www.microsoft.com/en-au/p/ubuntu/9nblggh4msv6?activetab=pivot:overviewtab "Ubuntu Windows 10")
-2. Install Ubuntu by clicking on the Icon once downloaded. Should you get the following error, 
-```
-The WSL optional component is not enabled. Please enable it and try again.
-See https://aka.ms/wslinstall for details.
-Error: 0x8007007e
-Press any key to continue...
-```
-Open PowerShell as Administrator and run the following command.  
-```
-Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
-```
-3. Install Ubuntu and Login.
-4. Download and install EOS binaries 
-```
-wget "https://github.com/tide-foundation/Tide-h4x-for-Privacy/archive/master.zip" -outfile "h4x.zip"
-	Expand-Archive "h4x.zip" -Force -DestinationPath "C:\code"
-```
+1. Install Ubuntu from the Windows Store. Ignore the following error: 
+   ```
+   See https://aka.ms/wslinstall for details.
+   Error: 0x8007007e
+   Press any key to continue...
+   ```
+   Open PowerShell as Administrator and run the following command.  
+   ```
+   Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
+   ```
+1. Install Ubuntu and Login.
+1. Download and install EOS binaries 
+   ```
+   wget "https://github.com/tide-foundation/Tide-h4x-for-Privacy/archive/master.zip" -outfile "h4x.zip"
+   Expand-Archive "h4x.zip" -Force -DestinationPath "C:\code"
+   ```
 ### Deployment
 
 #### EOS
