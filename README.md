@@ -53,7 +53,7 @@ This guide assists you to replicate the entire environment using EOS jungle test
    Using Windows Powershell
    ```
    wget "https://github.com/tide-foundation/Tide-h4x-for-Privacy/archive/master.zip" -outfile "h4x.zip"
-   Expand-Archive "h4x.zip" -Force
+   Expand-Archive "h4x.zip" -Force -DestinationPath "C:\code"
    ``` 
    <details>
    <summary>Linux</summary>
@@ -81,8 +81,10 @@ There are two options when running EOS in a Windows environment: Docker or Linux
 1. Install Ubuntu and Login.
 1. Download and install EOS binaries 
    ```
-   wget "https://github.com/tide-foundation/Tide-h4x-for-Privacy/archive/master.zip" -outfile "h4x.zip"
-   Expand-Archive "h4x.zip" -Force -DestinationPath "C:\code"
+   wget https://github.com/EOSIO/eos/releases/download/v1.7.0/eosio_1.7.0-1-ubuntu-18.04_amd64.deb
+   sudo apt install ./eosio_1.7.0-1-ubuntu-18.04_amd64.deb
+   wget https://github.com/EOSIO/eosio.cdt/releases/download/v1.6.0/eosio.cdt_1.6.0-1_amd64.deb
+   sudo apt install ./eosio.cdt_1.6.0-1_amd64.deb
    ```
 ### Deployment
 
