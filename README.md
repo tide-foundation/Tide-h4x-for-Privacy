@@ -130,7 +130,8 @@ This deployment utilizes EOS "jungle" testnet environment.
 
 #### ORKs
 
-1. Open appsettings.ork1.json and fill in the credentials you created in the previous section. Do this for for the other two nodes.
+1. Navigate to `../srcRaziel.Ork` folder.
+1. Open appsettings.ork1.json and fill in the credentials you created in the previous section. Do this for for the other two nodes *appsettings.ork2.json*  and *appsettings.ork3.json*.
    
    <details>
    <summary>appsettings.ork1.json</summary>
@@ -149,7 +150,6 @@ This deployment utilizes EOS "jungle" testnet environment.
    ```
    </details>
 
-1. Open appsettings.ork1.json and fill in the credentials you created in the previous section.
 1. Run your ORK nodes with the following commands in seperate terminals: 
     ```
     dotnet run "https://localhost:5401" --environment "Ork1"
