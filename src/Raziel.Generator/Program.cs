@@ -18,19 +18,24 @@ using System.Linq;
 using System.Security.Cryptography;
 using Raziel.Library.Classes.Crypto;
 
-namespace Raziel.Generator {
-    internal class Program {
-        private static void Main(string[] args) {
+namespace Raziel.Generator
+{
+    internal class Program
+    {
+        private static void Main(string[] args)
+        {
             var amount = 1;
             if (args.Any()) int.TryParse(args[0], out amount);
 
-            for (var i = 0; i < amount; i++) {
+            for (var i = 0; i < amount; i++)
+            {
                 var pair = Cryptide.Instance.GetKey();
                 Console.WriteLine($"\nPublic: {pair.Public}\nPrivate: {pair.Private}\nPassword: {GetKey()}\nKey: {GetKey()}");
             }
         }
 
-        public static string GetKey(int byteSize = 32) {
+        public static string GetKey(int byteSize = 32)
+        {
             var buffer = new byte[byteSize];
             using var rdm = new RNGCryptoServiceProvider();
             rdm.GetBytes(buffer);

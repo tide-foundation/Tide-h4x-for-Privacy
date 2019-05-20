@@ -14,7 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Raziel.Contracts", "Raziel.
 		Raziel.Contracts\onboarding.cpp = Raziel.Contracts\onboarding.cpp
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raziel.Generator", "Raziel.Generator\Raziel.Generator.csproj", "{F44B8F9E-44DF-4F34-BAE1-3B687115EBF6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raziel.Generator", "Raziel.Generator\Raziel.Generator.csproj", "{68151F31-D593-4FB9-97A4-1047E8AC443E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,10 +34,10 @@ Global
 		{724035BF-B24E-4959-8436-C3BDEF330705}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{724035BF-B24E-4959-8436-C3BDEF330705}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{724035BF-B24E-4959-8436-C3BDEF330705}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F44B8F9E-44DF-4F34-BAE1-3B687115EBF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F44B8F9E-44DF-4F34-BAE1-3B687115EBF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F44B8F9E-44DF-4F34-BAE1-3B687115EBF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F44B8F9E-44DF-4F34-BAE1-3B687115EBF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68151F31-D593-4FB9-97A4-1047E8AC443E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68151F31-D593-4FB9-97A4-1047E8AC443E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68151F31-D593-4FB9-97A4-1047E8AC443E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68151F31-D593-4FB9-97A4-1047E8AC443E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
