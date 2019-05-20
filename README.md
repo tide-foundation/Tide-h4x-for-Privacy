@@ -93,9 +93,9 @@ This deployment utilizes EOS "jungle" testnet environment.
 1. Create EOS Wallet `cleos wallet create --to-console`.  This will create a *default* wallet.  Take note of the **WALLET_PASSWORD**
 1. Generate a keypair for your master account `cleos create key --to-console`.  Take note of the generated **PK_MASTER SK_MASTER** keypair.
 1. Import the private keys into your cleos wallet by running `cleos wallet import --private-key SK_MASTER`.
-1. Navigate to Jungle Testnet for the Account Creation [Jungle Test Net](https://monitor.jungletestnet.io/ "Jungle"). 
+1. Navigate to Jungle Testnet for the Account Creation [Jungle Test Net](https://monitor.jungletestnet.io/#account "Jungle"). 
 1. Create a Jungle Testnet account by *Create Account*.  Use the generated PK_MASTER for the Owner Public Key and Active Public Key field.  This will be your **MASTER_ACCOUNT**
-1. The MASTER_ACCOUNT will need some RAM delegated to it for the smartcontract and transaction processing. Use the *faucet* on the [Jungle Test Net](https://monitor.jungletestnet.io/ "Jungle") to give your **MASTER_ACCOUNT** some EOS. 
+1. The MASTER_ACCOUNT will need some RAM delegated to it for the smartcontract and transaction processing. Use the *faucet* on the [Jungle Test Net](https://monitor.jungletestnet.io/#faucet "Jungle") to give your **MASTER_ACCOUNT** some EOS.  Your main account should get 100 EOS.   
 1. In cleos, run the command `cleos -u http://jungle2.cryptolions.io:80 system buyram MASTER_ACCOUNT MASTER_ACCOUNT "15 EOS"`. The -u parameter is telling cleos to run this command using the jungle testnet.
 1. Generate a keypair for each of the 3 ORK nodes using cleos. Take a note of the 3 created keys ORK 1 **PK_ORK1 SK_ORK1**, ORK 2 **PK_ORK2 SK_ORK2**, ORK 3 **PK_ORK3 SK_ORK3**. 
 1. Using your Master Account create a new eos account for each of the 3 ORK nodes by running 
