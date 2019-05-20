@@ -61,7 +61,7 @@ namespace Raziel.Vendor {
                     .RequireAuthenticatedUser().Build());
             });
 
-            services.AddDbContext<RazielContext>(options => options.UseSqlite(settings.Connection));
+            services.AddDbContext<RazielContext>(options => options.UseSqlite("Data Source=Raziel.db"));
             services.AddCors();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
