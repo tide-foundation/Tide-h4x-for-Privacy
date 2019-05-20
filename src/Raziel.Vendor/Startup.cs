@@ -60,14 +60,22 @@ namespace Raziel.Vendor {
                     .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
                     .RequireAuthenticatedUser().Build());
             });
-        
-            services.AddDbContext<RazielContext>(options => options.UseSqlServer(settings.Connection));
+
+            services.AddDbContext<RazielContext>(options => options.UseSqlite(settings.Connection));
+            services.AddCors();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env) {
             app.UseHsts();
             app.UseHttpsRedirection();
+
+            app.UseCors(builder =>
+                builder
+                    .AllowAnyOrigin()
+                    .AllowAnyHeader()
+                    .AllowAnyHeader());
+
             app.UseMvc();
         }
     }

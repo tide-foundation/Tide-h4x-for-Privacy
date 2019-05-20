@@ -8,3 +8,9 @@ body {
 #content {
     width: 500px;
 }
+
+input {
+    display: block;
+    margin-bottom: 10px;
+    width: 300px;
+}

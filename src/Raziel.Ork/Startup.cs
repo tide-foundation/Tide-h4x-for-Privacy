@@ -38,14 +38,20 @@ namespace Raziel.Ork {
             services.AddSingleton<IAdminTideAuthentication, EosAdminTideAuthentication>();
             services.AddHttpContextAccessor();
             services.AddMemoryCache();
-
+            services.AddCors();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env) {
             app.UseHsts();
-
             app.UseHttpsRedirection();
+
+            app.UseCors(builder =>
+                builder
+                    .AllowAnyOrigin()
+                    .AllowAnyHeader()
+                    .AllowAnyHeader());
+
             app.UseMvc();
         }
     }

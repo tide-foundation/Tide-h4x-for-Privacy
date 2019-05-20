@@ -20,6 +20,9 @@ import config from './src/assets/js/config'
 
 const tide = new Tide(config.nodes, 32);
 
+document.getElementById("username").value = `User${Math.floor(Math.random() * 1000000) + 1}`;
+
+
 document.getElementById('submit-btn').onclick = async function () {
     try {
         const username = document.getElementById("username").value;
@@ -32,16 +35,16 @@ document.getElementById('submit-btn').onclick = async function () {
         const request = {
             user: {
                 username: processedUsername.username,
-                firstName: await tide.processEncryption(true, "matt", result.pub),
-                lastName: await tide.processEncryption(true, "spencer", result.pub),
-                bitcoinPrivateKey: await tide.processEncryption(true, "lol key", result.pub),
-                note: await tide.processEncryption(true, "some note", result.pub),
+                firstName: await tide.processEncryption(true, document.getElementById("first").value, result.pub),
+                lastName: await tide.processEncryption(true, document.getElementById("last").value, result.pub),
+                bitcoinPrivateKey: await tide.processEncryption(true, document.getElementById("key").value, result.pub),
+                note: await tide.processEncryption(true, document.getElementById("notes").value, result.pub),
                 vendorPublicKey: result.pub
             },
-            token: "RccuTZP0inPEpoKZb49WiSDQOaFs6K*T17S2fbK@!6JakfVMU8qOgbLAeDKe5AaT4kp7%0^98TO5OI1"
+            token: config.vendorPassword
         };
 
-        console.log(await tide.tideRequest(`https://your-vendor-endpoint.net/PostUser`, request));
+        console.log(await tide.tideRequest(`${config.vendorEndpoint}/PostUser`, request));
 
         console.log(`Account created successfully`);
     } catch (error) {

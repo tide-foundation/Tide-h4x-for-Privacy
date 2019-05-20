@@ -17,7 +17,8 @@
 
 export default {
     nodes: ["https://localhost:5401", "https://localhost:5402", "https://localhost:5403"],
-    vendorEndpoint: "https://localhost:5405"
+    vendorEndpoint: "https://localhost:5001",
+    vendorPassword: "password"
 }
 
 document.addEventListener("tide-log", (e) => console.log(e.detail.msg));
