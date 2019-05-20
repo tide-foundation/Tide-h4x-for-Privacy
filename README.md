@@ -171,8 +171,8 @@ This deployment utilizes EOS "jungle" testnet environment.
         "publicKey": "ALdwxVNySq65hwkStfpSuuwz__EXAMPLE_PUBLIC_KEY__oD8PpStPQ0BXqHQd69NAD9LGzQLujEXg=="
     },
     "error": null
-}
-```
+  }
+  ```
 
  </details>
 
@@ -225,7 +225,7 @@ Environmental variables are explained below:
   }
 }
 ```
->>>>>>> Stashed changes
+
 
 #### Vendor
 
