@@ -130,33 +130,35 @@ This deployment utilizes EOS "jungle" testnet environment.
 
 #### ORKs
 
-1. Navigate to `../srcRaziel.Ork` folder.
-1. Open appsettings.ork1.json and fill in the credentials you created in the previous section. Do this for for the other two nodes *appsettings.ork2.json*  and *appsettings.ork3.json*.
-   
-   <details>
-   <summary>appsettings.ork1.json</summary>
+1. (Optionsl) If you plan to use a different blockchain other than Jungle, navigate to the Raziel.Ork folder and open appsettings.json and edit the variables.
+2. Open appsettings.ork1.json and fill in the credentials you created in the previous section. Do this for for the other two nodes.
 
-   ```json
-      {
-          "Settings": {
-            "Account": "The 12 character eos account you made for the ork nodes",
-            "PublicKey": "The public key created in Raziel.Generator",
-            "PrivateKey": "The private key created in Raziel.Generator",
-            "EosPrivateKey": "The EOS private key associated to this ork node",
-            "Password": "The password created in Raziel.Generator",
-            "Key": "The key created in Raziel.Generator"
-            }
-       }
-   ```
-   </details>
+<details>
+ <summary>appsettings.ork1.json</summary>
 
-1. Run your ORK nodes with the following commands in seperate terminals: 
-    ```
-    dotnet run "https://localhost:5401" --environment "Ork1"
-    dotnet run "https://localhost:5402" --environment "Ork2"
-    dotnet run "https://localhost:5403" --environment "Ork3"
-    ```
-1. Test the nodes are working by visiting https://localhost:5401/discover in a web browser. You should be greeted with an object similar to this one:
+```json
+{
+  "Settings": {
+    "Account": "The 12 character eos account you made for the ork nodes",
+    "PublicKey": "The public key created in Raziel.Generator",
+    "PrivateKey": "The private key created in Raziel.Generator",
+    "EosPrivateKey": "The EOS private key associated to this ork node",
+    "Password": "The password created in Raziel.Generator",
+    "Key": "The key created in Raziel.Generator"
+  }
+}
+```
+
+ </details>
+ 
+ 3.	Open appsettings.ork1.json and fill in the credentials you created in the previous section.
+ 4.	Run your ORK nodes with the following commands in seperate terminals: 
+ ```
+ dotnet run "https://localhost:5401" --environment "Ork1"
+ dotnet run "https://localhost:5402" --environment "Ork2"
+ dotnet run "https://localhost:5403" --environment "Ork3"
+ ```
+ 5.	Test the nodes are working by visiting https://localhost:5401/discover in a web browser. You should be greeted with an object similar to this one:
  
  <details>
  <summary>Response</summary>
@@ -170,61 +172,47 @@ This deployment utilizes EOS "jungle" testnet environment.
         "publicKey": "ALdwxVNySq65hwkStfpSuuwz__EXAMPLE_PUBLIC_KEY__oD8PpStPQ0BXqHQd69NAD9LGzQLujEXg=="
     },
     "error": null
-  }
-  ```
+}
+```
 
  </details>
 
-*Option: If you plan to use a different blockchain other than Jungle, navigate to the Raziel.Ork folder and open appsettings.json and edit the variables.*
+ #### Database & Vendor
 
-#### Miscellaneous
+1. Download and install SQL Server and get your local connection string ready.
+2. Navigate to Raziel/Raziel.Vendor and open appsettings.json and fill in the connection variable with the recently aquired connection string. Example: `Data Source=DESKTOP-3ASU9A7\\SQLEXPRESS;Initial Catalog=Raziel;Integrated Security=True;`
+3. Enter any kind of password in the password variable and save.
+<details>
+ <summary>Example appsettings</summary>
 
-1. Run `Raziel.Generator\dotnet restore`.
-1. Build the Raziel.Generator project and run it once for each ORK Node. You can generate them all at once by indluding the optional parameter, example: `./Raziel.Generator 12`. Save the generated credentials as we will be using them for the ORK environmental variables.
-1. Run `Raziel.Creator\npm install`.
-1. Open Index.html inside the Razial.Creator root folder and create an account to use for the challenge. Ensure you write down the credentials used in it's creation.
+```json
+{
+  "VendorSettings": {
+    "Connection": "Data Source=DESKTOP-3ASU9A7\\SQLEXPRESS;Initial Catalog=Raziel;Integrated Security=True;",
+    "Password": "password"
+  }
+}
+```
+ </details>
+ 
+4. Run `dotnet ef migrations add Initial` to create a migration. Run `dotnet ef database update` to push the scaffolding to your local database.
+5. Run the vendor using `dotnet run`. Take note of the endpoint shown on screen.
 
-#### Vendor
 
-1. Run `Raziel.Vendor\dotnet restore`.
-1. Open a shell in the Raziel.Vendor project folder and run `dotnet ef migrations database update` to push the structure to the database. Ensure you have your connection settings set in appsettings before executing.
-1. Publish the project to your endpoint.
+#### Account Creation
 
-#### Miscellaneous
+1. Navigate to Raziel/Raziel.Creator and run `npm install`.
+2. Open the config at /src/assets/js/config.js and edit the ork node array to reflect the 3 nodes you have running. Change the vendor endpoint to the above.
+3. Run the command `webpack` to compile the changes made to config.js.
+4. Open index.html in a web browser, fill in a new username and password.
+5. Open developer console by pressing F12, then click the 'Create Account' button.
+6. If it creates successfully, you should see 'Account created successfully' appear in the console.
 
-1. Run `Raziel.Generator\dotnet restore`.
-1. Build the Raziel.Generator project and run it once for each ORK Node. You can generate them all at once by indluding the optional parameter, example: `./Raziel.Generator 12`. Save the generated credentials as we will be using them for the ORK environmental variables.
-1. Run `Raziel.Creator\npm install`.
-1. Open Index.html inside the Razial.Creator root folder and create an account to use for the challenge. Ensure you write down the credentials used in it's creation.
 
-#### Vendor
-
-1. Run `Raziel.Vendor\dotnet restore`.
-1. Open a shell in the Raziel.Vendor project folder and run `dotnet ef migrations database update` to push the structure to the database. Ensure you have your connection settings set in appsettings before executing.
-1. Publish the project to your endpoint.
 
 ### Environment Setup
 
 Environmental variables are explained below:
-
-```json
-{
-  "Settings": {
-    "Account": "Blockchain account identifier",
-    "PublicKey": "elGamal public key",
-    "PrivateKey": " elGamal private key ",
-    "Onboarding": "Authentication smart contract",
-    "EosPrivateKey": "Blockchain account private key",
-    "Password": "AES encryption passphrase",
-    "Key": "Key used for generation of junk data",
-    "BlockchainChainId": "Blockchain Chain Id",
-    "BlockchainEndpoint": "Blockchain API Endpoint",
-    "UsersTable": "Users table in the authentication contract",
-    "FragmentsTable": " Fragment table in the authentication contract "
-  }
-}
-```
-
 
 #### Vendor
 
