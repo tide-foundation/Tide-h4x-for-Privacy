@@ -49,7 +49,6 @@ This guide assists you to replicate the entire environment using EOS jungle test
 1. [.NET Core 2.2 Build apps - SDK](https://dotnet.microsoft.com/download/dotnet-core/2.2 ".net Core 2.2 Download")
 1. [Node.js - LTS](https://nodejs.org/en/download/ "node.js Download")
 1. [Cleos](https://developers.eos.io/eosio-nodeos/v1.2.0/docs/cleos-overview "Cleos")
-1. [SQL Express](https://www.microsoft.com/en-au/sql-server/sql-server-editions-express "SQL Express")
 1. Clone Repository
    Using Windows Powershell
 
