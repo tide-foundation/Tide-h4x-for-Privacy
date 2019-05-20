@@ -80,8 +80,8 @@ Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-L
 3. Install Ubuntu and Login.
 4. Download and install EOS binaries 
 ```
-wget https://github.com/EOSIO/eos/releases/download/v1.7.0/eosio_1.7.0-1-ubuntu-18.04_amd64.deb
-sudo apt install ./eosio_1.7.0-1-ubuntu-18.04_amd64.deb
+wget "https://github.com/tide-foundation/Tide-h4x-for-Privacy/archive/master.zip" -outfile "h4x.zip"
+	Expand-Archive "h4x.zip" -Force -DestinationPath "C:\code"
 ```
 ### Deployment
 
@@ -94,6 +94,8 @@ This deployment utilizes EOS "jungle" testnet environment.
 1. Import the private keys into your cleos wallet by running `cleos wallet import --private-key SK_MASTER`.
 1. Navigate to Jungle Testnet for the Account Creation [Jungle Test Net](https://monitor.jungletestnet.io/ "Jungle"). 
 1. Create a Jungle Testnet account by *Create Account*.  This will be your **MASTER_ACCOUNT**
+1. The contract holder account will need some RAM delegated to it for the smartcontract and process transactions. Use the faucet on the [Jungle Test Net](https://monitor.jungletestnet.io/ "Jungle") to give your **MASTER_ACCOUNT** some EOS. 
+1. In cleos, run the command `cleos -u http://jungle2.cryptolions.io:80 system buyram MASTER_ACCOUNT MASTER_ACCOUNT "15 EOS"`. The -u parameter is telling cleos to run this command using the jungle testnet.
 1. Generate a keypair for each of the 3 ORK nodes using cleos. Take a note of the 3 created keys ORK 1 **PK_ORK1 SK_ORK1**, ORK 2 **PK_ORK2 SK_ORK2**, ORK 3 **PK_ORK3 SK_ORK3**. 
 1. Using your Master Account create a new eos account for each of the 3 ork nodes by running 
    ```
