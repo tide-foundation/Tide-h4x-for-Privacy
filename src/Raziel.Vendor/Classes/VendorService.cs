@@ -39,16 +39,15 @@ namespace Raziel.Vendor.Classes {
             _logger = logger.CreateLogger("Vendor");
         }
 
-        public bool PostUser(AuthenticationRequest user) {
+        public TideResponse PostUser(AuthenticationRequest user) {
             try {
-                if (user.Token != _settings.Password) return false;
+                if (user.Token != _settings.Password) return new TideResponse("Incorrect password");
                 _context.Add(user.User);
                 _context.SaveChanges();
-                return true;
+                return  new TideResponse(true);
             }
             catch (Exception e) {
-                Console.WriteLine(e);
-                throw;
+                return new TideResponse(e.Message);
             }
           
         }

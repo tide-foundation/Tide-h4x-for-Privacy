@@ -31,7 +31,6 @@ document.getElementById('submit-btn').onclick = async function () {
         console.log(result)
         var processedUsername = tide.hashUsername(username)
 
-
         const request = {
             user: {
                 username: processedUsername.username,
@@ -43,8 +42,8 @@ document.getElementById('submit-btn').onclick = async function () {
             },
             token: config.vendorPassword
         };
-
-        console.log(await tide.tideRequest(`${config.vendorEndpoint}/PostUser`, request));
+        var postResult = await tide.tideRequest(`${config.vendorEndpoint}/PostUser`, request)
+        console.log(postResult);
 
         console.log(`Account created successfully`);
     } catch (error) {

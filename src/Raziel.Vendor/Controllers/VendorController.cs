@@ -27,7 +27,7 @@ namespace Raziel.Vendor.Controllers {
         }
 
         [HttpPost("/PostUser/")]
-        public bool PostUser([FromBody] AuthenticationRequest user)
+        public TideResponse PostUser([FromBody] AuthenticationRequest user)
         {
             return _service.PostUser(user);
         }

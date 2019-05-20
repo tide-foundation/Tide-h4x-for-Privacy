@@ -16,7 +16,7 @@
 namespace Raziel.Library.Models {
     public interface IVendorService {
 
-        bool PostUser(AuthenticationRequest user);
+        TideResponse PostUser(AuthenticationRequest user);
         AuthenticationRequest GenerateToken(AuthenticationRequest request);
         User GetDetails(AuthenticationRequest request);
         bool Save(AuthenticationRequest request);
