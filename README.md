@@ -101,7 +101,7 @@ This deployment utilizes EOS "jungle" testnet environment.
 1. Import the private keys into your cleos wallet by running `cleos wallet import --private-key SK_MASTER`.
 1. Navigate to Jungle Testnet for the Account Creation [Jungle Test Net](https://monitor.jungletestnet.io/#account "Jungle").
 1. Create a Jungle Testnet account by _Create Account_. Use the generated PK_MASTER for the Owner Public Key and Active Public Key field. This will be your **MASTER_ACCOUNT**
-1. The MASTER_ACCOUNT will need some RAM delegated to it for the smartcontract and transaction processing. Use the _faucet_ on the [Jungle Test Net](https://monitor.jungletestnet.io/#faucet "Jungle") to give your **MASTER_ACCOUNT** some EOS. Your main account should get 100 EOS.
+1. The MASTER*ACCOUNT will need some RAM delegated to it for the smartcontract and transaction processing. Use the \_faucet* on the [Jungle Test Net](https://monitor.jungletestnet.io/#faucet "Jungle") to give your **MASTER_ACCOUNT** some EOS. Your main account should get 100 EOS.
 1. In cleos, run the command `cleos -u http://jungle2.cryptolions.io:80 system buyram MASTER_ACCOUNT MASTER_ACCOUNT "15 EOS"`. The -u parameter is telling cleos to run this command using the jungle testnet.
 
    <details>
@@ -130,11 +130,43 @@ This deployment utilizes EOS "jungle" testnet environment.
 
 #### ORKs
 
-1. (Optionsl) If you plan to use a different blockchain other than Jungle, navigate to the Raziel.Ork folder and open appsettings.json and edit the variables.
-2. Open appsettings.ork1.json and fill in the credentials you created in the previous section. Do this for for the other two nodes.
+1. Navigate to Raziel/Raziel.Ork and create 4 files with names:
 
-<details>
- <summary>appsettings.ork1.json</summary>
+```
+appsettings.json
+appsettings.Ork1.json
+appsettings.Ork2.json
+appsettings.Ork3.json
+```
+
+2. Open appsettings.json and populate it with the following code (change the variables if you're using a different blockchain):
+
+   <details>
+    <summary>appsettings.json code</summary>
+
+```json
+{
+  "Settings": {
+    "BlockchainChainId": "e70aaab8997e1dfce58fbfac80cbbb8fecec7b99cf982a9444273cbc64c41473",
+    "BlockchainEndpoint": "http://jungle2.cryptolions.io:80",
+    "Onboarding": "tidecontract",
+    "UsersTable": "tideusers",
+    "FragmentsTable": "tidefrags"
+  },
+  "AllowedHosts": "*",
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information"
+    }
+  }
+}
+```
+
+</details>
+
+3. Open appsettings.ork1.json and populate it with the following code. Replacing the variables with the details you generated in 'Credential Generation'. Do this for all 3 ork setting files.
+   <details>
+    <summary>appsettings.orkX.json code</summary>
 
 ```json
 {
@@ -149,17 +181,18 @@ This deployment utilizes EOS "jungle" testnet environment.
 }
 ```
 
- </details>
- 
- 3.	Open appsettings.ork1.json and fill in the credentials you created in the previous section.
- 4.	Run your ORK nodes with the following commands in seperate terminals: 
- ```
- dotnet run "https://localhost:5401" --environment "Ork1"
- dotnet run "https://localhost:5402" --environment "Ork2"
- dotnet run "https://localhost:5403" --environment "Ork3"
- ```
- 5.	Test the nodes are working by visiting https://localhost:5401/discover in a web browser. You should be greeted with an object similar to this one:
- 
+</details>
+
+4.  Run your ORK nodes with the following commands in seperate terminals:
+
+```
+dotnet run "https://localhost:5401" --environment "Ork1"
+dotnet run "https://localhost:5402" --environment "Ork2"
+dotnet run "https://localhost:5403" --environment "Ork3"
+```
+
+5.  Test the nodes are working by visiting https://localhost:5401/discover in a web browser. You should be greeted with an object similar to this one:
+
  <details>
  <summary>Response</summary>
  
@@ -168,7 +201,7 @@ This deployment utilizes EOS "jungle" testnet environment.
     "success": true,
     "content": {
         "account": "yourorkaccount",
-        "url": "https://localhost:orkport",
+        "url": "https://localhost:5401",
         "publicKey": "ALdwxVNySq65hwkStfpSuuwz__EXAMPLE_PUBLIC_KEY__oD8PpStPQ0BXqHQd69NAD9LGzQLujEXg=="
     },
     "error": null
@@ -177,64 +210,42 @@ This deployment utilizes EOS "jungle" testnet environment.
 
  </details>
 
- #### Database & Vendor
+#### Database & Vendor
 
-1. Download and install SQL Server and get your local connection string ready.
-2. Navigate to Raziel/Raziel.Vendor and open appsettings.json and fill in the connection variable with the recently aquired connection string. Example: `Data Source=DESKTOP-3ASU9A7\\SQLEXPRESS;Initial Catalog=Raziel;Integrated Security=True;`
-3. Enter any kind of password in the password variable and save.
-<details>
- <summary>Example appsettings</summary>
+1. Navigate to Raziel/Raziel.Vendor and create a file called appsettings.json and populate it with the following code:
+   <details>
+    <summary>appsettings.json code</summary>
 
 ```json
 {
   "VendorSettings": {
-    "Connection": "Data Source=DESKTOP-3ASU9A7\\SQLEXPRESS;Initial Catalog=Raziel;Integrated Security=True;",
-    "Password": "password"
+    "Password": "This can be any password you choose"
   }
 }
 ```
- </details>
- 
-4. Run `dotnet ef migrations add Initial` to create a migration. Run `dotnet ef database update` to push the scaffolding to your local database.
-5. Run the vendor using `dotnet run`. Take note of the endpoint shown on screen.
 
+ </details>
+
+2. Run `dotnet ef migrations add Initial` to create a migration. Run `dotnet ef database update` to push the scaffolding to your local database.
+3. Run the vendor using `dotnet run`. Take note of the endpoint shown on screen.
 
 #### Account Creation
 
 1. Navigate to Raziel/Raziel.Creator and run `npm install`.
 2. Open the config at /src/assets/js/config.js and edit the ork node array to reflect the 3 nodes you have running. Change the vendor endpoint to the above.
-3. Run the command `webpack` to compile the changes made to config.js.
-4. Open index.html in a web browser, fill in a new username and password.
-5. Open developer console by pressing F12, then click the 'Create Account' button.
-6. If it creates successfully, you should see 'Account created successfully' appear in the console.
-
-
-
-### Environment Setup
-
-Environmental variables are explained below:
-
-#### Vendor
-
-```json
-{
-  "VendorSettings": {
-    "Connection": "Database endpoint",
-    "Password": "JWT token password"
-  }
-}
-```
+3. Edit the password variable with the password you choose to use in the vendor appsettings.
+4. Run the command `webpack` to compile the changes made to config.js.
+5. Open index.html in a web browser, fill in the details. We've added placeholder values for brevity.
+6. Open developer console by pressing F12, then click the 'Create Account' button.
+7. If it creates successfully, you should see 'Account created successfully' appear in the console.
 
 #### Frontend Setup
 
-1. Run `Raziel.Front\npm install`.
-1. Open Raziel.Front\src\assets\js\config.js. Populate the ORK node endpoints array. The generation is looped as the endpoints follow a strict naming convention but this can be easily changed.
-1. Open the .env.production file and set your vendor endpoint there.
-
-#### Running the Frontend Website
-
-1. In the Raziel.Front\ folder, open a console and run `npm run serve` and open the browser to the endpoint shown.
-1. Login using your credentials from ‘Miscellaneous’ step 2
+1. Navigate to Raziel/Raziel.Front run `npm install`.
+2. Open Raziel.Front\src\assets\js\config.js. Populate the ORK node endpoints array with the correct endpoints.
+3. Open the .env.production file in the root folder and set your vendor endpoint there.
+4. Run the command `npm run serve` to start up a development server and run the application.
+5. You should not be able to login using the account credentials created in section 'Account Creation'
 
 ### Social
 
