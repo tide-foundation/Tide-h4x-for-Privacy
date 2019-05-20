@@ -64,7 +64,7 @@ Open PowerShell as Administrator and run the following command.
 ```
 Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
 ```
-3. Login to Ubuntu
+3. Install Ubuntu and Login.
 4. Download and install EOS binaries 
 ```
 wget https://github.com/EOSIO/eos/releases/download/v1.7.0/eosio_1.7.0-1-ubuntu-18.04_amd64.deb
