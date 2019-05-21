@@ -170,13 +170,20 @@ This deployment utilizes EOS "jungle" testnet environment.
 
 #### Database & Vendor
 
-1. Navigate to Raziel/Raziel.Vendor. Open appsettings.json and populate it with the following code:
+1. Navigate to Raziel/Raziel.Vendor. Open appsettings.json and populate it with the following code (feel free to use the pre-filled values):
    ```json
-   {
-     "VendorSettings": {
-       "Password": "This can be any password you choose"
-     }
-   }
+    {
+      "VendorSettings": {
+        "Password": "Password",
+        "Key": "dq8p8NiQ134WK94hUVlp%Ge%IiJXDsP9MPNFS%@qplGG#drX9!y7RWh&#e@xKC8ut%9ACw5^W^^6@SC"
+      },
+        "AllowedHosts": "*",
+        "Logging": {
+        "LogLevel": {
+        "Default": "Information"
+      }
+      }
+    }
    ```
 
 1. Run `dotnet ef migrations add Initial` to create a migration. Run `dotnet ef database update` to push the scaffolding to your local database.
@@ -205,8 +212,9 @@ This deployment utilizes EOS "jungle" testnet environment.
       vendorEndpoint: "https://localhost:5001"
     }
     ```
-1. Run the command `npm run serve` to start up a development server and run the application.
-1. You should not be able to login using the account credentials created in section 'Account Creation'
+1. Run the command `npm run build`. This will compile the website to the /dist folder.
+1. Copy the contents of the dist folder to wherever you serve files. This can be via xampp, a htdocs folder or simply placing the contents in your main drive root folder.
+1. Open index.html. You should now be able to login using the account credentials created in section 'Account Creation'
 
 ### Social
 
