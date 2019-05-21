@@ -210,8 +210,6 @@ This deployment utilizes EOS "jungle" testnet environment.
 #### Account Creation
 
 1. Navigate to Raziel/Raziel.Creator and run `npm install`.
-1. Open the config at /src/assets/js/config.js and edit the ork node array to reflect the 3 nodes you have running. Change the vendor endpoint to the above.
-1. Edit the password variable with the password you choose to use in the vendor appsettings.
 1. Install webpack dependencies
    ```
    npm install --global webpack`
