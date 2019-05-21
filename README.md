@@ -213,7 +213,7 @@ This deployment utilizes EOS "jungle" testnet environment.
     }
     ```
 1. Run the command `npm run build`. This will compile the website to the /dist folder.
-1. Copy the contents of the \src\Raziel.Front\dist\ to your webserver folder. This can be via xampp, a htdocs folder or simply placing the contents in your main drive root folder (C:\).
+1. Copy the contents of the \src\Raziel.Front\dist\ to your webserver folder.  Simply place the contents in your main drive root folder *C:\ (there should be 2 files and 2 folders)*.  An alternative is to have it in your webserver like Xampp, IIS or a htdocs folder. 
 1. Open .\index.html. You should now be able to login using the account credentials created in section *Account Creation*.
 
 ### Social
