@@ -49,21 +49,7 @@ This guide assists you to replicate the entire environment using EOS jungle test
 1. [.NET Core 2.2 Build apps - SDK](https://dotnet.microsoft.com/download/dotnet-core/2.2 ".net Core 2.2 Download")
 1. [Node.js - LTS](https://nodejs.org/en/download/ "node.js Download")
 1. [Cleos](https://developers.eos.io/eosio-nodeos/v1.2.0/docs/cleos-overview "Cleos")
-1. Clone Repository
-   Using Windows Powershell
-
-   ```
-   wget "https://github.com/tide-foundation/Tide-h4x-for-Privacy/archive/master.zip" -outfile "h4x.zip"
-   Expand-Archive "h4x.zip" -Force -DestinationPath "C:\code"
-   ```
-
-   <details>
-   <summary>Linux</summary>
-      
-      ```
-      git clone https://github.com/tide-foundation/Tide-h4x-for-Privacy
-      ```
-   </details>
+1. Clone Repository `git clone https://github.com/tide-foundation/Tide-h4x-for-Privacy`
 
 #### Installing Cleos in Windows 10
 
@@ -133,16 +119,16 @@ This deployment utilizes EOS "jungle" testnet environment.
    ```json
    {
        "Settings": {
-       "BlockchainChainId": "e70aaab8997e1dfce58fbfac80cbbb8fecec7b99cf982a9444273cbc64c41473",
-       "BlockchainEndpoint": "http://jungle2.cryptolions.io:80",
-       "Onboarding": "tidecontract",
-       "UsersTable": "tideusers",
-       "FragmentsTable": "tidefrags"
+         "BlockchainChainId": "e70aaab8997e1dfce58fbfac80cbbb8fecec7b99cf982a9444273cbc64c41473",
+         "BlockchainEndpoint": "http://jungle2.cryptolions.io:80",
+         "Onboarding": "tidecontract",
+         "UsersTable": "tideusers",
+         "FragmentsTable": "tidefrags"
         },
-       "AllowedHosts": "*",
-       "Logging": {
-       "LogLevel": {
-       "Default": "Information"
+         "AllowedHosts": "*",
+         "Logging": {
+         "LogLevel": {
+         "Default": "Information"
         }
       }
     }
