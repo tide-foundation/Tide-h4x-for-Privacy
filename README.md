@@ -205,6 +205,8 @@ This deployment utilizes EOS "jungle" testnet environment.
   vendorEndpoint: "https://localhost:5001"
 }
 ```
+1. Run the command `npm run serve` to start up a development server and run the application.
+1. You should not be able to login using the account credentials created in section 'Account Creation'
 
 ### Social
 
