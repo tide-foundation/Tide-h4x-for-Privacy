@@ -201,8 +201,8 @@ This deployment utilizes EOS "jungle" testnet environment.
 
 1. Navigate to \src\Raziel.Front run `npm install`.
 1. Open Raziel.Front\src\assets\js\config.js. Populate the ORK node endpoint array and enter the password you choose in vendor appsettings.json.
-```json
-export default {
+```
+{
   orkNodes: ["https://localhost:5401", "https://localhost:5402", "https://localhost:5403"],
   vendorEndpoint: "https://localhost:5001"
 }
