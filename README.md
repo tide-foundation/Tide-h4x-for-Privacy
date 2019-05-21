@@ -297,6 +297,7 @@ This deployment utilizes EOS "jungle" testnet environment.
 #### Database & Vendor
 
 1. Navigate to Raziel/Raziel.Vendor and create a file called appsettings.json and populate it with the following code:
+   
    <details>
     <summary>appsettings.json code</summary>
 
@@ -307,9 +308,8 @@ This deployment utilizes EOS "jungle" testnet environment.
        }
     }
     ```
-
- </details>
-
+    </details>
+    
 1. Run `dotnet ef migrations add Initial` to create a migration. Run `dotnet ef database update` to push the scaffolding to your local database.
 1. Run the vendor using `dotnet run`. Take note of the endpoint shown on screen.
 
