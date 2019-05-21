@@ -82,31 +82,31 @@ This deployment utilizes EOS "jungle" testnet environment.
 
 1. Create EOS Wallet `cleos wallet create --to-console`. This will create a _default_ wallet. Take note of the **WALLET_PASSWORD**
 1. Generate a keypair for your master account `cleos create key --to-console`. Take note of the generated **PK_MASTER SK_MASTER** keypair.
-1. Import the private keys into your cleos wallet by running `cleos wallet import --private-key SK_MASTER`.
+1. Import the private keys into your cleos wallet by running `cleos wallet import --private-key <SK_MASTER>`.
 1. Navigate to Jungle Testnet for the Account Creation [Jungle Test Net](https://monitor.jungletestnet.io/#account "Jungle").
 1. Create a Jungle Testnet account by _Create Account_. Use the generated PK_MASTER for the Owner Public Key and Active Public Key field. This will be your **MASTER_ACCOUNT**
 1. The MASTER*ACCOUNT will need some RAM delegated to it for the smartcontract and transaction processing. Use the \_faucet* on the [Jungle Test Net](https://monitor.jungletestnet.io/#faucet "Jungle") to give your **MASTER_ACCOUNT** some EOS. Your main account should get 100 EOS.
-1. In cleos, run the command `cleos -u http://jungle2.cryptolions.io:80 system buyram MASTER_ACCOUNT MASTER_ACCOUNT "15 EOS"`. The -u parameter is telling cleos to run this command using the jungle testnet.
+1. In cleos, run the command `cleos -u http://jungle2.cryptolions.io:80 system buyram <MASTER_ACCOUNT> <MASTER_ACCOUNT> "15 EOS"`. The -u parameter is telling cleos to run this command using the jungle testnet.
 
    <details>
    <summary>Unlock Wallet</summary>
    Should the wallet lock run the following command
 
    ```
-   cleos wallet unlock --password WALLET_PASSWORD
+   cleos wallet unlock --password <WALLET_PASSWORD>
    ```
 
 1. Generate a keypair for each of the 3 ORK nodes using cleos. Take a note of the 3 created keys ORK 1-**PK_ORK1 SK_ORK1**, ORK 2-**PK_ORK2 SK_ORK2**, ORK 3-**PK_ORK3 SK_ORK3**.
 1. Using your Master Account create a new eos account for each of the 3 ORK nodes by running
    ```
-   cleos -u http://jungle2.cryptolions.io:80 system newaccount --stake-net "1.0000 EOS" --stake-cpu "1.0000 EOS" --buy-ram-kbytes 8 MASTER_ACCOUNT ORK1xACCOUNT PK_ORK1 PK_ORK1
-   cleos -u http://jungle2.cryptolions.io:80 system newaccount --stake-net "1.0000 EOS" --stake-cpu "1.0000 EOS" --buy-ram-kbytes 8 MASTER_ACCOUNT ORK2xACCOUNT PK_ORK2 PK_ORK2
-   cleos -u http://jungle2.cryptolions.io:80 system newaccount --stake-net "1.0000 EOS" --stake-cpu "1.0000 EOS" --buy-ram-kbytes 8 MASTER_ACCOUNT ORK3xACCOUNT PK_ORK3 PK_ORK3
+   cleos -u http://jungle2.cryptolions.io:80 system newaccount --stake-net "1.0000 EOS" --stake-cpu "1.0000 EOS" --buy-ram-kbytes 8 <MASTER_ACCOUNT> <ORK1xACCOUNT> <PK_ORK1> <PK_ORK1>
+   cleos -u http://jungle2.cryptolions.io:80 system newaccount --stake-net "1.0000 EOS" --stake-cpu "1.0000 EOS" --buy-ram-kbytes 8 <MASTER_ACCOUNT> <ORK2xACCOUNT> <PK_ORK2> <PK_ORK2>
+   cleos -u http://jungle2.cryptolions.io:80 system newaccount --stake-net "1.0000 EOS" --stake-cpu "1.0000 EOS" --buy-ram-kbytes 8 <MASTER_ACCOUNT> <ORK3xACCOUNT> <PK_ORK3> <PK_ORK3>
    ```
    _Note: ORKx_ACCOUNT needs to be 12 characters with a-z and 1-9 eg ork1accountx)_
 1. Navigate to the onboarding folder `../src/Raziel-Contracts/onboarding/`
 1. Compile the onboarding contract using `eosio-cpp -abigen -o onboarding.wasm onboarding.cpp`
-1. Go up a folder (../src/Raziel-Contracts/) and run the command `cleos -u http://jungle2.cryptolions.io:80 set contract MASTER_ACCOUNT ./onboarding -p MASTER_ACCOUNT@active`.
+1. Go up a folder (../src/Raziel-Contracts/) and run the command `cleos -u http://jungle2.cryptolions.io:80 set contract <MASTER_ACCOUNT> ./onboarding -p <MASTER_ACCOUNT>@active`.
 
 #### Credential Generation
 
