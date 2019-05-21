@@ -1,9 +1,5 @@
 # Tide h4x for Privacy Challenge
 
-  <a href="https://tide.org/licenses_tcosl-1-0-en">
-    <img src="https://img.shields.io/badge/license-TCOS-green.svg" alt="license">
-  </a>
-</p>
 The concept for the challenge is quite simple: The details of 1 Bitcoin were stored in the simplest website setup: on a database record behind a web server. Anyone logging in to that website using the correct username and password will see those details. All typical defences around that set up were removed. No firewalls, no added security. It should be easy work for any hacker to crack that. The twist: Tide's unique protection mechanism was used on the data and the website authentication. Supposedly, even if one cracks the whole thing, it would be impractical to crack the authentication or extract the data. Anyone who does, the bitcoin is theirs, and Tide is back to the drawing board. This project is an open-source code repository for the challenge and provides ability to recreate the entire environment locally.
 
 ### Terminology
@@ -221,3 +217,8 @@ This deployment utilizes EOS "jungle" testnet environment.
 [Tide Telegram group](https://t.me/TideFoundation)
 
 [Tide Subreddit channel](https://www.reddit.com/r/TideFoundation)
+
+  <a href="https://tide.org/licenses_tcosl-1-0-en">
+    <img src="https://img.shields.io/badge/license-TCOS-green.svg" alt="license">
+  </a>
+</p>
