@@ -25,6 +25,7 @@ document.getElementById("username").value = `User${Math.floor(Math.random() * 10
 
 document.getElementById('submit-btn').onclick = async function () {
     try {
+        document.getElementById("status").innerHTML = `Starting account creation...`;
         const username = document.getElementById("username").value;
 
         const result = await tide.postCredentials(username, document.getElementById("password").value);
@@ -45,8 +46,8 @@ document.getElementById('submit-btn').onclick = async function () {
         var postResult = await tide.tideRequest(`${config.vendorEndpoint}/PostUser`, request)
         console.log(postResult);
 
-        console.log(`Account created successfully`);
+        document.getElementById("status").innerHTML = `Account created successfully`;
     } catch (error) {
-        console.log(error);
+        document.getElementById("status").innerHTML = error;
     }
 };
