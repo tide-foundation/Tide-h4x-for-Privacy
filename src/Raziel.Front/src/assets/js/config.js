@@ -17,5 +17,5 @@
 
 export default {
   orkNodes: ["https://localhost:5401", "https://localhost:5402", "https://localhost:5403"],
-  vendorEndpoint: "https://localhost:5001"
+  vendorEndpoint: "https://localhost:44313"
 }

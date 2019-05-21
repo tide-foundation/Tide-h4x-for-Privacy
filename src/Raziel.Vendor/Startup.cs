@@ -49,7 +49,7 @@ namespace Raziel.Vendor {
                     x.SaveToken = true;
                     x.TokenValidationParameters = new TokenValidationParameters {
                         ValidateIssuerSigningKey = true,
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(settings.Password)),
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(settings.Key)),
                         ValidateIssuer = false,
                         ValidateAudience = false
                     };

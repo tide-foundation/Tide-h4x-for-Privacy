@@ -130,7 +130,7 @@
 <script>
 import l from "./components/Line.vue";
 import consoleBox from "./components/Console.vue";
-import Tide from "./assets/js/tide.js";
+import Tide from "tide-js";
 import config from "./assets/js/config.js";
 // 
 export default {
@@ -138,7 +138,7 @@ export default {
   components: { l, consoleBox },
   data() {
     return {
-      tide: new Tide(config.orkNodes),
+      tide: new Tide(config.orkNodes, 32),
       btnText: "Login",
       unlocked: false,
       currentId: 1000,
@@ -191,7 +191,7 @@ export default {
         const tokenResponse = await this.tideRequest(`${config.vendorEndpoint}/Token/`, this.authModel);
         this.auth = tokenResponse.token;
 
-        const tideResult = await this.tide.getTideCredentials(this.username, this.password);
+        const tideResult = await this.tide.getCredentials(this.username, this.password);
 
         this.keys = tideResult;
 

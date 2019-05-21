@@ -98,7 +98,7 @@ namespace Raziel.Vendor.Classes {
 
         private string GenerateToken(string publicKey) {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_settings.Password);
+            var key = Encoding.ASCII.GetBytes(_settings.Key);
             var tokenDescriptor = new SecurityTokenDescriptor {
                 Subject = new ClaimsIdentity(new[] {
                     new Claim(ClaimTypes.Name, publicKey)
