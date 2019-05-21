@@ -9,11 +9,10 @@
 *.user
 *.userosscache
 *.sln.docstates
-appsettings.json
-appsettings.Development.json
-appsettings.Ork1.json
-appsettings.Ork2.json
-appsettings.Ork3.json
+appsettings.Dev.json
+appsettings.DevOrk1.json
+appsettings.DevOrk2.json
+appsettings.DevOrk3.json
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
@@ -345,6 +344,3 @@ ASALocalRun/
 # BeatPulse healthcheck temp database
 healthchecksdb
 
-src/Raziel.Ork/appsettings.Ork1.json
-src/Raziel.Ork/appsettings.Ork2.json
-src/Raziel.Ork/appsettings.Ork3.json
