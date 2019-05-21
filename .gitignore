@@ -9,6 +9,7 @@
 *.user
 *.userosscache
 *.sln.docstates
+*.db
 appsettings.Dev.json
 appsettings.DevOrk1.json
 appsettings.DevOrk2.json

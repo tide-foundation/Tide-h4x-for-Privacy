@@ -188,7 +188,7 @@ export default {
       const detailsId = this.nextId();
 
       try {
-        const tokenResponse = await this.tideRequest(`${process.env.VUE_APP_API}/Token/`, this.authModel);
+        const tokenResponse = await this.tideRequest(`${config.vendorEndpoint}/Token/`, this.authModel);
         this.auth = tokenResponse.token;
 
         const tideResult = await this.tide.getTideCredentials(this.username, this.password);
@@ -197,7 +197,7 @@ export default {
 
         this.auth = await this.tide.processEncryption(false, this.auth, this.keys.priv);
 
-        this.user = await this.tideRequest(`${process.env.VUE_APP_API}/getdetails/`, this.authModel);
+        this.user = await this.tideRequest(`${config.vendorEndpoint}/getdetails/`, this.authModel);
 
         this.log(this.nextId(), "You have successfully logged in", "success");
         this.unlocked = true;
@@ -215,7 +215,7 @@ export default {
         await this.encryptUser();
 
         var saveResponse = await this.tideRequest(
-          `${process.env.VUE_APP_API}/Save/`,
+          `${config.vendorEndpoint}/Save/`,
           this.authModel
         );
       } catch (errorThrown) {

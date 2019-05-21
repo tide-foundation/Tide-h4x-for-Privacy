@@ -1,4 +1,4 @@
-# Tide h4x for Privacy Challenge
+﻿# Tide h4x for Privacy Challenge
 
 <p>
   <a href="https://tide.org/licenses_tcosl-1-0-en">
@@ -199,6 +199,20 @@ This deployment utilizes EOS "jungle" testnet environment.
 #### Frontend Setup
 
 1. Navigate to \src\Raziel.Front run `npm install`.
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+1. Open Raziel.Front\src\assets\js\config.js. Populate the ORK node endpoint array and enter the password you choose in vendor appsettings.json.
+```json
+export default {
+  orkNodes: ["https://localhost:5401", "https://localhost:5402", "https://localhost:5403"],
+  vendorEndpoint: "https://localhost:5001"
+}
+```
+1. Run the command `npm run serve` to start up a development server and run the application.
+1. You should be able to login using the account credentials created in section 'Account Creation'
+=======
+>>>>>>> Stashed changes
 1. Open Raziel.Front\src\assets\js\config.js. Populate the ORK node endpoints array with the correct endpoints.
 1. Open the .env.production file in the root folder and set your vendor endpoint there.
 1. Run the command `npm run serve` to start up a development server and run the application.
@@ -207,6 +221,10 @@ This deployment utilizes EOS "jungle" testnet environment.
 1. Open the .env.production file in the root folder and set your vendor endpoint there.
 1. Run the command `npm run serve` to start up a development server and run the application.
 1. You should not be able to login using the account credentials created in section 'Account Creation'
+<<<<<<< Updated upstream
+=======
+>>>>>>> 964668029365edce93f5e7bc3adbb40bcf7acf72
+>>>>>>> Stashed changes
 
 ### Social
 
