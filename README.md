@@ -199,7 +199,7 @@ This deployment utilizes EOS "jungle" testnet environment.
    ```
 1. Run the command `webpack` to compile the changes made to config.js.
 1. Open index.html in a web browser, fill in the details. We've added placeholder values for brevity.
-1. Open developer console by pressing F12, then click the 'Create Account' button.
+1. Open developer console by pressing F12, then click the *Create Account* button.
 1. If it creates successfully, you should see 'Account created successfully' appear in the console.
 
 #### Frontend Setup
@@ -213,8 +213,8 @@ This deployment utilizes EOS "jungle" testnet environment.
     }
     ```
 1. Run the command `npm run build`. This will compile the website to the /dist folder.
-1. Copy the contents of the dist folder to wherever you serve files. This can be via xampp, a htdocs folder or simply placing the contents in your main drive root folder.
-1. Open index.html. You should now be able to login using the account credentials created in section 'Account Creation'
+1. Copy the contents of the \src\Raziel.Front\dist\ to your webserver folder. This can be via xampp, a htdocs folder or simply placing the contents in your main drive root folder (C:\).
+1. Open .\index.html. You should now be able to login using the account credentials created in section *Account Creation*.
 
 ### Social
 
