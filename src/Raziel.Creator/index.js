@@ -16,7 +16,7 @@
  */
 
 import Tide from 'tide-js'
-import config from './src/assets/js/config'
+import config from './src/js/config'
 
 const tide = new Tide(config.nodes, 32);
 

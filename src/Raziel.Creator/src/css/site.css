@@ -3,6 +3,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: 'Montserrat', sans-serif;
 }
 
 #content {
@@ -12,5 +13,12 @@ body {
 input {
     display: block;
     margin-bottom: 10px;
-    width: 300px;
+    width: 90%;
+    height: 20px;
+    padding-left: 5px;
+    padding-top: 4px;
+}
+
+button {
+    height: 30px;
 }
