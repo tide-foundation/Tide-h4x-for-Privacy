@@ -130,7 +130,6 @@ This deployment utilizes EOS "jungle" testnet environment.
 #### ORKs
 
 1. Navigate to Raziel/Raziel.Ork and create 4 files with names:
-<<<<<<< Updated upstream
 
    ```
    appsettings.json
@@ -301,13 +300,13 @@ This deployment utilizes EOS "jungle" testnet environment.
    <details>
     <summary>appsettings.json code</summary>
 
-```json
-{
-  "VendorSettings": {
-    "Password": "This can be any password you choose"
-  }
-}
-```
+    ```json
+    {
+      "VendorSettings": {
+      "Password": "This can be any password you choose"
+       }
+    }
+    ```
 
  </details>
 
