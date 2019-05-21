@@ -1,7 +1,5 @@
 # Tide h4x for Privacy Challenge
 
-
-p>
   <a href="https://tide.org/licenses_tcosl-1-0-en">
     <img src="https://img.shields.io/badge/license-TCOS-green.svg" alt="license">
   </a>
