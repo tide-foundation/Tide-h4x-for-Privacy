@@ -84,7 +84,7 @@ This deployment utilizes EOS "jungle" testnet environment.
 1. Navigate to the Jungle Testnet for the Account Creation [Jungle Test Net](https://monitor.jungletestnet.io/#account "Jungle").
 1. Create a Jungle Testnet account by *Create Account*.  Use the generated PK_MASTER for the Owner Public Key and Active Public Key field. This will be the **MASTER_ACCOUNT**
 1. The MASTER_ACCOUNT will need some RAM delegated for the smartcontract and transaction processing. Use the *faucet* on the [Jungle Test Net](https://monitor.jungletestnet.io/#faucet "Jungle") to give the **MASTER_ACCOUNT** some EOS. The Master Account should get 100 EOS.
-1. In cleos, run the command `cleos -u http://jungle2.cryptolions.io:80 system buyram <MASTER_ACCOUNT> <MASTER_ACCOUNT> "15 EOS"`. The -u parameter allows cleos to run this command in jungle testnet.
+1. To stake some EOS, run this command in cleos `cleos -u http://jungle2.cryptolions.io:80 system buyram <MASTER_ACCOUNT> <MASTER_ACCOUNT> "15 EOS"`. The -u parameter allows cleos to run this command in jungle testnet.
 
    <details>
    <summary>Unlock Wallet</summary>
