@@ -108,7 +108,7 @@ This deployment utilizes EOS "jungle" testnet environment.
 
 #### Credential Generation
 
-1. Navigate to the Raziel.Generator folder and run `dotnet run 4`. This will generate 4 sets of credentials. One for the master account and 1 for each ork node.
+1. Navigate to the Raziel.Generator folder and run `dotnet run 4`. This will generate 4 sets of credentials. One for the Master Account and one for each ORK node.
 
 #### ORKs
 
