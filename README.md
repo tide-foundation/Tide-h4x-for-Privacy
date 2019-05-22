@@ -76,9 +76,9 @@ There are two options when running EOS in a Windows environment: Docker or Linux
 
 #### EOS
 
-This deployment utilizes EOS "jungle" testnet environment.
+This deployment utilizes EOS "jungle" testnet environment. 
 
-1. Create EOS Wallet `cleos wallet create --to-console`. This will create a _default_ wallet. Take note of the **WALLET_PASSWORD**
+1. Create EOS Wallet by running `cleos wallet create --to-console`. This will create a *default* wallet. Take note of the **WALLET_PASSWORD**
 1. Generate a keypair for the master account `cleos create key --to-console`. Take note of the generated **PK_MASTER SK_MASTER** keypair.
 1. Import the private keys into the newly created cleos wallet by running `cleos wallet import --private-key <SK_MASTER>`.
 1. Navigate to the Jungle Testnet for the Account Creation [Jungle Test Net](https://monitor.jungletestnet.io/#account "Jungle").
