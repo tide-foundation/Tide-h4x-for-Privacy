@@ -82,43 +82,54 @@ There are two options when running EOS in a Windows environment: Docker or Linux
 
 #### EOS
 
-This deployment utilizes EOS "jungle" testnet environment. 
+This deployment utilizes EOS "jungle" testnet environment and needs to run within the Ubuntu shell.
 
 1. Create EOS Wallet by running `cleos wallet create --to-console`. This will create a *default* wallet. Take note of the **WALLET_PASSWORD**
 1. Generate a keypair for the master account `cleos create key --to-console`. Take note of the generated **PK_MASTER SK_MASTER** keypair.
 1. Import the private keys into the newly created cleos wallet by running `cleos wallet import --private-key <SK_MASTER>`.
-1. Navigate to the Jungle Testnet for the Account Creation [EOS Jungle](https://monitor.jungletestnet.io/#account "Jungle").
-1. Create a Jungle Testnet account by *Create Account*.  Use the generated PK_MASTER for the Owner Public Key and Active Public Key field. This will be the **MASTER_ACCOUNT**
-1. The MASTER_ACCOUNT will need some RAM delegated for the smartcontract and transaction processing. Use the *faucet* on the [Jungle Test Net](https://monitor.jungletestnet.io/#faucet "Jungle") to give the **MASTER_ACCOUNT** some EOS. The Master Account should get 100 EOS.
-1. To stake some EOS, run this command in cleos `cleos -u http://jungle2.cryptolions.io:80 system buyram <MASTER_ACCOUNT> <MASTER_ACCOUNT> "15 EOS"`. The -u parameter allows cleos to run this command in jungle testnet.
+1. Navigate to the [EOS Jungle](https://monitor.jungletestnet.io/#account "Jungle") website for the Account Creation.
+1. Create an EOS account by *Create Account*.  Use the generated **<PK_MASTER>** for both the *Owner Public Key* and *Active Public Key* fields. The *Account Name* you've entered is the **MASTER_ACCOUNT** designation.
+1. The **MASTER_ACCOUNT** will need some RAM delegated for the smartcontract and transaction processing. Use the *faucet* on the [EOS Jungle](https://monitor.jungletestnet.io/#faucet "Jungle") site to give the Account Name **<MASTER_ACCOUNT>** some EOS. The account should now be funded with 100 EOS.
+1. To stake EOS funds, run this command in cleos `cleos -u http://jungle2.cryptolions.io:80 system buyram <MASTER_ACCOUNT> <MASTER_ACCOUNT> "15 EOS"` (FYI: The -u parameter allows cleos to run this command in jungle testnet).
 
    <details>
-   <summary>Unlock Wallet</summary>
-   Should the wallet lock run the following command
+   <summary>Expand this if your wallet got locked</summary>
+   Should the wallet lock, run the following command
 
    ```
    cleos wallet unlock --password <WALLET_PASSWORD>
    ```
 
-1. Generate a keypair for each of the 3 ORK nodes using cleos. Take a note of the 3 created keys ORK 1-**PK_ORK1 SK_ORK1**, ORK 2-**PK_ORK2 SK_ORK2**, ORK 3-**PK_ORK3 SK_ORK3**.
-1. Using the Master Account, create a new EOS account for each of the 3 ORK nodes by running
+1. Generate a keypair for each of the 3 ORK nodes using cleos. 
+   ```
+   cleos create key --to-console
+   cleos create key --to-console
+   cleos create key --to-console
+   ```
+   Take a note of the 3 created keypairs **PK_ORK1 SK_ORK1**, **PK_ORK2 SK_ORK2**, **PK_ORK3 SK_ORK3**.
+1. Using the Master Account, create a new EOS account for each of the 3 ORK nodes:
    ```
    cleos -u http://jungle2.cryptolions.io:80 system newaccount --stake-net "1.0000 EOS" --stake-cpu "1.0000 EOS" --buy-ram-kbytes 8 <MASTER_ACCOUNT> <ORK1xACCOUNT> <PK_ORK1> <PK_ORK1>
    cleos -u http://jungle2.cryptolions.io:80 system newaccount --stake-net "1.0000 EOS" --stake-cpu "1.0000 EOS" --buy-ram-kbytes 8 <MASTER_ACCOUNT> <ORK2xACCOUNT> <PK_ORK2> <PK_ORK2>
    cleos -u http://jungle2.cryptolions.io:80 system newaccount --stake-net "1.0000 EOS" --stake-cpu "1.0000 EOS" --buy-ram-kbytes 8 <MASTER_ACCOUNT> <ORK3xACCOUNT> <PK_ORK3> <PK_ORK3>
    ```
-   *Note: ORKx_ACCOUNT needs to be 12 characters with a-z and 1-9 eg ork1accountx)*
-1. Navigate to the onboarding folder `../src/Raziel-Contracts/onboarding/`
-1. Compile the onboarding contract using `eosio-cpp -abigen -o onboarding.wasm onboarding.cpp`
-1. Go up a folder (../src/Raziel-Contracts/) and run the command `cleos -u http://jungle2.cryptolions.io:80 set contract <MASTER_ACCOUNT> ./onboarding -p <MASTER_ACCOUNT>@active`.
+   *Note: **<ORKx_ACCOUNT>** needs to be 12 characters of a-z and 1-9 eg ork1accountx)*
+1. Navigate to the onboarding folder `cd ../src/Raziel-Contracts/onboarding/`
+1. Compile the onboarding contract: `eosio-cpp -abigen -o onboarding.wasm onboarding.cpp`
+1. Upload the contract to EOS: `cleos -u http://jungle2.cryptolions.io:80 set contract <MASTER_ACCOUNT> . -p <MASTER_ACCOUNT>@active`.
 
 #### Credential Generation
 
-1. Navigate to the Raziel.Generator folder and run `dotnet run 4`. This will generate 4 sets of credentials. One for the Master Account and one for each ORK node.
+The following steps occur outside the Ubuntu shell, under the location of the downloaded git repository.
+
+1. Navigate to the Raziel.Generator folder and run `dotnet run 4`. This will generate 3 sets of credentials. One for each of the ORK nodes: 
+11. **ORK1_CRYPTO_PK, ORK1_CRYPTO_SK, ORK1_CRYPTO_PASSWORD, ORK1_CRYPTO_KEY**
+11. **ORK2_CRYPTO_PK, ORK2_CRYPTO_SK, ORK2_CRYPTO_PASSWORD, ORK2_CRYPTO_KEY**
+11. **ORK3_CRYPTO_PK, ORK3_CRYPTO_SK, ORK3_CRYPTO_PASSWORD, ORK3_CRYPTO_KEY**
 
 #### ORKs
 
-1. Navigate to Raziel/Raziel.Ork. Open *appsettings.json* and populate it with the following code (change the variables should there be  a different blockchain):
+1. Navigate to Raziel/Raziel.Ork. Open *appsettings.json* and populate it with the EOS Jungle settings:
    ```json
    {
        "Settings": {
@@ -137,16 +148,16 @@ This deployment utilizes EOS "jungle" testnet environment.
     }
     ```
 
-1. Open *appsettings.ork1.json* and populate using the following code. Replace the variables with the details that was generated in `Credential Generation`. Perform this for all 3 ORK setting files.
+1. Edit *appsettings.ork**n**.json* and populate using the following settings. Replace the variables with the details generated earlier. Perform this for all 3 ORK setting files (change **n** with the ORK number: 1, 2, 3).
    ```json
    {
      "Settings": {
-       "Account": "The 12 character eos account you made for the ork nodes",
-       "PublicKey": "The public key created in Raziel.Generator",
-       "PrivateKey": "The private key created in Raziel.Generator",
-       "EosPrivateKey": "The EOS private key associated to this ork node",
-       "Password": "The password created in Raziel.Generator",
-       "Key": "The key created in Raziel.Generator"
+       "Account": "<ORKnxACCOUNT>",
+       "PublicKey": "<ORKn_CRYPTO_PK>",
+       "PrivateKey": "<ORKn_CRYPTO_SK>",
+       "EosPrivateKey": "<SK_ORKn>",
+       "Password": "<ORKn_CRYPTO_PASSWORD>",
+       "Key": "<ORKn_CRYPTO_KEY>"
      }
    }
    ```
@@ -164,9 +175,9 @@ This deployment utilizes EOS "jungle" testnet environment.
     {
        "success": true,
        "content": {
-           "account": "yourorkaccount",
+           "account": "<ORK1xACCOUNT>",
            "url": "https://localhost:5401",
-           "publicKey": "ALdwxVNySq65hwkStfpSuuwz__EXAMPLE_PUBLIC_KEY__oD8PpStPQ0BXqHQd69NAD9LGzQLujEXg=="
+           "publicKey": "<ORKn_CRYPTO_PK>"
        },
        "error": null
     }
@@ -174,11 +185,11 @@ This deployment utilizes EOS "jungle" testnet environment.
 
 #### Database & Vendor
 
-1. Navigate to Raziel/Raziel.Vendor. Open *appsettings.json* and populate it with the following code (feel free to use the pre-filled values):
+1. Navigate to Raziel/Raziel.Vendor. Edit *appsettings.json* and populate it with the following (feel free to use the pre-filled values):
    ```json
     {
       "VendorSettings": {
-        "Password": "Password",
+        "Password": "password",
         "Key": "dq8p8NiQ134WK94hUVlp%Ge%IiJXDsP9MPNFS%@qplGG#drX9!y7RWh&#e@xKC8ut%9ACw5^W^^6@SC"
       },
         "AllowedHosts": "*",
@@ -201,15 +212,16 @@ This deployment utilizes EOS "jungle" testnet environment.
    npm install --global webpack
    npm install --global webpack-cli
    ```
+1. You can change *config.js* settings to reflect changes you've made to default values (If you didn't change those, don't worry about it)
 1. Run the command `webpack` to compile the changes made to *config.js*.
-1. Open *index.html* in a web browser, fill in the details. This added placeholder values is for brevity.
+1. Open *index.html* in a web browser, fill in the details. The added placeholder values are for brevity.
 1. Open developer console by pressing F12, then click the *Create Account* button.
 1. When successful, the 'Account created successfully' will appear in the console window.
 
 #### Frontend Setup
 
 1. Navigate to \src\Raziel.Front run `npm install`.
-1. Open *Raziel.Front\src\assets\js\config.js*. Populate the ORK node endpoint array and enter the password you choose in vendor appsettings.json.
+1. Under *Raziel.Front\src\assets\js\config.js* you can set the ORK node endpoint array and the password if you changed those in vendor appsettings.json. If you didn't change, don't worry about it.
     ```
     {
       orkNodes: ["https://localhost:5401", "https://localhost:5402", "https://localhost:5403"],
@@ -217,11 +229,11 @@ This deployment utilizes EOS "jungle" testnet environment.
     }
     ```
 1. Run the command `npm run build`. This will compile the website to the /dist folder.
-1. Copy the contents of the \src\Raziel.Front\dist\ to your webserver folder.  Simply place the contents in the main drive root folder *C:\ (there should be 2 files and 2 folders)*.  An alternative is to have it in a webserver like Xampp, IIS or a htdocs folder. 
+1. Copy the contents of the \src\Raziel.Front\dist\ to your webserver folder.  If you don't have one installed, simply place the contents of that folder in the main drive root folder *C:\* (there should be 2 files and 2 folders). This step will work with any webserver like Xampp, Apache, IIS or a htdocs folder. 
 1. Open *.\index.html* for the main website. 
 1. Login using the account credentials created in section *Account Creation*.
 
-### Social
+### Get in touch!
 
 [Tide Telegram group](https://t.me/TideFoundation)
 
