@@ -122,7 +122,7 @@ This deployment utilizes EOS "jungle" testnet environment and needs to run withi
 
 The following steps occur outside the Ubuntu shell, under the location of the downloaded git repository.
 
-1. Navigate to the Raziel.Generator folder and run `dotnet run 4`. This will generate 3 sets of credentials. One for each of the ORK nodes: 
+1. Navigate to the Raziel.Generator folder and run `dotnet run 3`. This will generate 3 sets of credentials. One for each of the ORK nodes: 
 11. **ORK1_CRYPTO_PK, ORK1_CRYPTO_SK, ORK1_CRYPTO_PASSWORD, ORK1_CRYPTO_KEY**
 11. **ORK2_CRYPTO_PK, ORK2_CRYPTO_SK, ORK2_CRYPTO_PASSWORD, ORK2_CRYPTO_KEY**
 11. **ORK3_CRYPTO_PK, ORK3_CRYPTO_SK, ORK3_CRYPTO_PASSWORD, ORK3_CRYPTO_KEY**
