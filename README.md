@@ -21,7 +21,7 @@ Below are terms that are important to understand within the context of the Tide 
 
 ## Architecture
 
-![alt text HELLO](https://github.com/tide-foundation/Tide-h4x-for-Privacy/blob/master/Tide%20h4x%20Architecture.png "Architecture Diagram")
+![alt text](https://github.com/tide-foundation/Tide-h4x-for-Privacy/blob/master/Tide%20h4x%20Architecture.png "Architecture Diagram")
 
 ## Flow Diagram
 
@@ -39,11 +39,16 @@ Below are terms that are important to understand within the context of the Tide 
 
 ## Installation
 
-This guide assists you to replicate the entire environment using EOS jungle testnet (free), local deployment with 3 ORK nodes.
+While the live H4X environment is staged with lots of nodes, hosted across 3 different public clouds, utilizing EOS mainnet, this guide assists you to replicate the entire environment locally, on a small scale, using EOS jungle testnet (free), with just 3 ORK nodes - so it doesn't cost you.
+
+While all the components of the this environment are cross-platform, this manual describes how to set it up in a Windows environment. Similar steps can be followed to achieve the same on Linux.
+
+The architecture, therefore, is slightly different and looks like this:
 ![alt text](https://github.com/tide-foundation/Tide-h4x-for-Privacy/blob/master/Tide%20h4x%20Local.png "Local Setup")
 
 ### Prerequisite
 
+The following components are required to be set up ahead of the deployment:
 1. [.NET Core 2.2 Build apps - SDK](https://dotnet.microsoft.com/download/dotnet-core/2.2 ".net Core 2.2 Download")
 1. [Node.js - LTS](https://nodejs.org/en/download/ "node.js Download")
 1. [Cleos](https://developers.eos.io/eosio-nodeos/v1.2.0/docs/cleos-overview "Cleos")
@@ -54,18 +59,18 @@ This guide assists you to replicate the entire environment using EOS jungle test
 There are two options when running EOS in a Windows environment: Docker or Linux for Windows. Provided below are the steps in running Cleos using Linux/Ubuntu for Windows 10.
 
 1. Get Ubuntu from Windows Store [Ubuntu Windows 10](https://www.microsoft.com/en-au/p/ubuntu/9nblggh4msv6?activetab=pivot:overviewtab "Ubuntu Windows 10")
-1. Install Ubuntu from the Windows Store. Ignore the following error:
+1. Install Ubuntu from the Windows Store. The following error may appear:
    ```
    See https://aka.ms/wslinstall for details.
    Error: 0x8007007e
    Press any key to continue...
    ```
-   Open PowerShell as Administrator and run the following command.
+   If it does, ignore it and proceed to start PowerShell as Administrator and run the following command.
    ```
    Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
    ```
 1. Install Ubuntu and Login.
-1. Download and install EOS binaries
+1. Within the Ubuntu shell, download and install the following EOS binaries
    ```
    wget https://github.com/EOSIO/eos/releases/download/v1.7.0/eosio_1.7.0-1-ubuntu-18.04_amd64.deb
    sudo apt install ./eosio_1.7.0-1-ubuntu-18.04_amd64.deb
@@ -82,7 +87,7 @@ This deployment utilizes EOS "jungle" testnet environment.
 1. Create EOS Wallet by running `cleos wallet create --to-console`. This will create a *default* wallet. Take note of the **WALLET_PASSWORD**
 1. Generate a keypair for the master account `cleos create key --to-console`. Take note of the generated **PK_MASTER SK_MASTER** keypair.
 1. Import the private keys into the newly created cleos wallet by running `cleos wallet import --private-key <SK_MASTER>`.
-1. Navigate to the Jungle Testnet for the Account Creation [Jungle Test Net](https://monitor.jungletestnet.io/#account "Jungle").
+1. Navigate to the Jungle Testnet for the Account Creation [EOS Jungle](https://monitor.jungletestnet.io/#account "Jungle").
 1. Create a Jungle Testnet account by *Create Account*.  Use the generated PK_MASTER for the Owner Public Key and Active Public Key field. This will be the **MASTER_ACCOUNT**
 1. The MASTER_ACCOUNT will need some RAM delegated for the smartcontract and transaction processing. Use the *faucet* on the [Jungle Test Net](https://monitor.jungletestnet.io/#faucet "Jungle") to give the **MASTER_ACCOUNT** some EOS. The Master Account should get 100 EOS.
 1. To stake some EOS, run this command in cleos `cleos -u http://jungle2.cryptolions.io:80 system buyram <MASTER_ACCOUNT> <MASTER_ACCOUNT> "15 EOS"`. The -u parameter allows cleos to run this command in jungle testnet.
