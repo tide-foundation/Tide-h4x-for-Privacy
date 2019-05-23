@@ -1,26 +1,27 @@
-# Tide h4x for Privacy Challenge
+# Tide h4x for Privacy
 
-The concept for the challenge is quite simple: The details of 1 Bitcoin were stored in the simplest website setup: on a database record behind a web server. Anyone logging in to that website using the correct username and password will see those details. All typical defences around that set up were removed. No firewalls, no added security. It should be easy work for any hacker to crack that. The twist: Tide's unique protection mechanism was used on the data and the website authentication. Supposedly, even if one cracks the whole thing, it would be impractical to crack the authentication or extract the data. Anyone who does, the bitcoin is theirs, and Tide is back to the drawing board. This project is an open-source code repository for the challenge and provides ability to recreate the entire environment locally.
+The [H4X experiment](http://h4x.tide.org) is a showcase of the Tide Protocol's novel authentication and data privacy protection technology, inviting the community to learn, contribute and engage with Tide on the development of the protocol. It also challenges participants to find security flaws by placing a real bitcoin behind its protection.
+The concept is quite simple. The details of 1 Bitcoin were stored in the simplest website setup: on a database record behind a web server. Anyone logging in to that website using the correct username and password will see those details. All typical defences around that set up were removed. No firewalls, no added security. It should be easy work for any hacker to crack that. The twist: Tide's unique protection mechanism was used on the data and the website authentication. Supposedly, even if one cracks the whole thing, it would be impractical to crack the authentication or extract the data. Anyone who does, the bitcoin is theirs, and we're back to the drawing board. This project code is an open-source and provides ability to recreate the entire environment locally.
 
 ### Terminology
 
-Below are concepts that are important to understand within the context of the Tide h4x challenge.
+Below are terms that are important to understand within the context of the Tide Protocol.
 
 **Seeker** - Any organization or business seeking to engage with or collect consumer data.
 
-**Vendor** - Any consumer-facing organization or business that collects, manages and stores consumer data.
+**Vendor** - Any consumer-facing organization or business that collects, manages and stores consumer data. In this context, the H4X website.
 
-**Consumer** - Any individual natural person that has a uniquely identified representation or data footprint (usually in the form of a user account or identity) in a Vendor’s database.
+**Consumer** - Any individual natural person that has a uniquely identified representation or data footprint (usually in the form of a user account or identity) in a Vendor’s database. In this context: the H4X target, owner of the bitcoin wallet.
 
 **Smart Contract** - a computer protocol intended to digitally facilitate, verify, or enforce the negotiation or performance of a contract.
 
-**ORK** - Orchestrated Recluder of Keys - The Tide Protocol nodes
+**ORK** - Orchestrated Recluder of Keys - The Tide Protocol decentralized nodes
 
 **Key Pair** - consist of a Secret Key (SK) and Public Key (PK)
 
 ## Architecture
 
-![alt text](https://github.com/tide-foundation/Tide-h4x-for-Privacy/blob/master/Tide%20h4x%20Architecture.png "Architecture Diagram")
+![alt text HELLO](https://github.com/tide-foundation/Tide-h4x-for-Privacy/blob/master/Tide%20h4x%20Architecture.png "Architecture Diagram")
 
 ## Flow Diagram
 
