@@ -90,7 +90,7 @@ This deployment utilizes EOS "jungle" testnet environment and needs to run withi
 1. Navigate to the [EOS Jungle](https://monitor.jungletestnet.io/#account "Jungle") website for the Account Creation.
 1. Create an EOS account by *Create Account*.  Use the generated **<PK_MASTER>** for both the *Owner Public Key* and *Active Public Key* fields. The *Account Name* you've entered is the **MASTER_ACCOUNT** designation.
 1. The **MASTER_ACCOUNT** will need some RAM delegated for the smartcontract and transaction processing. Use the *faucet* on the [EOS Jungle](https://monitor.jungletestnet.io/#faucet "Jungle") site to give the Account Name **<MASTER_ACCOUNT>** some EOS. The account should now be funded with 100 EOS.
-1. To stake EOS funds, run this command in cleos `cleos -u http://jungle2.cryptolions.io:80 system buyram <MASTER_ACCOUNT> <MASTER_ACCOUNT> "15 EOS"` (FYI: The -u parameter allows cleos to run this command in jungle testnet).
+1. To stake EOS funds, run this command in cleos `cleos -u http://jungle2.cryptolions.io:80 system buyram <MASTER_ACCOUNT> <MASTER_ACCOUNT> "75 EOS"` (FYI: The -u parameter allows cleos to run this command in jungle testnet).
 
    <details>
    <summary>Expand this if your wallet got locked</summary>
@@ -116,7 +116,7 @@ This deployment utilizes EOS "jungle" testnet environment and needs to run withi
    *Note: **<ORKx_ACCOUNT>** needs to be 12 characters of a-z and 1-9 eg ork1accountx)*
 1. Navigate to the onboarding folder `cd ../src/Raziel-Contracts/onboarding/`
 1. Compile the onboarding contract: `eosio-cpp -abigen -o onboarding.wasm onboarding.cpp`
-1. Upload the contract to EOS: `cleos -u http://jungle2.cryptolions.io:80 set contract <MASTER_ACCOUNT> . -p <MASTER_ACCOUNT>@active`.
+1. Upload the contract to EOS: `cleos -u http://jungle2.cryptolions.io:80 set contract <MASTER_ACCOUNT> ../onboarding -p <MASTER_ACCOUNT>@active`.
 
 #### Credential Generation
 
@@ -201,7 +201,7 @@ The following steps occur outside the Ubuntu shell, under the location of the do
     }
    ```
 
-1. Run `dotnet ef migrations add Initial` to create a migration. Run `dotnet ef database update` to push the scaffolding to your local database.
+1. Run `dotnet ef migrations add Initial` to create a migration. Run `dotnet ef database update` to create a sqlite database and push the required scaffolding.
 1. Run the vendor using `dotnet run`. Take note of the endpoint shown on screen.
 
 #### Account Creation
@@ -215,8 +215,7 @@ The following steps occur outside the Ubuntu shell, under the location of the do
 1. You can change *config.js* settings to reflect changes you've made to default values (If you didn't change those, don't worry about it)
 1. Run the command `webpack` to compile the changes made to *config.js*.
 1. Open *index.html* in a web browser, fill in the details. The added placeholder values are for brevity.
-1. Open developer console by pressing F12, then click the *Create Account* button.
-1. When successful, the 'Account created successfully' will appear in the console window.
+1. Click the *Create Account* button. When successful, 'Account created successfully' will appear on screen.
 
 #### Frontend Setup
 
@@ -229,7 +228,7 @@ The following steps occur outside the Ubuntu shell, under the location of the do
     }
     ```
 1. Run the command `npm run build`. This will compile the website to the /dist folder.
-1. Copy the contents of the \src\Raziel.Front\dist\ to your webserver folder.  If you don't have one installed, simply place the contents of that folder in the main drive root folder *C:\* (there should be 2 files and 2 folders). This step will work with any webserver like Xampp, Apache, IIS or a htdocs folder. 
+1. Copy the contents of the \src\Raziel.Front\dist\ to your webserver folder (Xampp, Apache, IIS, etc).  If you don't have one installed, simply place the contents of that folder in the main drive root folder *C:\* (there should be 2 files and 2 folders).
 1. Open *.\index.html* for the main website. 
 1. Login using the account credentials created in section *Account Creation*.
 
