@@ -58,17 +58,11 @@ The following components are required to be set up ahead of the deployment:
 
 There are two options when running EOS in a Windows environment: Docker or Linux for Windows. Provided below are the steps in running Cleos using Linux/Ubuntu for Windows 10.
 
-1. Get Ubuntu from Windows Store [Ubuntu Windows 10](https://www.microsoft.com/en-au/p/ubuntu/9nblggh4msv6?activetab=pivot:overviewtab "Ubuntu Windows 10")
-1. Install Ubuntu from the Windows Store. The following error may appear:
-   ```
-   See https://aka.ms/wslinstall for details.
-   Error: 0x8007007e
-   Press any key to continue...
-   ```
-   If it does, ignore it and proceed to start PowerShell as Administrator and run the following command.
+1. Windows subsystems is required to run Ubunutu under windows, run this command in an administrator powershell:
    ```
    Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
    ```
+1. Get Ubuntu from Windows Store [Ubuntu Windows 10](https://www.microsoft.com/en-au/p/ubuntu/9nblggh4msv6?activetab=pivot:overviewtab "Ubuntu Windows 10").
 1. Install Ubuntu and Login.
 1. Within the Ubuntu shell, download and install the following EOS binaries
    ```
