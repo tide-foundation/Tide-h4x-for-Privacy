@@ -227,11 +227,13 @@ The following steps occur outside the Ubuntu shell, under the location of the do
 1. Login using the account credentials created in section *Account Creation*.
 
 ### More info
-[Official Technical Whitepaper](https://tide.org/share/Tide_Tech_WhitePaper_v1.pdf)
+[The Tide Protocol Technical Whitepaper](https://tide.org/share/Tide_Tech_WhitePaper_v1.pdf)
 
 ### Get in touch!
 
 [Tide Telegram group](https://t.me/TideFoundation)
+
+[BitcoinTalk forum discussion](https://bitcointalk.org/index.php?topic=5140606)
 
 [Tide Subreddit channel](https://www.reddit.com/r/TideFoundation)
 
