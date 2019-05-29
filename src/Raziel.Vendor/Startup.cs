@@ -34,7 +34,7 @@ namespace Raziel.Vendor {
 
         public IConfiguration Configuration { get; }
 
-        public void ConfigureServices(IServiceCollection services) {
+        public void ConfigureServices(IServiceCollection services, IHostingEnvironment env) {
             var settings = new Settings();
             Configuration.Bind("VendorSettings", settings);
             services.AddSingleton(settings);
@@ -61,7 +61,14 @@ namespace Raziel.Vendor {
                     .RequireAuthenticatedUser().Build());
             });
 
-            services.AddDbContext<RazielContext>(options => options.UseSqlite("Data Source=Raziel.db"));
+            if (env.EnvironmentName == "local") {
+                services.AddDbContext<RazielContext>(options => options.UseSqlite("Data Source=Raziel.db"));
+            }
+            else {
+                services.AddDbContext<RazielContext>(options => options.UseSqlServer(settings.Connection));
+            }
+          
+           
             services.AddCors();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }

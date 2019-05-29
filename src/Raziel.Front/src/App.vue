@@ -188,15 +188,16 @@ export default {
       const detailsId = this.nextId();
 
       try {
+        this.log(this.nextId(), "Gathering user token", "log");
         const tokenResponse = await this.tideRequest(`${config.vendorEndpoint}/Token/`, this.authModel);
         this.auth = tokenResponse.token;
-
+        this.log(this.nextId(), "Fetching fragments", "log");
         const tideResult = await this.tide.getCredentials(this.username, this.password);
 
         this.keys = tideResult;
 
         this.auth = await this.tide.processEncryption(false, this.auth, this.keys.priv);
-
+        this.log(this.nextId(), "Gathering user details", "log");
         this.user = await this.tideRequest(`${config.vendorEndpoint}/getdetails/`, this.authModel);
 
         this.log(this.nextId(), "You have successfully logged in", "success");
