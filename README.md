@@ -131,7 +131,11 @@ The following steps occur outside the Ubuntu shell, under the location of the do
          "BlockchainEndpoint": "http://jungle2.cryptolions.io:80",
          "Onboarding": "tidecontract",
          "UsersTable": "tideusers",
-         "FragmentsTable": "tidefrags"
+         "FragmentsTable": "tidefrags",
+	 "LoggerSettings": {
+         "Connection": "",
+         "Identifier": "Ork"
+       }
         },
          "AllowedHosts": "*",
          "Logging": {
@@ -185,19 +189,18 @@ The following steps occur outside the Ubuntu shell, under the location of the do
       "VendorSettings": {
         "Password": "password",
         "Key": "dq8p8NiQ134WK94hUVlp%Ge%IiJXDsP9MPNFS%@qplGG#drX9!y7RWh&#e@xKC8ut%9ACw5^W^^6@SC",
-	"Connection": "This is used for SQL Server when deploying to a production environment. Leave this blank otherwise."
-      },
-        "AllowedHosts": "*",
-        "Logging": {
-        "LogLevel": {
-        "Default": "Information"
+	"Connection": "This is used for SQL Server when deploying to a production environment. Leave this blank otherwise.",
+	"LoggerSettings": {
+           "Connection": "",
+           "Identifier": "Ork"
+        }
       }
       }
     }
    ```
 
 1. Run `dotnet ef migrations add Initial` to create a migration. Run `dotnet ef database update` to create a sqlite database and push the required scaffolding.
-1. Run the vendor using `dotnet run --environment "local"`. Take note of the endpoint shown on screen.
+1. Run the vendor using `dotnet run --environment "Dev"`. Take note of the endpoint shown on screen.
 
 #### Account Creation
 
