@@ -18,6 +18,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Raziel.Library.Classes;
 using Raziel.Library.Models;
 using Raziel.Ork.Classes;
 
@@ -34,6 +35,7 @@ namespace Raziel.Ork {
             Configuration.Bind("Settings", settings);
             services.AddSingleton(settings);
 
+            services.AddScoped<ITideLogger, TideLogger>();
             services.AddSingleton<ITideAuthentication, EosTideAuthentication>();
             services.AddSingleton<IAdminTideAuthentication, EosAdminTideAuthentication>();
             services.AddHttpContextAccessor();

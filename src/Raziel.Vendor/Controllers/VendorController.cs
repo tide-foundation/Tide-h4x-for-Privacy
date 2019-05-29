@@ -14,6 +14,7 @@
 // If not, see https://tide.org/licenses_tcosl-1-0-en
 
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Raziel.Library.Models;
 
@@ -21,9 +22,11 @@ namespace Raziel.Vendor.Controllers {
     [ApiController]
     public class VendorController : ControllerBase {
         private readonly IVendorService _service;
+        private readonly IHttpContextAccessor _accessor;
 
-        public VendorController(IVendorService service) {
+        public VendorController(IVendorService service, IHttpContextAccessor accessor) {
             _service = service;
+            _accessor = accessor;
         }
 
         [HttpPost("/PostUser/")]
@@ -34,19 +37,25 @@ namespace Raziel.Vendor.Controllers {
 
         [HttpPost("/Token")]
         public AuthenticationRequest Token([FromBody] AuthenticationRequest request) {
-            return _service.GenerateToken(request);
+            return _service.GenerateToken(AttachLogInformation(request));
         }
 
         [Authorize("Bearer")]
         [HttpPost("/GetDetails")]
         public User GetDetails([FromBody] AuthenticationRequest request) {
-            return _service.GetDetails(request);
+            return _service.GetDetails(AttachLogInformation(request));
         }
 
         [Authorize("Bearer")]
         [HttpPost("/Save")]
         public bool Save([FromBody] AuthenticationRequest request) {
-            return _service.Save(request);
+            return _service.Save(AttachLogInformation(request));
+        }
+
+        private AuthenticationRequest AttachLogInformation(AuthenticationRequest model)
+        {
+            model.Ip = _accessor.HttpContext.Connection.RemoteIpAddress.ToString();
+            return model;
         }
     }
 }

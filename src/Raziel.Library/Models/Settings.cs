@@ -26,5 +26,8 @@ namespace Raziel.Library.Models {
         public string Connection { get; set; }
         public string UsersTable { get; set; }
         public string FragmentsTable { get; set; }
+        public string LogEndpoint { get; set; }
+        public LoggerSettings LoggerSettings { get; set; }
     }
+
 }

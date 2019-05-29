@@ -15,14 +15,26 @@
 
 using System;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using Raziel.Library.Models;
 
 namespace Raziel.Library.Classes {
     public static class LogHelper {
-        public static void LogMsg(this ILogger logger, string message, AuthenticationModel model = null, Exception ex = null) {
-            var errorModel = new {hashedusername = model?.Username, convertedUsername = model?.Username?.ConvertToUint64(), userIp = model?.Ip, exception = ex};
-            if (ex != null) logger.LogError(message, errorModel);
-            else logger.LogWarning(message, errorModel);
+        public static void LogMsg(this ITideLogger logger, string message, AuthenticationModel model = null, Exception ex = null) {
+
+            var tideLog = new TideLog() {
+                Data = JsonConvert.SerializeObject(new {
+                    Data = model,
+                    Exception = ex,
+                    HashedUsername = model?.Username,
+                    ConvertedUsername = model?.Username?.ConvertToUint64(),
+                    UserIp = model?.Ip
+                }),
+                Message = message,
+                TideLogLevel = ex == null ? TideLogLevel.Information : TideLogLevel.Error
+            };
+
+            logger.Log(tideLog);
         }
     }
 }

@@ -27,14 +27,14 @@ using Raziel.Library.Models;
 
 namespace Raziel.Ork.Classes {
     public class EosTideAuthentication : ITideAuthentication {
-        private readonly ILogger _logger;
+        private readonly ITideLogger _logger;
         private readonly IMemoryCache _memoryCache;
         private readonly Settings _settings;
 
-        public EosTideAuthentication(Settings settings, IMemoryCache memoryCache, ILoggerFactory logger) {
+        public EosTideAuthentication(Settings settings, IMemoryCache memoryCache, ITideLogger logger) {
             _settings = settings;
             _memoryCache = memoryCache;
-            _logger = logger.CreateLogger($"Ork-{settings.Account}");
+            _logger = logger;
         }
 
         public TideResponse GetUserNodes(AuthenticationModel model) {

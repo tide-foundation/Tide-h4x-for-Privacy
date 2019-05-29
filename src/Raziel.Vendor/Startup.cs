@@ -23,18 +23,21 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using Raziel.Library.Classes;
 using Raziel.Library.Models;
 using Raziel.Vendor.Classes;
 
 namespace Raziel.Vendor {
     public class Startup {
-        public Startup(IConfiguration configuration) {
+        public Startup(IConfiguration configuration, IHostingEnvironment environment) {
             Configuration = configuration;
+            HostingEnvironment = environment;
         }
 
         public IConfiguration Configuration { get; }
+        public IHostingEnvironment HostingEnvironment { get; }
 
-        public void ConfigureServices(IServiceCollection services, IHostingEnvironment env) {
+        public void ConfigureServices(IServiceCollection services) {
             var settings = new Settings();
             Configuration.Bind("VendorSettings", settings);
             services.AddSingleton(settings);
@@ -61,14 +64,14 @@ namespace Raziel.Vendor {
                     .RequireAuthenticatedUser().Build());
             });
 
-            if (env.EnvironmentName == "local") {
+            if (HostingEnvironment.EnvironmentName == "Dev") {
                 services.AddDbContext<RazielContext>(options => options.UseSqlite("Data Source=Raziel.db"));
             }
             else {
                 services.AddDbContext<RazielContext>(options => options.UseSqlServer(settings.Connection));
             }
-          
-           
+            services.AddHttpContextAccessor();
+            services.AddSingleton<ITideLogger, TideLogger>();
             services.AddCors();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }

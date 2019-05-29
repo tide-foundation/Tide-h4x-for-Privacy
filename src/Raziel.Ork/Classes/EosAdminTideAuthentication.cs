@@ -25,12 +25,12 @@ using Action = EosSharp.Api.v1.Action;
 namespace Raziel.Ork.Classes {
     public class EosAdminTideAuthentication : IAdminTideAuthentication {
         private readonly Eos _eos;
-        private readonly ILogger _logger;
+        private readonly ITideLogger _logger;
         private readonly Settings _settings;
 
-        public EosAdminTideAuthentication(Settings settings, ILoggerFactory logger) {
+        public EosAdminTideAuthentication(Settings settings, ITideLogger logger) {
             _settings = settings;
-            _logger = logger.CreateLogger($"Ork-{settings.Account}");
+            _logger = logger;
 
             _eos = new Eos(new EosConfigurator {
                 HttpEndpoint = _settings.BlockchainEndpoint,

@@ -19,7 +19,6 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using Microsoft.Extensions.Caching.Memory;
-using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Raziel.Library.Classes;
 using Raziel.Library.Classes.Crypto;
@@ -28,15 +27,15 @@ using Raziel.Library.Models;
 namespace Raziel.Vendor.Classes {
     public class VendorService : IVendorService {
         private readonly RazielContext _context;
-        private readonly ILogger _logger;
+        private readonly ITideLogger _logger;
         private readonly IMemoryCache _memoryCache;
         private readonly Settings _settings;
 
-        public VendorService(RazielContext context, Settings settings, IMemoryCache memoryCache, ILoggerFactory logger) {
+        public VendorService(RazielContext context, Settings settings, IMemoryCache memoryCache, ITideLogger logger) {
             _context = context;
             _settings = settings;
             _memoryCache = memoryCache;
-            _logger = logger.CreateLogger("Vendor");
+            _logger = logger;
         }
 
         public TideResponse PostUser(AuthenticationRequest user) {
@@ -54,17 +53,20 @@ namespace Raziel.Vendor.Classes {
 
         public AuthenticationRequest GenerateToken(AuthenticationRequest request) {
             var user = FetchUser(request.User.Username);
-            if (user == null) return null;
+            if (user == null) {
+                _logger.LogMsg("Incorrect username attempt", new AuthenticationModel { Username = request.User.Username, Ip = request.Ip});
+                return null;
+            }
 
             // Encrypt the token with the end users public key. If they're able to decrypt it we know they're valid
             request.Token = Cryptide.Instance.Encrypt(GenerateToken(request.User.Username), user.VendorPublicKey);
 
-            _logger.LogMsg("Created token for user", new AuthenticationModel {Username = request.User.Username});
+            _logger.LogMsg("Created token for user", new AuthenticationModel {Username = request.User.Username, Ip = request.Ip });
             return request;
         }
 
         public User GetDetails(AuthenticationRequest request) {
-            _logger.LogMsg("Returned details for user", new AuthenticationModel {Username = request.User.Username});
+            _logger.LogMsg("Returned details for user", new AuthenticationModel {Username = request.User.Username, Ip = request.Ip });
             return FetchUser(request.User.Username);
         }
 
@@ -78,7 +80,7 @@ namespace Raziel.Vendor.Classes {
                 user.LastName = request.User.LastName;
                 user.Note = request.User.Note;
 
-                _logger.LogMsg("Updated details for user", new AuthenticationModel {Username = request.User.Username});
+                _logger.LogMsg("Updated details for user", new AuthenticationModel {Username = request.User.Username, Ip = request.Ip });
                 _context.SaveChanges();
                 return true;
             }
