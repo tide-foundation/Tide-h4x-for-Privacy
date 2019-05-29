@@ -125,25 +125,20 @@ The following steps occur outside the Ubuntu shell, under the location of the do
 
 1. Navigate to Raziel/Raziel.Ork. Open *appsettings.json* and populate it with the EOS Jungle settings:
    ```json
-   {
-       "Settings": {
-         "BlockchainChainId": "e70aaab8997e1dfce58fbfac80cbbb8fecec7b99cf982a9444273cbc64c41473",
-         "BlockchainEndpoint": "http://jungle2.cryptolions.io:80",
-         "Onboarding": "tidecontract",
-         "UsersTable": "tideusers",
-         "FragmentsTable": "tidefrags",
-	 "LoggerSettings": {
-         "Connection": "",
-         "Identifier": "Ork"
-       }
-        },
-         "AllowedHosts": "*",
-         "Logging": {
-         "LogLevel": {
-         "Default": "Information"
-        }
-      }
-    }
+	   {
+	    "Settings": {
+		"BlockchainChainId": "e70aaab8997e1dfce58fbfac80cbbb8fecec7b99cf982a9444273cbc64c41473",
+		"BlockchainEndpoint": "http://jungle2.cryptolions.io:80",
+		"Onboarding": "tidecontract",
+		"UsersTable": "tideusers",
+		"FragmentsTable": "tidefrags",
+		"LoggerSettings": {
+		    "Connection": "",
+		    "Identifier": "Ork"
+		}
+
+	    }
+	}
     ```
 
 1. Edit *appsettings.ork**n**.json* and populate using the following settings. Replace the variables with the details generated earlier. Perform this for all 3 ORK setting files (change **n** with the ORK number: 1, 2, 3).
@@ -186,17 +181,16 @@ The following steps occur outside the Ubuntu shell, under the location of the do
 1. Navigate to Raziel/Raziel.Vendor. Edit *appsettings.json* and populate it with the following (feel free to use the pre-filled values):
    ```json
     {
-      "VendorSettings": {
+    "VendorSettings": {
         "Password": "password",
         "Key": "dq8p8NiQ134WK94hUVlp%Ge%IiJXDsP9MPNFS%@qplGG#drX9!y7RWh&#e@xKC8ut%9ACw5^W^^6@SC",
-	"Connection": "This is used for SQL Server when deploying to a production environment. Leave this blank otherwise.",
-	"LoggerSettings": {
-           "Connection": "",
-           "Identifier": "Ork"
+        "Connection": "This is used for SQL Server when deploying to a production environment. Leave this blank otherwise.",
+        "LoggerSettings": {
+            "Connection": "",
+            "Identifier": "Ork"
         }
-      }
-      }
     }
+}
    ```
 
 1. Run `dotnet ef migrations add Initial` to create a migration. Run `dotnet ef database update` to create a sqlite database and push the required scaffolding.
