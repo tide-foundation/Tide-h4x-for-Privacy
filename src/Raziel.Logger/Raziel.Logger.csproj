@@ -14,4 +14,22 @@
     <ProjectReference Include="..\Raziel.Library\Raziel.Library.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="Piwik.Tracker">
+      <HintPath>Piwik\Piwik.Tracker.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Piwik\Piwik.Tracker.deps.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Piwik\Piwik.Tracker.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

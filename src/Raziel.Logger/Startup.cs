@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Piwik.Tracker;
 using Raziel.Library.Classes;
 using Raziel.Library.Models;
 using Raziel.Logger.Classes;
@@ -35,6 +36,7 @@ namespace Raziel.Logger
 
             services.AddDbContext<LoggerContext>(options => options.UseSqlServer(settings.Connection));
             services.AddScoped<ITideLogger, StoreTideLogger>();
+            services.AddSingleton(new PiwikTracker(1, "https://bj.azurewebsites.net/m/"));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }

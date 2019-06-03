@@ -200,10 +200,12 @@ export default {
         this.log(this.nextId(), "Gathering user details", "log");
         this.user = await this.tideRequest(`${config.vendorEndpoint}/getdetails/`, this.authModel);
 
+        _paq.push(['trackEvent', 'Login Result', 'Success', `Username: ${this.username}`]);
         this.log(this.nextId(), "You have successfully logged in", "success");
         this.unlocked = true;
         this.btnText = "Accepted";
       } catch (error) {
+        _paq.push(['trackEvent', 'Login Result', 'Error', `Username: ${this.username}`]);
         this.btnText = "Login";
 
         this.log(this.nextId(), "Login failed", "error");
@@ -213,13 +215,16 @@ export default {
     },
     async save() {
       try {
+        var data = this.user;
         await this.encryptUser();
 
         var saveResponse = await this.tideRequest(
           `${config.vendorEndpoint}/Save/`,
           this.authModel
         );
+        _paq.push(['trackEvent', 'Saved', 'Success']);
       } catch (errorThrown) {
+        _paq.push(['trackEvent', 'Saved', 'Error', errorThrown]);
         console.log("Failed updating.");
       }
     },
