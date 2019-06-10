@@ -180,17 +180,15 @@ The following steps occur outside the Ubuntu shell, under the location of the do
 
 1. Navigate to Raziel/Raziel.Vendor. Edit *appsettings.json* and populate it with the following (feel free to use the pre-filled values):
    ```json
-    {
     "VendorSettings": {
-        "Password": "password",
-        "Key": "dq8p8NiQ134WK94hUVlp%Ge%IiJXDsP9MPNFS%@qplGG#drX9!y7RWh&#e@xKC8ut%9ACw5^W^^6@SC",
-        "Connection": "This is used for SQL Server when deploying to a production environment. Leave this blank otherwise.",
-        "LoggerSettings": {
-            "Connection": "",
-            "Identifier": "Ork"
-        }
-    }
-}
+          "Password": "password",
+          "Key": "dq8p8NiQ134WK94hUVlp%Ge%IiJXDsP9MPNFS%@qplGG#drX9!y7RWh&#e@xKC8ut%9ACw5^W^^6@SC",
+          "Connection": "This is used for SQL Server when deploying to a production environment. Leave this blank otherwise.",
+          "LoggerSettings": {
+              "Connection": "",
+              "Identifier": "Ork"
+          }
+      }
    ```
 
 1. Run `dotnet ef migrations add Initial` to create a migration. Run `dotnet ef database update` to create a sqlite database and push the required scaffolding.
