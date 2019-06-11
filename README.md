@@ -223,7 +223,7 @@ The following steps occur outside the Ubuntu shell, under the location of the do
 1. Login using the account credentials created in section *Account Creation*.
 
 ### More info
-[The Tide Protocol Whitepaper](https://tide.org/whitePaper)
+[The Tide Protocol Whitepaper](https://tide.org/whitepaper)
 
 ### Get in touch!
 
