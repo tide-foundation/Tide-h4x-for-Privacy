@@ -229,7 +229,7 @@ The following steps occur outside the Ubuntu shell, under the location of the do
 
 [Tide Telegram group](https://t.me/TideFoundation)
 
-[BitcoinTalk forum discussion](https://bitcointalk.org/index.php?topic=5140606)
+[Medium post about this](https://medium.com/@uv/protect-your-private-parts-4f7c6102171a)
 
 [Tide Subreddit channel](https://www.reddit.com/r/TideFoundation)
 
