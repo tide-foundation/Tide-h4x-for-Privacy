@@ -43,7 +43,7 @@
         <a
           class="success"
           target="_blank"
-          href="https://bitcointalk.org/index.php?topic=5140606"
+          href="https://medium.com/tidefoundation/protect-your-private-parts-4f7c6102171a"
           >Details</a
         >
       </section>

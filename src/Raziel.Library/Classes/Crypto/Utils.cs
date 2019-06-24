@@ -86,7 +86,7 @@ namespace Raziel.Library.Classes.Crypto {
             }
         }
 
-        public static BigInteger getPrimitiveRoot(BigInteger p) {
+        public static BigInteger GetPrimitiveRoot(BigInteger p) {
             if (p == new BigInteger(2))
                 return BigInteger.One;
             var min = new BigInteger(3); // Avoid g=2 because of Bleichenbacher's attack

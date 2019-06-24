@@ -13,11 +13,6 @@ namespace Raziel.Logger.Controllers
             _logger = logger;
         }
 
-        [HttpGet("/hey")]
-        public string Hey() {
-            return "Hello there";
-        }
-
         [HttpPost("/log")]
         public void Log(TideLog log)
         {

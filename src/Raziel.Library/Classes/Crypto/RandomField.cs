@@ -21,21 +21,21 @@ using System.Security.Cryptography;
 
 namespace Raziel.Library.Classes.Crypto {
     public class RandomField : IDisposable {
-        private readonly RNGCryptoServiceProvider rdm;
+        private readonly RNGCryptoServiceProvider _rdm;
 
         public RandomField(int field) : this(new BigInteger(field)) {
         }
 
         public RandomField(BigInteger field) {
             Field = field;
-            rdm = new RNGCryptoServiceProvider();
+            _rdm = new RNGCryptoServiceProvider();
         }
 
         public BigInteger Field { get; }
         private int Bytes => Field.GetByteCount(true);
 
         public void Dispose() {
-            rdm.Dispose();
+            _rdm.Dispose();
         }
 
         public BigInteger Generate(BigInteger? min = null) {
@@ -43,7 +43,7 @@ namespace Raziel.Library.Classes.Crypto {
             BigInteger number;
 
             do {
-                rdm.GetBytes(bytes);
+                _rdm.GetBytes(bytes);
                 number = new BigInteger(bytes, true, true);
             } while (number >= Field || min.HasValue && number < min.Value);
 

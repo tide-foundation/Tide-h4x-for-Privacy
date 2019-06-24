@@ -17,7 +17,8 @@
 
 export default {
   orkNodes: getOrks(),
-  vendorEndpoint: "https://raziel-vendor.azurewebsites.net"
+  vendorEndpoint: "https://raziel-vendor.azurewebsites.net",
+  portalEndpoint: "https://raziel-portal.azurewebsites.net/"
 }
 
 

@@ -52,7 +52,7 @@ namespace Raziel.Library.Classes.Crypto {
 
         public static (CryptideKey sec, CryptideKey pub) Generate(int bitSize = 128) {
             var (p, q) = Utils.RandomPrime(bitSize);
-            var g = Utils.getPrimitiveRoot(p);
+            var g = Utils.GetPrimitiveRoot(p);
 
             using (var rdmGen = new RandomField(q)) {
                 var x = rdmGen.Generate(BigInteger.One);

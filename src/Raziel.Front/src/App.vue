@@ -1,5 +1,12 @@
 <template>
   <div id="app" :style="{ height: windowHeight }">
+    <div id="brute-force">
+      <section v-if="attempts != null">
+        {'totalAttempts':<span class="success">{{ attempts.total }}</span
+        >,'attemptsThisHour':<span class="success">{{ attempts.thisHour }}</span
+        >}
+      </section>
+    </div>
     <section id="top-content">
       <section id="art">
         <l n=" 1" c="/****************************/"></l>
@@ -148,6 +155,7 @@ export default {
       password: "",
       expanded: false,
       windowHeight: "40vh",
+      attempts: null,
       keys: {
         priv: "",
         pub: ""
@@ -162,6 +170,7 @@ export default {
     };
   },
   created() {
+    this.getAttempts();
     this.$bus.$on("toggle", toggled => (this.expanded = toggled));
 
     window.addEventListener("resize", () => this.setWindowHeight());
@@ -280,6 +289,14 @@ export default {
     setWindowHeight() {
       let vh = window.innerHeight * 0.01;
       this.windowHeight = `${vh * 100}px`;
+    },
+    async getAttempts() {
+      try {
+        this.attempts = await this.tideRequest(config.portalEndpoint);
+        setTimeout(this.getAttempts, 5000);
+      } catch (error) {
+        // Ignored
+      }
     }
   }
 };
@@ -415,7 +432,7 @@ body {
 #top-content {
   flex: 1;
   overflow: auto;
-  padding: 20px 0;
+  padding: 10px 0;
 }
 #bottom-content {
   height: 35px;
@@ -458,5 +475,16 @@ body {
   display: flex;
   align-items: center;
   width: 100%;
+}
+
+#brute-force {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 20px;
+  font-size: 10px;
+  background: #282a36;
+  border-bottom: 1px #b08fe4 solid;
 }
 </style>

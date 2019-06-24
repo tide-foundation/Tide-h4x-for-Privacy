@@ -1,4 +1,5 @@
 ﻿
+using System;
 using Piwik.Tracker;
 using Raziel.Library.Classes;
 using Raziel.Library.Models;
@@ -21,6 +22,7 @@ namespace Raziel.Logger.Classes
             _tracker.SetCustomVariable(1, "User IP", "Some IP here");
             _tracker.DoTrackEvent($"Logger", $"Name: {log.Identifier}. Message: {log.Message}", log.Data);
 
+            log.DateTime = DateTime.Now;
             _context.Add(log);
             _context.SaveChanges();
         }

@@ -15,6 +15,7 @@ appsettings.DevOrk1.json
 appsettings.DevOrk2.json
 appsettings.DevOrk3.json
 Raziel.Portal
+Raziel.Functions
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs

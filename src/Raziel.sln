@@ -16,9 +16,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Raziel.Contracts", "Raziel.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Raziel.Generator", "Raziel.Generator\Raziel.Generator.csproj", "{68151F31-D593-4FB9-97A4-1047E8AC443E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raziel.Logger", "Raziel.Logger\Raziel.Logger.csproj", "{F3F5453E-0C3D-493B-9E0E-D0174E8F4525}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Raziel.Logger", "Raziel.Logger\Raziel.Logger.csproj", "{F3F5453E-0C3D-493B-9E0E-D0174E8F4525}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raziel.Portal", "Raziel.Portal\Raziel.Portal.csproj", "{74AFCD0F-6983-4D25-AA98-63B8EAC9B851}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Raziel.Portal", "Raziel.Portal\Raziel.Portal.csproj", "{74AFCD0F-6983-4D25-AA98-63B8EAC9B851}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Raziel.Functions", "Raziel.Functions\Raziel.Functions.csproj", "{4EEF595D-1F6F-4D1D-8CD6-943BC4FEFEA7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,6 +52,10 @@ Global
 		{74AFCD0F-6983-4D25-AA98-63B8EAC9B851}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{74AFCD0F-6983-4D25-AA98-63B8EAC9B851}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{74AFCD0F-6983-4D25-AA98-63B8EAC9B851}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4EEF595D-1F6F-4D1D-8CD6-943BC4FEFEA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4EEF595D-1F6F-4D1D-8CD6-943BC4FEFEA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4EEF595D-1F6F-4D1D-8CD6-943BC4FEFEA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4EEF595D-1F6F-4D1D-8CD6-943BC4FEFEA7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
