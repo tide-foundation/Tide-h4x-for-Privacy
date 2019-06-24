@@ -180,17 +180,15 @@ The following steps occur outside the Ubuntu shell, under the location of the do
 
 1. Navigate to Raziel/Raziel.Vendor. Edit *appsettings.json* and populate it with the following (feel free to use the pre-filled values):
    ```json
-    {
     "VendorSettings": {
-        "Password": "password",
-        "Key": "dq8p8NiQ134WK94hUVlp%Ge%IiJXDsP9MPNFS%@qplGG#drX9!y7RWh&#e@xKC8ut%9ACw5^W^^6@SC",
-        "Connection": "This is used for SQL Server when deploying to a production environment. Leave this blank otherwise.",
-        "LoggerSettings": {
-            "Connection": "",
-            "Identifier": "Ork"
-        }
-    }
-}
+          "Password": "password",
+          "Key": "dq8p8NiQ134WK94hUVlp%Ge%IiJXDsP9MPNFS%@qplGG#drX9!y7RWh&#e@xKC8ut%9ACw5^W^^6@SC",
+          "Connection": "This is used for SQL Server when deploying to a production environment. Leave this blank otherwise.",
+          "LoggerSettings": {
+              "Connection": "",
+              "Identifier": "Ork"
+          }
+      }
    ```
 
 1. Run `dotnet ef migrations add Initial` to create a migration. Run `dotnet ef database update` to create a sqlite database and push the required scaffolding.
@@ -225,13 +223,13 @@ The following steps occur outside the Ubuntu shell, under the location of the do
 1. Login using the account credentials created in section *Account Creation*.
 
 ### More info
-[The Tide Protocol Technical Whitepaper](https://tide.org/share/Tide_Tech_WhitePaper_v1.pdf)
+[The Tide Protocol Whitepaper](https://tide.org/whitepaper)
 
 ### Get in touch!
 
 [Tide Telegram group](https://t.me/TideFoundation)
 
-[BitcoinTalk forum discussion](https://bitcointalk.org/index.php?topic=5140606)
+[Medium post about this](https://medium.com/@uv/protect-your-private-parts-4f7c6102171a)
 
 [Tide Subreddit channel](https://www.reddit.com/r/TideFoundation)
 
