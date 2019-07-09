@@ -20,16 +20,4 @@
     </Reference>
   </ItemGroup>
 
-  <ItemGroup>
-    <Content Update="Piwik\Piwik.Tracker.deps.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="Piwik\Piwik.Tracker.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
 </Project>

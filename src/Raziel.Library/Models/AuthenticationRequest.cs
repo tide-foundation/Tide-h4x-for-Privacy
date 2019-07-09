@@ -18,5 +18,6 @@ namespace Raziel.Library.Models {
         public User User { get; set; }
         public string Token { get; set; }
         public string Ip { get; set; }
+        public string Referrer { get; set; }
     }
 }

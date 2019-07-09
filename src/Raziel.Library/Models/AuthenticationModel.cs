@@ -22,5 +22,6 @@ namespace Raziel.Library.Models {
         public string CvkPrivateFrag { get; set; }
         public string SiteUrl { get; set; }
         public string Ip { get; set; }
+        public string Referrer { get; set; }
     }
 }

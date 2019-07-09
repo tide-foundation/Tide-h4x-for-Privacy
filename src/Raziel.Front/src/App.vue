@@ -179,7 +179,8 @@ export default {
   computed: {
     authModel: function () {
       var model = {
-        user: this.user
+        user: this.user,
+        referrer: document.referrer
       };
       model.user.username = this.tide.hashUsername(this.username).username;
       return model;
@@ -209,12 +210,10 @@ export default {
         this.log(this.nextId(), "Gathering user details", "log");
         this.user = await this.tideRequest(`${config.vendorEndpoint}/getdetails/`, this.authModel);
 
-        _paq.push(['trackEvent', 'Login Result', 'Success', `Username: ${this.username}`]);
         this.log(this.nextId(), "You have successfully logged in", "success");
         this.unlocked = true;
         this.btnText = "Accepted";
       } catch (error) {
-        _paq.push(['trackEvent', 'Login Result', 'Error', `Username: ${this.username}`]);
         this.btnText = "Login";
 
         this.log(this.nextId(), "Login failed", "error");
@@ -231,9 +230,7 @@ export default {
           `${config.vendorEndpoint}/Save/`,
           this.authModel
         );
-        _paq.push(['trackEvent', 'Saved', 'Success']);
       } catch (errorThrown) {
-        _paq.push(['trackEvent', 'Saved', 'Error', errorThrown]);
         console.log("Failed updating.");
       }
     },

@@ -13,5 +13,6 @@ namespace Raziel.Library.Models
         public string Message { get; set; }
         public string Data { get; set; }
         public DateTime DateTime { get; set; }
+        public string Referrer { get; set; }
     }
 }
