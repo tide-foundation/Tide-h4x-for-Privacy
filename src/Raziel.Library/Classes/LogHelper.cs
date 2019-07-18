@@ -21,20 +21,26 @@ using Raziel.Library.Models;
 namespace Raziel.Library.Classes {
     public static class LogHelper {
         public static void LogMsg(this ITideLogger logger, string message, AuthenticationModel model = null, Exception ex = null) {
+            try {
+                var tideLog = new TideLog()
+                {
+                    Data = JsonConvert.SerializeObject(new
+                    {
+                        Data = model,
+                        Exception = ex,
+                        HashedUsername = model?.Username,
+                        ConvertedUsername = model?.Username?.ConvertToUint64(),
+                        UserIp = model?.Ip
+                    }),
+                    Message = message,
+                    TideLogLevel = ex == null ? TideLogLevel.Information : TideLogLevel.Error
+                };
 
-            var tideLog = new TideLog() {
-                Data = JsonConvert.SerializeObject(new {
-                    Data = model,
-                    Exception = ex,
-                    HashedUsername = model?.Username,
-                    ConvertedUsername = model?.Username?.ConvertToUint64(),
-                    UserIp = model?.Ip
-                }),
-                Message = message,
-                TideLogLevel = ex == null ? TideLogLevel.Information : TideLogLevel.Error
-            };
-
-            logger.Log(tideLog);
+                logger.Log(tideLog);
+            }
+            catch (Exception e) {
+                Console.WriteLine(e);
+            }
         }
     }
 }

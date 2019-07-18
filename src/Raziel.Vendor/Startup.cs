@@ -68,7 +68,9 @@ namespace Raziel.Vendor {
                 services.AddDbContext<RazielContext>(options => options.UseSqlite("Data Source=Raziel.db"));
             }
             else {
-                services.AddDbContext<RazielContext>(options => options.UseSqlServer(settings.Connection));
+                services.AddDbContext<RazielContext>(options => {
+                    options.UseSqlServer(settings.Connection, o => o.EnableRetryOnFailure());
+                });
             }
             services.AddHttpContextAccessor();
             services.AddSingleton<ITideLogger, TideLogger>();
