@@ -19,6 +19,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Raziel.Library.Classes;
+using Raziel.Library.Classes.Crypto;
 using Raziel.Library.Models;
 using Raziel.Ork.Classes;
 

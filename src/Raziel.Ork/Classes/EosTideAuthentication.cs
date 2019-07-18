@@ -136,6 +136,7 @@ namespace Raziel.Ork.Classes {
         private (bool success, string result, int minutes) ProcessRequest(AuthenticationModel model, Fragment fragment) {
             // initialize local variables
             string returnedValue = null;
+            var success = false;
 
             // check for current epoch time
             var epoch = (DateTime.UtcNow - _epoch).TotalSeconds;
@@ -147,30 +148,20 @@ namespace Raziel.Ork.Classes {
 
             var (item1, item2) = Records[model.Ip];
 
-            ValidationResult validationResult = null;
-            var success = false;
             // execute the authentication check only if ban expired or if still in the first 3 bans
             if (item1 < 4 || epoch > item2) {
-                validationResult = ValidationManager.ValidatePass(model.PasswordHash, AesCrypto.Decrypt(fragment.PasswordHash, _settings.Password), AesCrypto.Decrypt(fragment.CvkFragment, _settings.Password), _settings.Key).Result;
+                var validationResult = ValidationManager.ValidatePass(model.PasswordHash, AesCrypto.Decrypt(fragment.PasswordHash, _settings.Password), AesCrypto.Decrypt(fragment.CvkFragment, _settings.Password), _settings.Key).Result;
                 returnedValue = validationResult.Result;
                 success = validationResult.Success;
             }
 
-            var result = 0;
+            // increase ban exponentially 
+            var result = (int)Math.Pow(2, item1 - 3);
 
-            if (validationResult != null && validationResult.Success) {
-                // if authentication confirmed, reset record
-                Records[model.Ip] = new Tuple<int, double>(1, epoch - 1);
-            }
-            else {
-                // increase ban exponentially 
-                result = (int) Math.Pow(2, item1 - 3);
-
-                // if authentication failed:
-                // increase Attempts counter for that record
-                var additionalTime = epoch + 60 * result;
-                Records[model.Ip] = new Tuple<int, double>(item1 + 1, additionalTime);
-            }
+            // if authentication failed:
+            // increase Attempts counter for that record
+            var additionalTime = epoch + 60 * result;
+            Records[model.Ip] = new Tuple<int, double>(item1 + 1, additionalTime);
 
             // return result 
             return (success, returnedValue, result);
@@ -179,7 +170,7 @@ namespace Raziel.Ork.Classes {
         private void CleanDictionary(double epoch) {
             try {
                 // invoke clean-up every hour
-                if (DateTime.UtcNow > _cleaner.AddSeconds(5)) {
+                if (DateTime.UtcNow > _cleaner.AddHours(2)) {
                     // finding all records with expired bans
                     var deletableRecords = Records.Where(d => d.Value.Item2 < epoch);
                     foreach (var deletableRecord in deletableRecords) {
