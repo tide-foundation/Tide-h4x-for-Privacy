@@ -36,20 +36,35 @@
         <p>I got 99 problems but a breach ain't one</p>
       </section>
       <section v-if="currentTab == 'about'">
-        <p>find the account doors</p>
-        <p>if you break our protection</p>
-        <p>the bitcoin is yours</p>
+        <p>Welcome to Tide's decentralized username / password authentication live proof of concept.</p>
+        <p>The first step in individuals claiming ownership of their online identity, by removing</p>
+        <p>reliance on any third party for authentication. It can also help remove the</p>
+        <p>unnecessary liability organizations carry holding credentials and performing</p>
+        <p>authentication themselves.</p>
+        <p>Use dummy credentials: Admin / Password to test</p>
         <br />
         <a
           class="success"
           target="_blank"
-          href="https://medium.com/tidefoundation/protect-your-private-parts-4f7c6102171a"
-          >Details</a
-        >
+          href="https://Tide.org/splintering"
+          >Splintering Paper
+        </a>
+        <a
+          class="success"
+          target="_blank"
+          href="https://Tide.org/Whitepaper"
+          >Whitepaper
+        </a>
+                <a
+          class="success"
+          target="_blank"
+          href="https://github.com/tide-foundation"
+          >Github
+        </a>
       </section>
       <section v-if="currentTab == 'proof'">
         <p class="c">
-          // Proof of Ownership
+          // Proof of Bounty
         </p>
         <br />
         <p>
@@ -63,12 +78,7 @@
             ></span
           >
         </p>
-        <p>
-          Message:
-          <span class="success"
-            >I got 99 problems but a breach ain't one - h4x.tide.org</span
-          >
-        </p>
+
         <p>
           Signature:
           <span
@@ -80,6 +90,11 @@
             ></span
           >
         </p>
+        <p>Exciting news! Our Bitcoin bounty has finally been claimed. </p>
+        <p>6mnth & millions of hacks ago, we invited hackers to hammer </p>
+        <p>our 1st public POC. Community engagement was brilliant. </p>
+        <p>We’ve learned and improved a lot. Full report, new version </p>
+        and more bounties coming soon!</p>
       </section>
       <section v-if="currentTab == 'terminal'">
         <p
