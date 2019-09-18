@@ -135,7 +135,7 @@ namespace Raziel.Ork.Classes {
         // Function returns the amount of minutes that requester is blocked from now - if the request failed. 0 is if the request is approved.
         private (bool success, string result, int minutes) ProcessRequest(AuthenticationModel model, Fragment fragment) {
             // initialize local variables
-            string returnedValue = null;
+            string result = null;
             var success = false;
 
             // check for current epoch time
@@ -146,25 +146,25 @@ namespace Raziel.Ork.Classes {
             // check if record exists for that end-point
             if (!Records.ContainsKey(model.Ip)) Records.Add(model.Ip, new Tuple<int, double>(1, epoch - 1));
 
-            var (item1, item2) = Records[model.Ip];
+            var (attempts, banTime) = Records[model.Ip];
 
             // execute the authentication check only if ban expired or if still in the first 3 bans
-            if (item1 < 4 || epoch > item2) {
+            if (attempts < 4 || epoch > banTime) {
                 var validationResult = ValidationManager.ValidatePass(model.PasswordHash, AesCrypto.Decrypt(fragment.PasswordHash, _settings.Password), AesCrypto.Decrypt(fragment.CvkFragment, _settings.Password), _settings.Key).Result;
-                returnedValue = validationResult.Result;
+                result = validationResult.Result;
                 success = validationResult.Success;
             }
-
+            
             // increase ban exponentially 
-            var result = (int)Math.Pow(2, item1 - 3);
+            var extraTime = (int)Math.Pow(2, attempts - 3);
 
             // if authentication failed:
             // increase Attempts counter for that record
-            var additionalTime = epoch + 60 * result;
-            Records[model.Ip] = new Tuple<int, double>(item1 + 1, additionalTime);
+            var additionalTime = epoch + 60 * extraTime;
+            Records[model.Ip] = new Tuple<int, double>(attempts + 1, additionalTime);
 
             // return result 
-            return (success, returnedValue, result);
+            return (success, result, extraTime);
         }
 
         private void CleanDictionary(double epoch) {

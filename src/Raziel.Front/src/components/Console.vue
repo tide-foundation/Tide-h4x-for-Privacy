@@ -36,29 +36,27 @@
         <p>I got 99 problems but a breach ain't one</p>
       </section>
       <section v-if="currentTab == 'about'">
-        <p>Welcome to Tide's decentralized username / password authentication live proof of concept.</p>
-        <p>The first step in individuals claiming ownership of their online identity, by removing</p>
-        <p>reliance on any third party for authentication. It can also help remove the</p>
-        <p>unnecessary liability organizations carry holding credentials and performing</p>
-        <p>authentication themselves.</p>
-        <p>Use dummy credentials: Admin / Password to test</p>
+        <p>
+          Welcome to Tide's decentralized username / password authentication
+          live proof of concept. The first step in individuals claiming
+          ownership of their online identity, by removing reliance on any third
+          party for authentication. It can also help remove unnecessary
+          liability organizations carry holding credentials and performing
+          authentication themselves. Use dummy credentials: Admin / Password
+        </p>
+        <br />
+        <a class="success" target="_blank" href="https://Tide.org/splintering"
+          >Splintering Paper
+        </a>
+        <br />
+        <a class="success" target="_blank" href="https://Tide.org/whitepaper"
+          >Whitepaper
+        </a>
         <br />
         <a
           class="success"
           target="_blank"
-          href="https://Tide.org/splintering"
-          >Splintering Paper
-        </a>
-        <a
-          class="success"
-          target="_blank"
-          href="https://Tide.org/Whitepaper"
-          >Whitepaper
-        </a>
-                <a
-          class="success"
-          target="_blank"
-          href="https://github.com/tide-foundation"
+          href="https://github.com/tide-foundation/Tide-h4x-for-Privacy"
           >Github
         </a>
       </section>
@@ -90,11 +88,12 @@
             ></span
           >
         </p>
-        <p>Exciting news! Our Bitcoin bounty has finally been claimed. </p>
-        <p>6mnth & millions of hacks ago, we invited hackers to hammer </p>
-        <p>our 1st public POC. Community engagement was brilliant. </p>
-        <p>We’ve learned and improved a lot. Full report, new version </p>
-        and more bounties coming soon!</p>
+        <p>
+          Exciting news! Our Bitcoin bounty has finally been claimed. 6mnth &
+          millions of hacks ago, we invited hackers to hammer our 1st public
+          POC. Community engagement was brilliant. We’ve learned and improved a
+          lot. Full report, new version and more bounties coming soon!
+        </p>
       </section>
       <section v-if="currentTab == 'terminal'">
         <p
@@ -207,6 +206,10 @@ export default {
   }
 
   overflow: auto;
+
+  .success:hover {
+    color: orange;
+  }
 }
 
 #controls {
