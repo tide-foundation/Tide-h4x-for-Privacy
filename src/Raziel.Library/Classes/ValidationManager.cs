@@ -15,6 +15,7 @@
 
 using System;
 using System.Linq;
+using System.Numerics;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 
@@ -24,7 +25,7 @@ namespace Raziel.Library.Classes {
             var inputBytes = Convert.FromBase64String(input + "==");
             var passBytes = Convert.FromBase64String(pass + "==");
 
-            var passed = (inputBytes[0] ^ passBytes[0]) == 0;
+            var passed = (new BigInteger(inputBytes, true) ^ new BigInteger(passBytes, true)) == 0;
             var hashValue = passed ? share : GetFakeShare(inputBytes, share, randomKey);
             if (delay != null) await delay;
             return new ValidationResult(hashValue, passed);
