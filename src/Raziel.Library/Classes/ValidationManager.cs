@@ -37,10 +37,11 @@ namespace Raziel.Library.Classes {
             var size = (shareBytes.Length - 1) / 4;
 
             using (var hmac = size <= 32 ? new HMACSHA256(oAuthBytes) : new HMACSHA512(oAuthBytes) as HMAC) {
-                var fakeSecret = new BigInteger(hmac.ComputeHash(input.Concat(shareBytes).ToArray()).Take(size).ToArray(), true);
-                var fakeBytes = (fakeSecret >> 1).ToByteArray(true);
+                var fakeSecret = hmac.ComputeHash(input.Concat(shareBytes).ToArray()).Take(size).ToArray();
+                fakeSecret[fakeSecret.Length - 1] = (byte)(fakeSecret[fakeSecret.Length - 1] & 127);
 
-                var fakeShare = shareBytes.Take(shareBytes.Length - size * 2).Concat(fakeBytes).Concat(shareBytes.Skip(shareBytes.Length - size));
+
+                var fakeShare = shareBytes.Take(shareBytes.Length - size * 2).Concat(fakeSecret).Concat(shareBytes.Skip(shareBytes.Length - size));
                 return Convert.ToBase64String(fakeShare.ToArray());
             }
         }
