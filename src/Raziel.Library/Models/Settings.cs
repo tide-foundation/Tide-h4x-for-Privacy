@@ -28,6 +28,7 @@ namespace Raziel.Library.Models {
         public string FragmentsTable { get; set; }
         public string LogEndpoint { get; set; }
         public LoggerSettings LoggerSettings { get; set; }
+        public string EcDSAKey { get; set; }
     }
 
 }

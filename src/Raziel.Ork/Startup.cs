@@ -36,7 +36,7 @@ namespace Raziel.Ork {
             var settings = new Settings();
             Configuration.Bind("Settings", settings);
             services.AddSingleton(settings);
-            services.AddSingleton(new TParams(EcDSAKey.FromPrivate(settings.Key)));
+            services.AddSingleton(new TParams(EcDSAKey.FromPrivate(settings.EcDSAKey)));
             services.AddScoped<ITideLogger, TideLogger>();
             services.AddSingleton<ITideAuthentication, EosTideAuthentication>();
             services.AddSingleton<IAdminTideAuthentication, EosAdminTideAuthentication>();
