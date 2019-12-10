@@ -17,7 +17,8 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using Raziel.Library.Models;
 
-namespace Raziel.Ork.Classes {
+namespace Raziel.Ork.Models
+{
     public class TideUser : BaseModel {
         [JsonProperty("nodes")] public List<Node> Nodes { get; set; }
     }

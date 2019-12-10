@@ -14,46 +14,57 @@
 // If not, see https://tide.org/licenses_tcosl-1-0-en
 
 using System;
+using Tide.Encryption.ElGamal;
 
-namespace Raziel.Library.Classes.Crypto {
-    public class Cryptide {
+namespace Raziel.Library.Classes.Crypto
+{
+    public class Cryptide
+    {
         public static readonly Cryptide Instance = new Cryptide();
 
-        public (string Private, string Public) GetKey() {
-            var (sec, pub) = CryptideKey.Generate();
-            return (sec.ToString(), pub.ToString());
+        public (string Private, string Public) GetKey()
+        {
+            var sec = new ElGamalKey();
+            return (sec.ToString(), sec.GetPublic().ToString());
         }
 
         [Obsolete("This method is not yet implemented.", true)]
-        public string[] Share(int points, int threshold, string key) {
+        public string[] Share(int points, int threshold, string key)
+        {
             throw new NotImplementedException();
         }
 
         [Obsolete("This method is not yet implemented.", true)]
-        public string ReconstructText(string[] shares) {
+        public string ReconstructText(string[] shares)
+        {
             throw new NotImplementedException();
         }
 
         [Obsolete("This method is not yet implemented.", true)]
-        public string[] ShareText(int points, int threshold, string message) {
+        public string[] ShareText(int points, int threshold, string message)
+        {
             throw new NotImplementedException();
         }
 
-        public string Encrypt(string data, string key) {
-            return new CryptideKey(key).Encrypt(data);
+        public string Encrypt(string data, string key)
+        {
+            return new ElGamalKey(key).Encrypt(data);
         }
 
-        public string Decrypt(string data, string key) {
-            return new CryptideKey(key).Decrypt(data);
+        public string Decrypt(string data, string key)
+        {
+            return new ElGamalKey(key).Decrypt(data);
         }
 
         [Obsolete("This method is not yet implemented.", true)]
-        public string DecryptPartial(string data, string key) {
+        public string DecryptPartial(string data, string key)
+        {
             throw new NotImplementedException();
         }
 
         [Obsolete("This method is not yet implemented.", true)]
-        public string ReconstructPartial(string[] data, string key) {
+        public string ReconstructPartial(string[] data, string key)
+        {
             throw new NotImplementedException();
         }
     }

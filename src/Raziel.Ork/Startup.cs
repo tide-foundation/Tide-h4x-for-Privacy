@@ -19,9 +19,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Raziel.Library.Classes;
-using Raziel.Library.Classes.Crypto;
 using Raziel.Library.Models;
 using Raziel.Ork.Classes;
+using Tide.Encryption.EcDSA;
+using Tide.Encryption.Threshold.Authentication;
 
 namespace Raziel.Ork {
     public class Startup {
@@ -35,7 +36,7 @@ namespace Raziel.Ork {
             var settings = new Settings();
             Configuration.Bind("Settings", settings);
             services.AddSingleton(settings);
-
+            services.AddSingleton(new TParams(EcDSAKey.FromPrivate(settings.Key)));
             services.AddScoped<ITideLogger, TideLogger>();
             services.AddSingleton<ITideAuthentication, EosTideAuthentication>();
             services.AddSingleton<IAdminTideAuthentication, EosAdminTideAuthentication>();

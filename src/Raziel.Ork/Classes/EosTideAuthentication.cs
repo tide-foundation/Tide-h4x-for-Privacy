@@ -19,15 +19,16 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using Microsoft.Extensions.Caching.Memory;
-using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Raziel.Library.Classes;
 using Raziel.Library.Classes.Crypto;
 using Raziel.Library.Models;
+using Raziel.Ork.Models;
 
 namespace Raziel.Ork.Classes {
     public class EosTideAuthentication : ITideAuthentication {
         private readonly ITideLogger _logger;
+        private readonly OrkRepo _repo;
         private readonly IMemoryCache _memoryCache;
         private readonly Settings _settings;
 
@@ -35,6 +36,7 @@ namespace Raziel.Ork.Classes {
             _settings = settings;
             _memoryCache = memoryCache;
             _logger = logger;
+            _repo = new OrkRepo(settings, memoryCache);
         }
 
         public TideResponse GetUserNodes(AuthenticationModel model) {
@@ -42,10 +44,7 @@ namespace Raziel.Ork.Classes {
                 var usernameHash = model.Username.ConvertToUint64();
 
                 // Fetch the item from the cache, otherwise get it from the blockchain
-                if (!_memoryCache.GetCacheObject(CacheKeys.TideUser, out TideUser user, usernameHash)) {
-                    user = GetTableRow<TideUser>(_settings.Onboarding, _settings.UsersTable, usernameHash);
-                    if (user != null) _memoryCache.SetCacheObject(CacheKeys.TideUser, user);
-                }
+                var user = _repo.GetUser(usernameHash);
 
                 if (user == null) {
                     _logger.LogMsg("Invalid user gathering nodes", model);
@@ -66,11 +65,7 @@ namespace Raziel.Ork.Classes {
                 var usernameHash = model.Username.ConvertToUint64();
 
                 // Fetch the item from the cache, otherwise get it from the blockchain
-                if (!_memoryCache.GetCacheObject(CacheKeys.Fragment, out Fragment fragment, usernameHash)) {
-                    fragment = GetTableRow<Fragment>(_settings.Account, _settings.FragmentsTable, usernameHash);
-                    if (fragment != null) _memoryCache.SetCacheObject(CacheKeys.Fragment, fragment);
-                }
-
+                var fragment = _repo.GetShare(model.Username.ConvertToUint64());
                 if (fragment == null) {
                     _logger.LogMsg("Invalid user gathering fragment", model);
                     return new TideResponse(false, null, "That fragment does not exist");
@@ -100,22 +95,6 @@ namespace Raziel.Ork.Classes {
         }
 
         // Performs a post request to an EOS smart-contract table
-        private T GetTableRow<T>(string scope, string table, ulong index) {
-            var tableRequest = new TableRequest {
-                Code = _settings.Onboarding,
-                Scope = scope,
-                Table = table,
-                Json = true,
-                LowerBound = index.ToString(),
-                UpperBound = (index + 1).ToString()
-            };
-
-            var postContent = new StringContent(JsonConvert.SerializeObject(tableRequest), Encoding.UTF8, "application/json");
-            var client = new HttpClient {BaseAddress = new Uri(_settings.BlockchainEndpoint)};
-            var response = client.PostAsync("/v1/chain/get_table_rows", postContent).Result;
-            var content = response.Content.ReadAsStringAsync().Result;
-            return JsonConvert.DeserializeObject<TableRows<T>>(content).Rows.FirstOrDefault();
-        }
 
         #region Request Algorithm
 

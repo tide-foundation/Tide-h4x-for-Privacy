@@ -17,7 +17,8 @@ using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Raziel.Ork.Classes {
+namespace Raziel.Ork.Models
+{
     [Serializable]
     public class TableRequest {
         [JsonProperty("json")] public bool? Json { get; set; } = false;
