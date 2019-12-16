@@ -20,6 +20,7 @@ using Raziel.Ork.Classes;
 using Raziel.Ork.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Threading.Tasks;
 using Tide.Encryption.DSA;
 using Tide.Encryption.Threshold.Authentication;
@@ -41,8 +42,14 @@ namespace Raziel.Ork.Controllers
             _config = config;
         }
 
+        [HttpGet("Ki/{user}/{m}")]
+        public async Task<string> GetKi([FromRoute] string user, [FromRoute] string m)
+        {
+            return (await GetSign(user).PrepareSign(BigInteger.Parse(m))).ToString();
+        }
+
         [HttpPost("Ki/{user}")]
-        public async Task<string> GetKi([FromRoute] string user, [FromBody] string message)
+        public async Task<string> PostKi([FromRoute] string user, [FromBody] string message)
         {
             return (await GetSign(user).PrepareSign(message)).ToString();
         }
@@ -72,8 +79,8 @@ namespace Raziel.Ork.Controllers
         [HttpPost("RSi/{user}/{sigma}")]
         public async Task<string> GetRSi([FromRoute] string user, [FromRoute] string sigma, [FromBody] IEnumerable<string> deltas)
         {
-            var (r, s) = (await GetSign(user).ComputeSign(sigma.DecodeBase64Url(), deltas.Select(itm => ResponseDelta.Parse(itm))));
-            return DSAFormat.EncodeSignature(r, s);
+            var sign = await GetSign(user).ComputeSign(sigma.DecodeBase64Url(), deltas.Select(itm => ResponseDelta.Parse(itm)));
+            return sign.ToString();
         }
 
         private ITSign GetSign(string user)
