@@ -36,9 +36,9 @@ namespace Raziel.Ork.Controllers
         private readonly IAccountManager _manager;
         private readonly TParams _config;
 
-        public SignController(TParams config, Settings settings, IMemoryCache memoryCache)
+        public SignController(TParams config, IAccountManager manager)
         {
-            _manager = new AccountManager(new OrkRepo(settings, memoryCache));
+            _manager = manager;
             _config = config;
         }
 

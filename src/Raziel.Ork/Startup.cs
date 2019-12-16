@@ -39,6 +39,7 @@ namespace Raziel.Ork {
             services.AddSingleton(new TParams(EcDSAKey.FromPrivate(settings.EcDSAKey)));
             services.AddScoped<ITideLogger, TideLogger>();
             services.AddSingleton<ITideAuthentication, EosTideAuthentication>();
+            services.AddSingleton<IAccountManager, MemoryAccountManager>();
             services.AddSingleton<IAdminTideAuthentication, EosAdminTideAuthentication>();
             services.AddHttpContextAccessor();
             services.AddMemoryCache();
