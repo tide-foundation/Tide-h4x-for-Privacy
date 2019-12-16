@@ -13,22 +13,20 @@
 // Source License along with this program.
 // If not, see https://tide.org/licenses_tcosl-1-0-en
 
-using System;
-using System.Linq;
-using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Logging;
 
-namespace Raziel.Ork {
-    public class Program {
-        public static void Main(string[] args) {
-            CreateWebHostBuilder(args).Build().Run();
-        }
-
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) {
-            return WebHost.CreateDefaultBuilder(args)
-                .UseUrls(args.Any() ? args[0] : "https://localhost:5401")
-                .FilterDefaultLog()
-                .UseStartup<Startup>();
+namespace Raziel.Ork
+{
+    public static class WebConfigurationExtension
+    {
+        public static IWebHostBuilder FilterDefaultLog(this IWebHostBuilder hostBuilder)
+        {
+            return hostBuilder.ConfigureLogging(logging =>
+            {
+                logging.AddFilter("Microsoft", LogLevel.Warning);
+                logging.AddFilter(null, LogLevel.Information);
+            });
         }
     }
 }

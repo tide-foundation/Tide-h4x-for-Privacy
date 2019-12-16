@@ -14,15 +14,13 @@
 // If not, see https://tide.org/licenses_tcosl-1-0-en
 
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Caching.Memory;
-using Raziel.Library.Models;
+using Microsoft.Extensions.Logging;
 using Raziel.Ork.Classes;
 using Raziel.Ork.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Threading.Tasks;
-using Tide.Encryption.DSA;
 using Tide.Encryption.Threshold.Authentication;
 using Tide.Encryption.ThresSign;
 using Tide.Encryption.Tools;
@@ -34,11 +32,13 @@ namespace Raziel.Ork.Controllers
     public class SignController : ControllerBase
     {
         private readonly IAccountManager _manager;
+        private readonly ILogger<SignController> _logger;
         private readonly TParams _config;
 
-        public SignController(TParams config, IAccountManager manager)
+        public SignController(TParams config, IAccountManager manager, ILogger<SignController> logger)
         {
             _manager = manager;
+            this._logger = logger;
             _config = config;
         }
 
@@ -86,7 +86,15 @@ namespace Raziel.Ork.Controllers
         private ITSign GetSign(string user)
         {
             var (_, key) = _manager.GetAccount(user);
-            return new TSign(_config, key);
+            return new OrkSignLoger(new TSign(_config, key), new WebBasicLoger(_logger));
+        }
+
+        public class WebBasicLoger : IBasicLoger
+        {
+            private readonly ILogger _logger;
+            public WebBasicLoger(ILogger _logger) => this._logger = _logger;
+
+            public void WriteLine(string message) => _logger.LogInformation(message);
         }
     }
 }
