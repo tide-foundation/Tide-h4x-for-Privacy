@@ -60,12 +60,66 @@
           ></button>
         </l>
       </form>
+      <l n="23"></l>
+      <l n="24"></l>
+      <l n="25"></l>
+      <l n="26" c="// Proof of ownership"></l>
+      <l
+        style="white-space: nowrap;"
+        n="27"
+        c="// Type a message below and it'll be signed with the bitcoin account"
+      ></l>
+      <l n="28">
+        <div class="v">const&nbsp;</div>
+        <p class="variable">bitcoinId</p>
+        <p>&nbsp;=&nbsp;</p>
+        <p class="s">'</p>
+        <span>
+          <a
+            class="success"
+            target="_blank"
+            href="https://www.blockchain.com/btc/address/1EBwDuG8EvG9wDrgVconUZ3kGQg95H94ne"
+            >1EBwDuG8EvG9wDrgVconUZ3kGQg95H94ne</a
+          ></span
+        >
+        <p class="s">'</p>
+        <p>;</p>
+      </l>
+      <l n="29">
+        <div class="v">var&nbsp;</div>
+        <p class="variable">message</p>
+        <p>&nbsp;=&nbsp;</p>
+        <p class="s">'</p>
+        <input v-model="signMsg" type="text" />
+        <p class="s">'</p>
+        <p>;</p>
+      </l>
+      <l n="30"></l>
+      <l n="31">
+        <button type="button" @click="sign" v-html="signBtnText"></button>
+      </l>
+      <l n="32"></l>
+      <l n="33">
+        <div class="v">var&nbsp;</div>
+        <p class="variable">result</p>
+        <p>&nbsp;=&nbsp;</p>
+
+        <p class="s">'</p>
+        <span>
+          <a class="success" target="_blank" :href="signUrl">{{
+            signResult != null ? signResult : ""
+          }}</a></span
+        >
+        <p class="s">'</p>
+
+        <p>;</p>
+      </l>
     </section>
     <section id="bottom-content" :class="{ expanded: expanded }">
       <consoleBox />
     </section>
     <transition mode="out-in" name="fade">
-      <section id="modal" v-if="unlocked">
+      <section class="modal" id="modal" v-if="unlocked">
         <section v-if="!decrypted">
           <p>
             First name:
@@ -137,16 +191,23 @@
 <script>
 import l from "./components/Line.vue";
 import consoleBox from "./components/Console.vue";
-import Tide from "tide-js";
+import sign from "./components/Sign.vue";
+
 import config from "./assets/js/config.js";
-// 
+
+// import "./assets/js/cryptide.js";
+// import "./assets/js/tide.min.js";
 export default {
   name: "app",
-  components: { l, consoleBox },
+  components: { l, consoleBox, sign },
   data() {
     return {
-      tide: new Tide(config.orkNodes, 32),
+      tide: Tide.Create,
       btnText: "Login",
+      signBtnText: "Threshold Sign",
+      signMsg: "Hello World",
+      signResult: null,
+      signUrl: null,
       unlocked: false,
       currentId: 1000,
       loading: false,
@@ -170,14 +231,14 @@ export default {
     };
   },
   created() {
+    this.tide.init(config.orkNodes, 32);
     this.getAttempts();
     this.$bus.$on("toggle", toggled => (this.expanded = toggled));
-
     window.addEventListener("resize", () => this.setWindowHeight());
     this.setWindowHeight();
   },
   computed: {
-    authModel: function () {
+    authModel: function() {
       var model = {
         user: this.user,
         referrer: document.referrer
@@ -199,16 +260,29 @@ export default {
 
       try {
         this.log(this.nextId(), "Gathering user token", "log");
-        const tokenResponse = await this.tideRequest(`${config.vendorEndpoint}/Token/`, this.authModel);
+        const tokenResponse = await this.tideRequest(
+          `${config.vendorEndpoint}/Token/`,
+          this.authModel
+        );
         this.auth = tokenResponse.token;
         this.log(this.nextId(), "Fetching fragments", "log");
-        const tideResult = await this.tide.getCredentials(this.username, this.password);
+        const tideResult = await this.tide.getCredentials(
+          this.username,
+          this.password
+        );
 
         this.keys = tideResult;
 
-        this.auth = await this.tide.processEncryption(false, this.auth, this.keys.priv);
+        this.auth = await this.tide.processEncryption(
+          false,
+          this.auth,
+          this.keys.priv
+        );
         this.log(this.nextId(), "Gathering user details", "log");
-        this.user = await this.tideRequest(`${config.vendorEndpoint}/getdetails/`, this.authModel);
+        this.user = await this.tideRequest(
+          `${config.vendorEndpoint}/getdetails/`,
+          this.authModel
+        );
 
         this.log(this.nextId(), "You have successfully logged in", "success");
         this.unlocked = true;
@@ -236,10 +310,10 @@ export default {
     },
     tideRequest(url, data) {
       const self = this;
-      return new window.Promise(async function (resolve, reject) {
+      return new window.Promise(async function(resolve, reject) {
         try {
           const http = new XMLHttpRequest();
-          http.onreadystatechange = function () {
+          http.onreadystatechange = function() {
             if (this.readyState === 4) {
               if (this.status === 200) {
                 return resolve(JSON.parse(this.responseText));
@@ -250,7 +324,10 @@ export default {
           http.open(data != null ? "POST" : "GET", url);
           http.setRequestHeader("Authorization", "Bearer " + self.auth);
           if (data != null) {
-            http.setRequestHeader("Content-type", "application/json; charset=utf-8");
+            http.setRequestHeader(
+              "Content-type",
+              "application/json; charset=utf-8"
+            );
             http.send(JSON.stringify(data));
           } else {
             http.send();
@@ -261,18 +338,50 @@ export default {
       });
     },
     async decryptUser() {
-      this.user.firstName = await this.tide.processEncryption(false, this.user.firstName, this.keys.priv);
+      this.user.firstName = await this.tide.processEncryption(
+        false,
+        this.user.firstName,
+        this.keys.priv
+      );
 
-      this.user.lastName = await this.tide.processEncryption(false, this.user.lastName, this.keys.priv);
-      this.user.bitcoinPrivateKey = await this.tide.processEncryption(false, this.user.bitcoinPrivateKey, this.keys.priv);
-      this.user.note = await this.tide.processEncryption(false, this.user.note, this.keys.priv);
+      this.user.lastName = await this.tide.processEncryption(
+        false,
+        this.user.lastName,
+        this.keys.priv
+      );
+      this.user.bitcoinPrivateKey = await this.tide.processEncryption(
+        false,
+        this.user.bitcoinPrivateKey,
+        this.keys.priv
+      );
+      this.user.note = await this.tide.processEncryption(
+        false,
+        this.user.note,
+        this.keys.priv
+      );
       this.decrypted = true;
     },
     async encryptUser() {
-      this.user.firstName = await this.tide.processEncryption(true, this.user.firstName, this.keys.pub);
-      this.user.lastName = await this.tide.processEncryption(true, this.user.lastName, this.keys.pub);
-      this.user.bitcoinPrivateKey = await this.tide.processEncryption(true, this.user.bitcoinPrivateKey, this.keys.pub);
-      this.user.note = await this.tide.processEncryption(true, this.user.note, this.keys.pub);
+      this.user.firstName = await this.tide.processEncryption(
+        true,
+        this.user.firstName,
+        this.keys.pub
+      );
+      this.user.lastName = await this.tide.processEncryption(
+        true,
+        this.user.lastName,
+        this.keys.pub
+      );
+      this.user.bitcoinPrivateKey = await this.tide.processEncryption(
+        true,
+        this.user.bitcoinPrivateKey,
+        this.keys.pub
+      );
+      this.user.note = await this.tide.processEncryption(
+        true,
+        this.user.note,
+        this.keys.pub
+      );
       this.decrypted = false;
     },
     log(id, msg, type = "log") {
@@ -294,6 +403,13 @@ export default {
       } catch (error) {
         // Ignored
       }
+    },
+    async sign() {
+      var result = await this.tide.sign(this.signMsg);
+      this.signUrl = `https://brainwalletx.github.io/#verify?vrAddr=${
+        result.address
+      }&vrMsg=${encodeURI(this.signMsg)}&vrSig=${encodeURI(result.signature)}`;
+      this.signResult = result.signature;
     }
   }
 };
@@ -440,7 +556,7 @@ body {
   height: 170px !important;
 }
 
-#modal {
+.modal {
   position: absolute;
   width: 100%;
   height: 100vh;
@@ -483,5 +599,9 @@ body {
   font-size: 10px;
   background: #282a36;
   border-bottom: 1px #b08fe4 solid;
+}
+
+#bitcoin-id-input {
+  width: 275px;
 }
 </style>
