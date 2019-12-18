@@ -14,6 +14,7 @@
 // If not, see https://tide.org/licenses_tcosl-1-0-en
 
 using Raziel.Library.Classes;
+using Raziel.Library.Models;
 using System.Collections.Generic;
 using Tide.Encryption.Ecc;
 using Tide.Encryption.EcDSA;
@@ -39,6 +40,27 @@ namespace Raziel.Ork.Classes
         {
             var share = repo.GetShare(user.ConvertToUint64());
             return (new EcScalar(share.PasswordHash), EcDSAKey.FromPrivate(share.CvkFragment));
+        }
+
+        public void SetAccount(string user, EcScalar password, EcDSAKey key)
+        {
+            throw new System.NotImplementedException();
+        }
+    }
+
+
+    public class EnvironmentalAccountManager : IAccountManager
+    {
+        private readonly EcDSAKey share;
+
+        public EnvironmentalAccountManager(EcDSAKey share)
+        {
+            this.share = share;
+        }
+
+        public (EcScalar Pwd, EcDSAKey Key) GetAccount(string user)
+        {
+            return (EcScalar.Random(), share);
         }
 
         public void SetAccount(string user, EcScalar password, EcDSAKey key)

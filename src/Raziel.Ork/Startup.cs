@@ -1,4 +1,4 @@
-﻿// Tide Protocol - Infrastructure for the Personal Data economy
+// Tide Protocol - Infrastructure for the Personal Data economy
 // Copyright (C) 2019 Tide Foundation Ltd
 // 
 // This program is free software and is subject to the terms of 
@@ -39,7 +39,7 @@ namespace Raziel.Ork {
             services.AddSingleton(new TParams(EcDSAKey.FromPrivate(settings.EcDSAKey)));
             services.AddScoped<ITideLogger, TideLogger>();
             services.AddSingleton<ITideAuthentication, EosTideAuthentication>();
-            services.AddSingleton<IAccountManager, MemoryAccountManager>();
+            services.AddSingleton(new EnvironmentalAccountManager(EcDSAKey.FromPrivate(Configuration[settings.UserShare])) as IAccountManager);
             services.AddSingleton<IAdminTideAuthentication, EosAdminTideAuthentication>();
             services.AddHttpContextAccessor();
             services.AddMemoryCache();

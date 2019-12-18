@@ -29,6 +29,7 @@ namespace Raziel.Library.Models {
         public string LogEndpoint { get; set; }
         public LoggerSettings LoggerSettings { get; set; }
         public string EcDSAKey { get; set; }
+        public string UserShare { get; set; }
     }
 
 }
