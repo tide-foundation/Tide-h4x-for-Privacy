@@ -50,7 +50,8 @@ namespace Raziel.Ork {
         public void Configure(IApplicationBuilder app, IHostingEnvironment env) {
             app.UseHsts();
             app.UseHttpsRedirection();
-
+            app.UseDeveloperExceptionPage();
+            
             app.UseCors(builder =>
                 builder
                     .AllowAnyOrigin()

@@ -13,6 +13,7 @@
 // Source License along with this program.
 // If not, see https://tide.org/licenses_tcosl-1-0-en
 
+using System;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Raziel.Ork.Classes;
@@ -57,12 +58,21 @@ namespace Raziel.Ork.Controllers
         [HttpPost("Alpha/{user}")]
         public async Task<ResponseModel> GetAlpha([FromRoute] string user, [FromBody] IEnumerable<string> ks)
         {
-            var mta = await GetSign(user).StartMtA(ks.Select(ki => ResponseKi.Parse(ki)).ToList());
-            return new ResponseModel
-            {
-                Public = mta.Public.Select(itm => itm.ToString()),
-                Private = mta.Private
-            };
+            try {
+
+                _logger.LogWarning($"<<<<<<<<----------{string.Join(',', ks)}");
+                var mta = await GetSign(user).StartMtA(ks.Select(ResponseKi.Parse).ToList());
+                return new ResponseModel
+                {
+                    Public = mta.Public.Select(itm => itm.ToString()),
+                    Private = mta.Private
+                };
+            }
+            catch (Exception e) {
+                _logger.LogError(e.ToString());
+                throw;
+            }
+           
         }
 
         [HttpPost("Delta/{user}/{beta}")]
