@@ -405,7 +405,7 @@ export default {
       }
     },
     async sign() {
-      var result = await this.tide.sign(this.signMsg);
+      var result = await this.tide.sign(config.orkNodes, this.signMsg);
       this.signUrl = `https://brainwalletx.github.io/#verify?vrAddr=${
         result.address
       }&vrMsg=${encodeURI(this.signMsg)}&vrSig=${encodeURI(result.signature)}`;
