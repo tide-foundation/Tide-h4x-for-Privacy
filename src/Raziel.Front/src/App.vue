@@ -96,10 +96,16 @@
       </l>
       <l n="30"></l>
       <l n="31">
-        <button type="button" @click="sign" v-html="signBtnText"></button>
+        <button
+          type="button"
+          @click="sign"
+          v-html="signBtnText"
+          :class="{ disabled: signLoading }"
+        ></button>
       </l>
       <l n="32"></l>
-      <l n="33">
+      <l n="33"><span v-html="progressBar"></span></l>
+      <l n="34">
         <div class="v">var&nbsp;</div>
         <p class="variable">result</p>
         <p>&nbsp;=&nbsp;</p>
@@ -207,7 +213,9 @@ export default {
       signBtnText: "Threshold Sign",
       signMsg: "Hello World",
       signResult: null,
+      signLoading: false,
       signUrl: null,
+      currentProgress: 0,
       unlocked: false,
       currentId: 1000,
       loading: false,
@@ -217,6 +225,7 @@ export default {
       expanded: false,
       windowHeight: "40vh",
       attempts: null,
+
       keys: {
         priv: "",
         pub: ""
@@ -238,13 +247,24 @@ export default {
     this.setWindowHeight();
   },
   computed: {
-    authModel: function() {
+    authModel: function () {
       var model = {
         user: this.user,
         referrer: document.referrer
       };
       model.user.username = this.tide.hashUsername(this.username).username;
       return model;
+    },
+    progressBar: function () {
+      if (this.currentProgress == 0) return '';
+
+      var val = parseInt(this.currentProgress * 50);
+      var bar = "<span class='progress-bracket'>[</span>";
+      for (let i = 0; i < 50; i++) {
+        if (i < val) bar += "<span class='progress-block'>#</span>";
+        else bar += ".";
+      }
+      return bar + "<span class='progress-bracket'>]</span>";
     }
   },
   methods: {
@@ -310,10 +330,10 @@ export default {
     },
     tideRequest(url, data) {
       const self = this;
-      return new window.Promise(async function(resolve, reject) {
+      return new window.Promise(async function (resolve, reject) {
         try {
           const http = new XMLHttpRequest();
-          http.onreadystatechange = function() {
+          http.onreadystatechange = function () {
             if (this.readyState === 4) {
               if (this.status === 200) {
                 return resolve(JSON.parse(this.responseText));
@@ -405,11 +425,25 @@ export default {
       }
     },
     async sign() {
-      var result = await this.tide.sign(config.orkNodes, this.signMsg);
+      this.signLoading = true;
+      this.signBtnText = "Signing...";
+      var interval = setInterval(() => this.currentProgress += 0.045, 200)
+      var result = await this.tide.sign(
+        [
+          "https://raziel-ork-1.azurewebsites.net",
+          "https://raziel-ork-2.azurewebsites.net",
+          "https://raziel-ork-3.azurewebsites.net"
+        ],
+        this.signMsg
+      );
       this.signUrl = `https://brainwalletx.github.io/#verify?vrAddr=${
         result.address
-      }&vrMsg=${encodeURI(this.signMsg)}&vrSig=${encodeURI(result.signature)}`;
+        }&vrMsg=${encodeURI(this.signMsg)}&vrSig=${encodeURI(result.signature)}`;
       this.signResult = result.signature;
+      this.signLoading = false;
+      this.signBtnText = "Threshold Sign"
+      clearInterval(interval);
+      this.currentProgress = 1;
     }
   }
 };
@@ -603,5 +637,13 @@ body {
 
 #bitcoin-id-input {
   width: 275px;
+}
+
+.progress-bracket {
+  color: white;
+}
+
+.progress-block {
+  color: #b08fe4;
 }
 </style>
