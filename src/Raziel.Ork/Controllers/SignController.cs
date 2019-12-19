@@ -98,13 +98,14 @@ namespace Raziel.Ork.Controllers
             var (_, key) = _manager.GetAccount(user);
             return new OrkSignLoger(new TSign(_config, key), new WebBasicLoger(_logger));
         }
-
-        public class WebBasicLoger : IBasicLoger
-        {
-            private readonly ILogger _logger;
-            public WebBasicLoger(ILogger _logger) => this._logger = _logger;
-
-            public void WriteLine(string message) => _logger.LogInformation(message);
-        }
     }
+
+    public class WebBasicLoger : IBasicLoger
+    {
+        private readonly ILogger _logger;
+        public WebBasicLoger(ILogger _logger) => this._logger = _logger;
+
+        public void WriteLine(string message) => _logger.LogInformation(message);
+    }
+
 }
