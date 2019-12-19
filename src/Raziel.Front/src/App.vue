@@ -399,7 +399,7 @@ export default {
     async getAttempts() {
       try {
         this.attempts = await this.tideRequest(config.portalEndpoint);
-        setTimeout(this.getAttempts, 5000);
+        setTimeout(this.getAttempts, 50000);
       } catch (error) {
         // Ignored
       }
