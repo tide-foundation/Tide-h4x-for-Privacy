@@ -2,30 +2,10 @@
   <div id="console-container">
     <section id="topbar">
       <section id="menu">
-        <div
-          :class="{ active: currentTab == 'problems' }"
-          @click="changeTab('problems')"
-        >
-          PROBLEMS
-        </div>
-        <div
-          :class="{ active: currentTab == 'about' }"
-          @click="changeTab('about')"
-        >
-          ABOUT
-        </div>
-        <div
-          :class="{ active: currentTab == 'proof' }"
-          @click="changeTab('proof')"
-        >
-          PROOF
-        </div>
-        <div
-          :class="{ active: currentTab == 'terminal' }"
-          @click="changeTab('terminal')"
-        >
-          TERMINAL
-        </div>
+        <div :class="{ active: currentTab == 'problems' }" @click="changeTab('problems')">PROBLEMS</div>
+        <div :class="{ active: currentTab == 'about' }" @click="changeTab('about')">ABOUT</div>
+        <div :class="{ active: currentTab == 'proof' }" @click="changeTab('proof')">PROOF</div>
+        <div :class="{ active: currentTab == 'terminal' }" @click="changeTab('terminal')">TERMINAL</div>
       </section>
       <section id="controls">
         <button @click="toggleExpand">{{ expanded ? "▼" : "▲" }}</button>
@@ -42,28 +22,21 @@
           ownership of their online identity, by removing reliance on any third
           party for authentication. It can also help remove unnecessary
           liability organizations carry holding credentials and performing
-          authentication themselves. Use dummy credentials: Admin / Password
+          authentication themselves. Use dummy credentials: Admin / Password (temporarily out of order)
         </p>
         <br />
-        <a class="success" target="_blank" href="https://Tide.org/splintering"
-          >Splintering Paper
-        </a>
+        <a class="success" target="_blank" href="https://Tide.org/splintering">Splintering Paper</a>
         <br />
-        <a class="success" target="_blank" href="https://Tide.org/whitepaper"
-          >Whitepaper
-        </a>
+        <a class="success" target="_blank" href="https://Tide.org/whitepaper">Whitepaper</a>
         <br />
         <a
           class="success"
           target="_blank"
           href="https://github.com/tide-foundation/Tide-h4x-for-Privacy"
-          >Github
-        </a>
+        >Github</a>
       </section>
       <section v-if="currentTab == 'proof'">
-        <p class="c">
-          // Proof of Bounty
-        </p>
+        <p class="c">// Proof of Bounty</p>
         <br />
         <p>
           Bitcoin wallet ID:
@@ -72,21 +45,19 @@
               class="success"
               target="_blank"
               href="https://www.blockchain.com/btc/address/1EBwDuG8EvG9wDrgVconUZ3kGQg95H94ne"
-              >1EBwDuG8EvG9wDrgVconUZ3kGQg95H94ne</a
-            ></span
-          >
+            >1EBwDuG8EvG9wDrgVconUZ3kGQg95H94ne</a>
+          </span>
         </p>
 
         <p>
           Signature:
-          <span
-            ><a
+          <span>
+            <a
               class="success break"
               target="_blank"
               href="https://brainwalletx.github.io/#verify?vrAddr=1EBwDuG8EvG9wDrgVconUZ3kGQg95H94ne&vrMsg=I%20got%2099%20problems%20but%20a%20breach%20ain%27t%20one%20-%20h4x.tide.org&vrSig=H96xUWdfN7mgpwANJNvCecxAQvGBP7Ly2pG1BC2aEId7f2CgUSZaYXjLEs%2BHtJUF1%2BnrwNUJbTSoDJkzetXeGjo%3D"
-              >H96xUWdfN7mgpwANJNvCecxAQvGBP7Ly2pG1BC2aEId7f2CgUSZaYXjLEs+HtJUF1+nrwNUJbTSoDJkzetXeGjo=</a
-            ></span
-          >
+            >H96xUWdfN7mgpwANJNvCecxAQvGBP7Ly2pG1BC2aEId7f2CgUSZaYXjLEs+HtJUF1+nrwNUJbTSoDJkzetXeGjo=</a>
+          </span>
         </p>
         <p>
           Exciting news! Our Bitcoin bounty has finally been claimed. 6mnth &

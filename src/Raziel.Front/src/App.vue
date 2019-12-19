@@ -2,9 +2,9 @@
   <div id="app" :style="{ height: windowHeight }">
     <div id="brute-force">
       <section v-if="attempts != null">
-        {'totalAttempts':<span class="success">{{ attempts.total }}</span
-        >,'attemptsThisHour':<span class="success">{{ attempts.thisHour }}</span
-        >}
+        {'totalAttempts':
+        <span class="success">{{ attempts.total }}</span>,'attemptsThisHour':
+        <span class="success">{{ attempts.thisHour }}</span>}
       </section>
     </div>
     <section id="top-content">
@@ -20,10 +20,7 @@
         <l n=" 9" c="//   '._____ ____ _____.'   //"></l>
         <l n="10" c="//   |     .'____'.     |   //"></l>
         <l n="11" c="//   '.__.'.'    '.'.__.'   //"></l>
-        <l
-          n="12"
-          c="//   '.__  | <span style='color:#7fcbe8'>TIDE</span> |  __.'   //"
-        ></l>
+        <l n="12" c="//   '.__  | <span style='color:#7fcbe8'>TIDE</span> |  __.'   //"></l>
         <l n="13" c="//   |   '.'.____.'.'   |   //"></l>
         <l n="14" c="//   '.____'.____.'____.'   //"></l>
         <l n="15" c="//   '.________________.'   //"></l>
@@ -53,11 +50,7 @@
         </l>
         <l n="21"></l>
         <l n="22">
-          <button
-            :class="{ disabled: loading, accepted: unlocked }"
-            type="submit"
-            v-html="btnText"
-          ></button>
+          <button :class="{ disabled: loading, accepted: unlocked }" type="submit" v-html="btnText"></button>
         </l>
       </form>
       <l n="23"></l>
@@ -78,10 +71,9 @@
           <a
             class="success"
             target="_blank"
-            href="https://www.blockchain.com/btc/address/1EBwDuG8EvG9wDrgVconUZ3kGQg95H94ne"
-            >1EBwDuG8EvG9wDrgVconUZ3kGQg95H94ne</a
-          ></span
-        >
+            href="https://www.blockchain.com/btc/address/1D1SdY5MD36CJE4aHYEb9sUe2Ze7gGbM5h"
+          >1D1SdY5MD36CJE4aHYEb9sUe2Ze7gGbM5h</a>
+        </span>
         <p class="s">'</p>
         <p>;</p>
       </l>
@@ -90,21 +82,18 @@
         <p class="variable">message</p>
         <p>&nbsp;=&nbsp;</p>
         <p class="s">'</p>
-        <input v-model="signMsg" type="text" />
+        <input class="sign-input" v-model="signMsg" type="text" />
         <p class="s">'</p>
         <p>;</p>
       </l>
       <l n="30"></l>
       <l n="31">
-        <button
-          type="button"
-          @click="sign"
-          v-html="signBtnText"
-          :class="{ disabled: signLoading }"
-        ></button>
+        <button type="button" @click="sign" v-html="signBtnText" :class="{ disabled: signLoading }"></button>
       </l>
       <l n="32"></l>
-      <l n="33"><span v-html="progressBar"></span></l>
+      <l n="33">
+        <span v-html="progressBar"></span>
+      </l>
       <l n="34">
         <div class="v">var&nbsp;</div>
         <p class="variable">result</p>
@@ -112,10 +101,12 @@
 
         <p class="s">'</p>
         <span>
-          <a class="success" target="_blank" :href="signUrl">{{
+          <a class="success" target="_blank" :href="signUrl">
+            {{
             signResult != null ? signResult : ""
-          }}</a></span
-        >
+            }}
+          </a>
+        </span>
         <p class="s">'</p>
 
         <p>;</p>
@@ -156,35 +147,19 @@
         <section v-if="decrypted">
           <div class="modal-line">
             <p>First name:</p>
-            <input
-              type="text"
-              class="success modal-input"
-              v-model="user.firstName"
-            />
+            <input type="text" class="success modal-input" v-model="user.firstName" />
           </div>
           <div class="modal-line">
             <p>Last name:</p>
-            <input
-              type="text"
-              class="success modal-input"
-              v-model="user.lastName"
-            />
+            <input type="text" class="success modal-input" v-model="user.lastName" />
           </div>
           <div class="modal-line">
             <p>Bitcoin key:</p>
-            <input
-              type="text"
-              class="success modal-input"
-              v-model="user.bitcoinPrivateKey"
-            />
+            <input type="text" class="success modal-input" v-model="user.bitcoinPrivateKey" />
           </div>
           <div class="modal-line">
             <p>Note:</p>
-            <input
-              type="text"
-              class="success modal-input"
-              v-model="user.note"
-            />
+            <input type="text" class="success modal-input" v-model="user.note" />
           </div>
 
           <button @click="save">Save</button>
@@ -211,8 +186,9 @@ export default {
       tide: Tide.Create,
       btnText: "Login",
       signBtnText: "Threshold Sign",
-      signMsg: "Hello World",
+      signMsg: "Welcome to the world's fastest TSS!",
       signResult: null,
+      signProgressTarget: 0,
       signLoading: false,
       signUrl: null,
       currentProgress: 0,
@@ -427,23 +403,26 @@ export default {
     async sign() {
       this.signLoading = true;
       this.signBtnText = "Signing...";
-      var interval = setInterval(() => this.currentProgress += 0.045, 200)
-      var result = await this.tide.sign(
-        [
-          "https://raziel-ork-1.azurewebsites.net",
-          "https://raziel-ork-2.azurewebsites.net",
-          "https://raziel-ork-3.azurewebsites.net"
-        ],
-        this.signMsg
-      );
+      this.signProgressTarget = 0;
+      this.signResult = null;
+
+      var interval = setInterval(() => {
+        if (this.currentProgress < this.signProgressTarget) this.currentProgress += 0.03
+      }, 200)
+
+      var result = await this.tide.sign(config.orkNodes.slice(0, 6), 'jose', this.signMsg, (index, status) => {
+        this.signProgressTarget = index * 20 + 20;
+      }, false);
+
       this.signUrl = `https://brainwalletx.github.io/#verify?vrAddr=${
         result.address
         }&vrMsg=${encodeURI(this.signMsg)}&vrSig=${encodeURI(result.signature)}`;
+
       this.signResult = result.signature;
       this.signLoading = false;
       this.signBtnText = "Threshold Sign"
       clearInterval(interval);
-      this.currentProgress = 1;
+      this.currentProgress = 0;
     }
   }
 };
@@ -645,5 +624,9 @@ body {
 
 .progress-block {
   color: #b08fe4;
+}
+
+.sign-input {
+  width: 280px;
 }
 </style>
