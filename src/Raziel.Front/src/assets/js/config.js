@@ -15,11 +15,16 @@
  * If not, see https://tide.org/licenses_tcosl-1-0-en
  */
 
-export default {
+var object = {
   orkNodes: getOrks(),
   vendorEndpoint: "https://raziel-vendor.azurewebsites.net",
   portalEndpoint: "https://raziel-portal.azurewebsites.net/"
 };
+
+object.signNodes = object.orkNodes.slice(0, 6);
+object.signNodes.push(`https://raziel-ork-21.azurewebsites.net`);
+
+export default object;
 
 function getOrks() {
   var list = [];

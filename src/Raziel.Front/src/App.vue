@@ -3,8 +3,10 @@
     <div id="brute-force">
       <section v-if="attempts != null">
         {'totalAttempts':
-        <span class="success">{{ attempts.total }}</span>,'attemptsThisHour':
-        <span class="success">{{ attempts.thisHour }}</span>}
+        <span class="success">{{ attempts.total }}</span
+        >,'attemptsThisHour':
+        <span class="success">{{ attempts.thisHour }}</span
+        >}
       </section>
     </div>
     <section id="top-content">
@@ -20,7 +22,10 @@
         <l n=" 9" c="//   '._____ ____ _____.'   //"></l>
         <l n="10" c="//   |     .'____'.     |   //"></l>
         <l n="11" c="//   '.__.'.'    '.'.__.'   //"></l>
-        <l n="12" c="//   '.__  | <span style='color:#7fcbe8'>TIDE</span> |  __.'   //"></l>
+        <l
+          n="12"
+          c="//   '.__  | <span style='color:#7fcbe8'>TIDE</span> |  __.'   //"
+        ></l>
         <l n="13" c="//   |   '.'.____.'.'   |   //"></l>
         <l n="14" c="//   '.____'.____.'____.'   //"></l>
         <l n="15" c="//   '.________________.'   //"></l>
@@ -50,7 +55,11 @@
         </l>
         <l n="21"></l>
         <l n="22">
-          <button :class="{ disabled: loading, accepted: unlocked }" type="submit" v-html="btnText"></button>
+          <button
+            :class="{ disabled: loading, accepted: unlocked }"
+            type="submit"
+            v-html="btnText"
+          ></button>
         </l>
       </form>
       <l n="23"></l>
@@ -60,7 +69,7 @@
       <l
         style="white-space: nowrap;"
         n="27"
-        c="// Type a message below and it'll be signed with the bitcoin account"
+        c="// Type a message below and it'll be signed automatically with the bitcoin key by 7 trustless nodes"
       ></l>
       <l n="28">
         <div class="v">const&nbsp;</div>
@@ -71,8 +80,9 @@
           <a
             class="success"
             target="_blank"
-            href="https://www.blockchain.com/btc/address/1D1SdY5MD36CJE4aHYEb9sUe2Ze7gGbM5h"
-          >1D1SdY5MD36CJE4aHYEb9sUe2Ze7gGbM5h</a>
+            :href="'https://www.blockchain.com/btc/address/' + bitcoinId"
+            >{{ bitcoinId }}</a
+          >
         </span>
         <p class="s">'</p>
         <p>;</p>
@@ -82,13 +92,24 @@
         <p class="variable">message</p>
         <p>&nbsp;=&nbsp;</p>
         <p class="s">'</p>
-        <input class="sign-input" v-model="signMsg" type="text" />
+        <input
+          class="sign-input"
+          v-model="signMsg"
+          type="text"
+          @focus="signMsgFocus"
+          @blur="signMsgBlur"
+        />
         <p class="s">'</p>
         <p>;</p>
       </l>
       <l n="30"></l>
       <l n="31">
-        <button type="button" @click="sign" v-html="signBtnText" :class="{ disabled: signLoading }"></button>
+        <button
+          type="button"
+          @click="sign"
+          v-html="signBtnText"
+          :class="{ disabled: signLoading || this.signMsg == '' }"
+        ></button>
       </l>
       <l n="32"></l>
       <l n="33">
@@ -102,9 +123,7 @@
         <p class="s">'</p>
         <span>
           <a class="success" target="_blank" :href="signUrl">
-            {{
-            signResult != null ? signResult : ""
-            }}
+            {{ signResult != null ? signResult : "" }}
           </a>
         </span>
         <p class="s">'</p>
@@ -147,19 +166,35 @@
         <section v-if="decrypted">
           <div class="modal-line">
             <p>First name:</p>
-            <input type="text" class="success modal-input" v-model="user.firstName" />
+            <input
+              type="text"
+              class="success modal-input"
+              v-model="user.firstName"
+            />
           </div>
           <div class="modal-line">
             <p>Last name:</p>
-            <input type="text" class="success modal-input" v-model="user.lastName" />
+            <input
+              type="text"
+              class="success modal-input"
+              v-model="user.lastName"
+            />
           </div>
           <div class="modal-line">
             <p>Bitcoin key:</p>
-            <input type="text" class="success modal-input" v-model="user.bitcoinPrivateKey" />
+            <input
+              type="text"
+              class="success modal-input"
+              v-model="user.bitcoinPrivateKey"
+            />
           </div>
           <div class="modal-line">
             <p>Note:</p>
-            <input type="text" class="success modal-input" v-model="user.note" />
+            <input
+              type="text"
+              class="success modal-input"
+              v-model="user.note"
+            />
           </div>
 
           <button @click="save">Save</button>
@@ -191,6 +226,7 @@ export default {
       signProgressTarget: 0,
       signLoading: false,
       signUrl: null,
+      bitcoinId: "1GesdrT99LvczYZfW5zycVSkju1PZQzn1u",
       currentProgress: 0,
       unlocked: false,
       currentId: 1000,
@@ -244,6 +280,12 @@ export default {
     }
   },
   methods: {
+    signMsgFocus() {
+      if (this.signMsg == "Welcome to the world's fastest TSS!") this.signMsg = "";
+    },
+    signMsgBlur() {
+      if (this.signMsg == "") this.signMsg = "Welcome to the world's fastest TSS!";
+    },
     async getKeys() {
       if (this.loading) return;
       if (!this.expanded) this.$bus.$emit("trigger-expand");
@@ -410,9 +452,11 @@ export default {
         if (this.currentProgress < this.signProgressTarget) this.currentProgress += 0.03
       }, 200)
 
-      var result = await this.tide.sign(config.orkNodes.slice(0, 6), 'jose', this.signMsg, (index, status) => {
-        this.signProgressTarget = index * 20 + 20;
-      }, false);
+      var result = await this.tide.sign(
+
+        config.signNodes, 'jose', this.signMsg, (index, status) => {
+          this.signProgressTarget = index * 20 + 20;
+        }, false);
 
       this.signUrl = `https://brainwalletx.github.io/#verify?vrAddr=${
         result.address
