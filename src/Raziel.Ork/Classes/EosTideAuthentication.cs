@@ -62,8 +62,6 @@ namespace Raziel.Ork.Classes {
 
         public TideResponse Login(AuthenticationModel model) {
             try {
-                var usernameHash = model.Username.ConvertToUint64();
-
                 // Fetch the item from the cache, otherwise get it from the blockchain
                 var fragment = _repo.GetShare(model.Username.ConvertToUint64());
                 if (fragment == null) {
@@ -73,18 +71,20 @@ namespace Raziel.Ork.Classes {
 
                 // Process the request. Gather correct fragment if the password checks out, otherwise return junk data
                 // Alternatively reject it if too many requests have been made
-                var (success, result, minutes) = ProcessRequest(model, fragment);
-                if (result == null) {
+                var (result, minutes) = Throttle(model.Ip);
+                if (result)
+                {
                     _logger.LogMsg("TideUser hit throttle", model);
                     return new TideResponse(false, null, $"Too many requests. Try again in: {minutes} minutes.");
                 }
+                var validationResult = ValidationManager.ValidatePass(model.PasswordHash, AesCrypto.Decrypt(fragment.PasswordHash, _settings.Password), AesCrypto.Decrypt(fragment.CvkFragment, _settings.Password), _settings.Key).Result;
 
                 // Convert to a transfer object
                 var dto = new FragmentDto(fragment) {
-                    CvkFragment = Cryptide.Instance.Encrypt(result, model.PublicKey)
+                    CvkFragment = Cryptide.Instance.Encrypt(validationResult.Result, model.PublicKey)
                 };
 
-                _logger.LogMsg(success ? "Correct Fragment retrieved" : "Junk fragment retrieved", model);
+                _logger.LogMsg(validationResult.Success ? "Correct Fragment retrieved" : "Junk fragment retrieved", model);
 
                 return new TideResponse(true, new {vendorFragment = dto}, null);
             }
@@ -112,38 +112,31 @@ namespace Raziel.Ork.Classes {
         // This function runs on the ORK on every authentication request
         // epIP is the end-point IP/port address of the requester
         // Function returns the amount of minutes that requester is blocked from now - if the request failed. 0 is if the request is approved.
-        private (bool success, string result, int minutes) ProcessRequest(AuthenticationModel model, Fragment fragment) {
-            // initialize local variables
-            string result = null;
-            var success = false;
-
+        private (bool result, int minutes) Throttle(string ip)
+        {
             // check for current epoch time
             var epoch = (DateTime.UtcNow - _epoch).TotalSeconds;
 
             CleanDictionary(epoch);
 
             // check if record exists for that end-point
-            if (!Records.ContainsKey(model.Ip)) Records.Add(model.Ip, new Tuple<int, double>(1, epoch - 1));
+            if (!Records.ContainsKey(ip)) Records.Add(ip, new Tuple<int, double>(1, epoch - 1));
 
-            var (attempts, banTime) = Records[model.Ip];
+            var (attempts, banTime) = Records[ip];
 
             // execute the authentication check only if ban expired or if still in the first 3 bans
-            if (attempts < 4 || epoch > banTime) {
-                var validationResult = ValidationManager.ValidatePass(model.PasswordHash, AesCrypto.Decrypt(fragment.PasswordHash, _settings.Password), AesCrypto.Decrypt(fragment.CvkFragment, _settings.Password), _settings.Key).Result;
-                result = validationResult.Result;
-                success = validationResult.Success;
-            }
-            
+            var result = attempts < 4 || epoch > banTime;
+
             // increase ban exponentially 
             var extraTime = (int)Math.Pow(2, attempts - 3);
 
             // if authentication failed:
             // increase Attempts counter for that record
             var additionalTime = epoch + 60 * extraTime;
-            Records[model.Ip] = new Tuple<int, double>(attempts + 1, additionalTime);
+            Records[ip] = new Tuple<int, double>(attempts + 1, additionalTime);
 
             // return result 
-            return (success, result, extraTime);
+            return (result, extraTime);
         }
 
         private void CleanDictionary(double epoch) {

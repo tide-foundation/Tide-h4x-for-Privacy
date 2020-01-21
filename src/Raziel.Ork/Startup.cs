@@ -39,7 +39,8 @@ namespace Raziel.Ork {
             services.AddSingleton(new TParams(EcDSAKey.FromPrivate(settings.EcDSAKey)));
             services.AddScoped<ITideLogger, TideLogger>();
             services.AddSingleton<ITideAuthentication, EosTideAuthentication>();
-            services.AddSingleton(new EnvironmentalAccountManager(EcDSAKey.FromPrivate(settings.UserShare)) as IAccountManager);
+            services.AddSingleton<Throttler, Throttler>();
+            services.AddSingleton(new EnvAccountManager(settings.UserShare, settings.UserPublic, settings.UserPwd) as IAccountManager);
             services.AddSingleton<IAdminTideAuthentication, EosAdminTideAuthentication>();
             services.AddHttpContextAccessor();
             services.AddMemoryCache();

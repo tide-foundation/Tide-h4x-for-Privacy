@@ -33,7 +33,7 @@
   <ItemGroup>
     <PackageReference Include="eos-sharp" Version="1.0.7" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="Cryptide.Core" Version="0.0.3" />
+    <PackageReference Include="Cryptide.Core" Version="0.0.4" />
   </ItemGroup>
 
   <ItemGroup>

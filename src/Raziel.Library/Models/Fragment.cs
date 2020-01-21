@@ -25,6 +25,8 @@ namespace Raziel.Library.Models {
     }
 
     public class FragmentDto {
+        public FragmentDto() {}
+
         public FragmentDto(Fragment fragment) {
             CvkPublic = fragment.CvkPublic;
             CvkFragment = fragment.CvkFragment;

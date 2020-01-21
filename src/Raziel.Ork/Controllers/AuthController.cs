@@ -18,8 +18,7 @@ using Microsoft.AspNetCore.Mvc;
 using Raziel.Library.Models;
 
 namespace Raziel.Ork.Controllers {
-    [Route("api/[controller]")]
-    [ApiController]
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class AuthController : ControllerBase {
         private readonly IHttpContextAccessor _accessor;
         private readonly ITideAuthentication _tideAuthentication;

@@ -304,12 +304,11 @@ export default {
         );
         this.auth = tokenResponse.token;
         this.log(this.nextId(), "Fetching fragments", "log");
-        const tideResult = await this.tide.getCredentials(
-          this.username,
-          this.password
-        );
+        
+        const flow = new cryptide.TAuthFlow(config.signNodes, this.username);
+        const tideResult = await flow.logIn(this.password);
 
-        this.keys = tideResult;
+        this.keys = {priv: tideResult.priv.toString(), pub: tideResult.pub.toString()};
 
         this.auth = await this.tide.processEncryption(
           false,

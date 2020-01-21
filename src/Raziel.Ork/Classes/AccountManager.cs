@@ -14,16 +14,16 @@
 // If not, see https://tide.org/licenses_tcosl-1-0-en
 
 using Raziel.Library.Classes;
-using Raziel.Library.Models;
 using System.Collections.Generic;
 using Tide.Encryption.Ecc;
 using Tide.Encryption.EcDSA;
+using Tide.Encryption.ElGamal;
 
 namespace Raziel.Ork.Classes
 {
     public interface IAccountManager
     {
-        (EcScalar Pwd, EcDSAKey Key) GetAccount(string user);
+        (EcScalar Pwd, EcDSAKey Key, string pub) GetAccount(string user);
         void SetAccount(string user, EcScalar password, EcDSAKey key);
     }
 
@@ -36,10 +36,10 @@ namespace Raziel.Ork.Classes
             this.repo = repo;
         }
 
-        public (EcScalar Pwd, EcDSAKey Key) GetAccount(string user)
+        public (EcScalar Pwd, EcDSAKey Key, string pub) GetAccount(string user)
         {
             var share = repo.GetShare(user.ConvertToUint64());
-            return (new EcScalar(share.PasswordHash), EcDSAKey.FromPrivate(share.CvkFragment));
+            return (new EcScalar(share.PasswordHash), EcDSAKey.FromPrivate(share.CvkFragment), share.CvkPublic);
         }
 
         public void SetAccount(string user, EcScalar password, EcDSAKey key)
@@ -49,18 +49,25 @@ namespace Raziel.Ork.Classes
     }
 
 
-    public class EnvironmentalAccountManager : IAccountManager
+    public class EnvAccountManager : IAccountManager
     {
         private readonly EcDSAKey share;
+        private readonly EcScalar pass;
+        private readonly ElGamalKey pub;
 
-        public EnvironmentalAccountManager(EcDSAKey share)
+        public EnvAccountManager(EcDSAKey share, ElGamalKey pub, EcScalar pass)
         {
             this.share = share;
+            this.pass = pass;
+            this.pub = pub;
         }
 
-        public (EcScalar Pwd, EcDSAKey Key) GetAccount(string user)
+        public EnvAccountManager(string share, string pub, string pass) 
+            : this(EcDSAKey.FromPrivate(share), new ElGamalKey(pub),new EcScalar(pass)) { }
+
+        public (EcScalar Pwd, EcDSAKey Key, string pub) GetAccount(string user)
         {
-            return (EcScalar.Random(), share);
+            return (pass, share, pub.ToString());
         }
 
         public void SetAccount(string user, EcScalar password, EcDSAKey key)
@@ -71,22 +78,22 @@ namespace Raziel.Ork.Classes
 
     public class MemoryAccountManager : IAccountManager
     {
-        private readonly Dictionary<string, (EcScalar, EcDSAKey)> _items;
+        private readonly Dictionary<string, (EcScalar, EcDSAKey, string)> _items;
 
         public MemoryAccountManager()
         {
-            _items = new Dictionary<string, (EcScalar, EcDSAKey)>();
+            _items = new Dictionary<string, (EcScalar, EcDSAKey, string)>();
         }
 
         public void SetAccount(string user, EcScalar password, EcDSAKey key)
         {
-            _items[user] = (password, key);
+            _items[user] = (password, key, string.Empty);
         }
 
-        public (EcScalar Pwd, EcDSAKey Key) GetAccount(string user)
+        public (EcScalar Pwd, EcDSAKey Key, string pub) GetAccount(string user)
         {
             if (!_items.ContainsKey(user))
-                return (EcScalar.Random(), new EcDSAKey());
+                return (EcScalar.Random(), new EcDSAKey(), string.Empty);
 
             return _items[user];
         }

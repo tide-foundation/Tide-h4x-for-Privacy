@@ -95,7 +95,7 @@ namespace Raziel.Ork.Controllers
 
         private ITSign GetSign(string user)
         {
-            var (_, key) = _manager.GetAccount(user);
+            var (_, key, pub) = _manager.GetAccount(user);
             return new OrkSignLoger(new TSign(_config, key), new WebBasicLoger(_logger));
         }
     }

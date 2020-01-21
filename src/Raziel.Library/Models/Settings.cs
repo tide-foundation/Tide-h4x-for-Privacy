@@ -15,21 +15,22 @@
 
 namespace Raziel.Library.Models {
     public class Settings {
-        public string PublicKey { get; set; }
-        public string Account { get; set; }
-        public string Onboarding { get; set; }
-        public string EosPrivateKey { get; set; }
-        public string Password { get; set; }
+        public string PublicKey { get; set; } //block chain???
+        public string Account { get; set; } //block chain
+        public string Onboarding { get; set; } //block chain
+        public string EosPrivateKey { get; set; } //block chain
         public string BlockchainChainId { get; set; }
         public string BlockchainEndpoint { get; set; }
-        public string Key { get; set; }
-        public string Connection { get; set; }
-        public string UsersTable { get; set; }
-        public string FragmentsTable { get; set; }
+        public string Connection { get; set; } //sql database
+        public string UsersTable { get; set; } //block chain table
+        public string FragmentsTable { get; set; } //block chain table
         public string LogEndpoint { get; set; }
         public LoggerSettings LoggerSettings { get; set; }
-        public string EcDSAKey { get; set; }
-        public string UserShare { get; set; }
+        public string Key { get; set; } //another aes private ork key
+        public string Password { get; set; } //aes private ork key
+        public string EcDSAKey { get; set; } //ecdsa private key
+        public string UserShare { get; set; } //ecdsa private key set for all user in sign and auth
+        public string UserPublic { get; set; } //elgamal public key set for all user in auth
+        public string UserPwd { get; set; } //ecdsa private key set for all user in sign and auth
     }
-
 }
