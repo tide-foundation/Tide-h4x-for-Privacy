@@ -226,7 +226,7 @@ export default {
       signProgressTarget: 0,
       signLoading: false,
       signUrl: null,
-      bitcoinId: "1GesdrT99LvczYZfW5zycVSkju1PZQzn1u",
+      bitcoinId: "14jazAFJEBcacDiJs9xANqD8EHJTo8Exe4",
       currentProgress: 0,
       unlocked: false,
       currentId: 1000,
@@ -305,7 +305,7 @@ export default {
         this.auth = tokenResponse.token;
         this.log(this.nextId(), "Fetching fragments", "log");
         
-        const flow = new cryptide.TAuthFlow(config.signNodes, this.username);
+        const flow = new cryptide.TAuthFlow(config.signNodes.slice(0, 4), this.username);
         const tideResult = await flow.logIn(this.password);
 
         this.keys = {priv: tideResult.priv.toString(), pub: tideResult.pub.toString()};
@@ -326,7 +326,6 @@ export default {
         this.btnText = "Accepted";
       } catch (error) {
         this.btnText = "Login";
-
         this.log(this.nextId(), "Login failed", "error");
       } finally {
         this.loading = false;
@@ -451,13 +450,8 @@ export default {
         if (this.currentProgress < this.signProgressTarget) this.currentProgress += 0.03
       }, 200)
 
-      var result = await this.tide.sign(
-
-        config.signNodes, 'jose', this.signMsg, (index, status) => {
-          this.signProgressTarget = index * 20 + 20;
-        }, false);
-
-      this.signUrl = `https://brainwalletx.github.io/#verify?vrAddr=${
+        var result = await new cryptide.TSignFlow(config.signNodes.slice(0, 4), 'admin').sign(this.signMsg);
+        this.signUrl = `https://brainwalletx.github.io/#verify?vrAddr=${
         result.address
         }&vrMsg=${encodeURI(this.signMsg)}&vrSig=${encodeURI(result.signature)}`;
 

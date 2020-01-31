@@ -22,7 +22,7 @@
           ownership of their online identity, by removing reliance on any third
           party for authentication. It can also help remove unnecessary
           liability organizations carry holding credentials and performing
-          authentication themselves. Use dummy credentials: Admin / Password (temporarily out of order)
+          authentication themselves. Use dummy credentials: admin / 123456 (temporarily out of order)
         </p>
         <br />
         <a class="success" target="_blank" href="https://Tide.org/splintering">Splintering Paper</a>

@@ -30278,6 +30278,10 @@ var _elGamalKey = _interopRequireDefault(require("./elGamalKey"));
 
 var _elGamal = _interopRequireDefault(require("./elGamal"));
 
+var _hash = _interopRequireDefault(require("./hash"));
+
+var _bigInteger = _interopRequireDefault(require("big-integer"));
+
 // Tide Protocol - Infrastructure for the Personal Data economy
 // Copyright (C) 2019 Tide Foundation Ltd
 // 
@@ -30313,58 +30317,59 @@ function () {
   }
   /**
    * @param {EcScalar} key
-   * @param {EcScalar} pass
+   * @param {string} pass
    */
 
 
   (0, _createClass2.default)(TAuthFlow, [{
     key: "signIn",
     value: function signIn(key, pass) {
-      var keyShrs, passShrs;
+      var m, passShrs, keyShrs;
       return _regenerator.default.async(function signIn$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
               _context.prev = 0;
-              _context.next = 3;
+              m = getM(pass);
+              _context.next = 4;
+              return _regenerator.default.awrap(getShares(this.clients, m));
+
+            case 4:
+              passShrs = _context.sent;
+              _context.next = 7;
               return _regenerator.default.awrap(getShares(this.clients, key));
 
-            case 3:
+            case 7:
               keyShrs = _context.sent;
-              _context.next = 6;
-              return _regenerator.default.awrap(getShares(this.clients, pass));
-
-            case 6:
-              passShrs = _context.sent;
-              _context.next = 9;
+              _context.next = 10;
               return _regenerator.default.awrap(Promise.all(this.clients.map(function (cln, i) {
                 return cln.SetAccount(passShrs[i], keyShrs[i]);
               })));
 
-            case 9:
-              _context.next = 14;
+            case 10:
+              _context.next = 15;
               break;
 
-            case 11:
-              _context.prev = 11;
+            case 12:
+              _context.prev = 12;
               _context.t0 = _context["catch"](0);
               return _context.abrupt("return", Promise.reject(_context.t0));
 
-            case 14:
+            case 15:
             case "end":
               return _context.stop();
           }
         }
-      }, null, this, [[0, 11]]);
+      }, null, this, [[0, 12]]);
     }
     /**
-     * @param {EcScalar} password
+     * @param {string} password
      */
 
   }, {
     key: "logIn",
     value: function logIn(password) {
-      var rs, ais, alphaPromises, _ElGamalKey$generate, _ElGamalKey$generate2, sec, pub, alphas, toIdx, allAlphas, xis, priv, key;
+      var rs, m, ais, alphaPromises, _ElGamalKey$generate, _ElGamalKey$generate2, sec, pub, alphas, toIdx, allAlphas, xis, priv, key;
 
       return _regenerator.default.async(function logIn$(_context2) {
         while (1) {
@@ -30378,19 +30383,20 @@ function () {
 
             case 3:
               rs = _context2.sent;
-              _context2.next = 6;
-              return _regenerator.default.awrap(getShares(this.clients, password));
+              m = getM(password);
+              _context2.next = 7;
+              return _regenerator.default.awrap(getShares(this.clients, m));
 
-            case 6:
+            case 7:
               ais = _context2.sent;
               alphaPromises = Promise.all(this.clients.map(function (cln, i) {
                 return cln.getAuthAlpha(ais[i].value, rs);
               }));
               _ElGamalKey$generate = _elGamalKey.default.generate(128), _ElGamalKey$generate2 = (0, _slicedToArray2.default)(_ElGamalKey$generate, 2), sec = _ElGamalKey$generate2[0], pub = _ElGamalKey$generate2[1];
-              _context2.next = 11;
+              _context2.next = 12;
               return _regenerator.default.awrap(alphaPromises);
 
-            case 11:
+            case 12:
               alphas = _context2.sent;
               toIdx = Array.from(rs.keys()).map(function (j) {
                 return rs.map(function (_, i) {
@@ -30409,7 +30415,7 @@ function () {
               }).reduce(function (a, b) {
                 return a.concat(b);
               });
-              _context2.next = 16;
+              _context2.next = 17;
               return _regenerator.default.awrap(Promise.all(this.clients.map(function (cln, i) {
                 return cln.getAuthSi(alphas[i].private, pub, allAlphas.filter(function (alpha) {
                   return i === alpha.i;
@@ -30419,7 +30425,7 @@ function () {
                 }));
               })));
 
-            case 16:
+            case 17:
               xis = _context2.sent;
               priv = xis.map(function (cypher) {
                 return _tsignClient.TResponseAuth.from(_elGamal.default.decrypt(cypher.priv, sec));
@@ -30432,17 +30438,17 @@ function () {
               };
               return _context2.abrupt("return", key);
 
-            case 22:
-              _context2.prev = 22;
+            case 23:
+              _context2.prev = 23;
               _context2.t0 = _context2["catch"](0);
               return _context2.abrupt("return", Promise.reject(_context2.t0));
 
-            case 25:
+            case 26:
             case "end":
               return _context2.stop();
           }
         }
-      }, null, this, [[0, 22]]);
+      }, null, this, [[0, 23]]);
     }
   }]);
   return TAuthFlow;
@@ -30481,8 +30487,16 @@ function getShares(clients, password) {
     }
   });
 }
+/**
+ * @param {string} pass
+ */
 
-},{"./ecScalar":197,"./ecSecretShare":198,"./elGamal":200,"./elGamalKey":201,"./tsignClient":205,"@babel/runtime/helpers/classCallCheck":4,"@babel/runtime/helpers/createClass":6,"@babel/runtime/helpers/interopRequireDefault":9,"@babel/runtime/helpers/interopRequireWildcard":10,"@babel/runtime/helpers/slicedToArray":17,"@babel/runtime/regenerator":21}],205:[function(require,module,exports){
+
+function getM(pass) {
+  return new _ecScalar.default(_bigInteger.default.fromArray(Array.from(_hash.default.shaBuffer(pass)), 256, false));
+}
+
+},{"./ecScalar":197,"./ecSecretShare":198,"./elGamal":200,"./elGamalKey":201,"./hash":202,"./tsignClient":205,"@babel/runtime/helpers/classCallCheck":4,"@babel/runtime/helpers/createClass":6,"@babel/runtime/helpers/interopRequireDefault":9,"@babel/runtime/helpers/interopRequireWildcard":10,"@babel/runtime/helpers/slicedToArray":17,"@babel/runtime/regenerator":21,"big-integer":43}],205:[function(require,module,exports){
 (function (Buffer){
 "use strict";
 
