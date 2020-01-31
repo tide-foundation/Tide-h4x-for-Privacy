@@ -447,7 +447,7 @@ export default {
       this.signProgressTarget = 0;
       this.signResult = null;
 
-      var flow = new cryptide.TSignFlow(config.signNodes.slice(0, 4), 'admin')
+      var flow = new cryptide.TSignFlow(config.signNodes, 'admin')
 
       flow.onProgress = (id, msg) => {
         this.currentProgress = ((id + 1) / 100) * 20;
