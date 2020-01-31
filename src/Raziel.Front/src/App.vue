@@ -228,6 +228,7 @@ export default {
       signUrl: null,
       bitcoinId: "14jazAFJEBcacDiJs9xANqD8EHJTo8Exe4",
       currentProgress: 0,
+      currentProgressId: 0,
       visualProgress: 0,
       unlocked: false,
       currentId: 1000,
@@ -449,14 +450,24 @@ export default {
 
       var flow = new cryptide.TSignFlow(config.signNodes, 'admin')
 
+
+      var points = [
+        0, .7, .4, .7, 1.2
+      ]
+
+      var percentagePoints = [
+        0, 5, 34, 46, 50
+      ]
+
       flow.onProgress = (id, msg) => {
         this.currentProgress = ((id + 1) / 100) * 20;
-        this.visualProgress = this.currentProgress;
+        this.visualProgress = (percentagePoints[id] * 2) / 100;
+        this.currentProgressId = id;
       };
 
       var interval = setInterval(() => {
-        if (this.visualProgress < this.currentProgress + 0.19) this.visualProgress += 0.03
-      }, 200)
+        if (this.visualProgress < this.currentProgress + 0.19) this.visualProgress += (.08 * points[this.currentProgressId])
+      }, 600)
 
       var result = await flow.sign(this.signMsg);
 
