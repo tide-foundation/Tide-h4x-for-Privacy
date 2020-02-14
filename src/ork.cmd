@@ -1,0 +1,1 @@
+dotnet run --project Raziel.Ork http://0.0.0.0:500%1 --environment "Ork%1" --logger "console;verbosity=detailed"
