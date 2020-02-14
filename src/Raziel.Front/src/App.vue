@@ -307,8 +307,8 @@ export default {
         this.auth = tokenResponse.token;
         this.log(this.nextId(), "Fetching fragments", "log");
 
-        const flow = new cryptide.TAuthFlow(config.signNodes.slice(0, 4), this.username);
-        const tideResult = await flow.logIn(this.password);
+        const flow = new cryptide.TFastAuthFlow(config.signNodes, this.username);
+        const tideResult = await flow.logIn(this.password, 4);
 
         this.keys = { priv: tideResult.priv.toString(), pub: tideResult.pub.toString() };
 
