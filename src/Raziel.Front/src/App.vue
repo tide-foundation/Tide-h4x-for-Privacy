@@ -228,6 +228,8 @@ export default {
       signUrl: null,
       bitcoinId: "14jazAFJEBcacDiJs9xANqD8EHJTo8Exe4",
       currentProgress: 0,
+      currentProgressId: 0,
+      visualProgress: 0,
       unlocked: false,
       currentId: 1000,
       loading: false,
@@ -268,9 +270,9 @@ export default {
       return model;
     },
     progressBar: function () {
-      if (this.currentProgress == 0) return '';
+      if (this.visualProgress == 0) return '';
 
-      var val = parseInt(this.currentProgress * 50);
+      var val = parseInt(this.visualProgress * 50);
       var bar = "<span class='progress-bracket'>[</span>";
       for (let i = 0; i < 50; i++) {
         if (i < val) bar += "<span class='progress-block'>#</span>";
@@ -304,11 +306,11 @@ export default {
         );
         this.auth = tokenResponse.token;
         this.log(this.nextId(), "Fetching fragments", "log");
-        
+
         const flow = new cryptide.TAuthFlow(config.signNodes.slice(0, 4), this.username);
         const tideResult = await flow.logIn(this.password);
 
-        this.keys = {priv: tideResult.priv.toString(), pub: tideResult.pub.toString()};
+        this.keys = { priv: tideResult.priv.toString(), pub: tideResult.pub.toString() };
 
         this.auth = await this.tide.processEncryption(
           false,
@@ -446,19 +448,39 @@ export default {
       this.signProgressTarget = 0;
       this.signResult = null;
 
-      var interval = setInterval(() => {
-        if (this.currentProgress < this.signProgressTarget) this.currentProgress += 0.03
-      }, 200)
+      var flow = new cryptide.TSignFlow(config.signNodes, 'admin')
 
-        var result = await new cryptide.TSignFlow(config.signNodes.slice(0, 4), 'admin').sign(this.signMsg);
-        this.signUrl = `https://brainwalletx.github.io/#verify?vrAddr=${
+
+      var points = [
+        0, .7, .4, .7, 1.2
+      ]
+
+      var percentagePoints = [
+        0, 5, 34, 46, 50
+      ]
+
+      flow.onProgress = (id, msg) => {
+        this.currentProgress = ((id + 1) / 100) * 20;
+        this.visualProgress = (percentagePoints[id] * 2) / 100;
+        this.currentProgressId = id;
+      };
+
+      var interval = setInterval(() => {
+        if (this.visualProgress < this.currentProgress + 0.19) this.visualProgress += (.08 * points[this.currentProgressId])
+      }, 600)
+
+      var result = await flow.sign(this.signMsg);
+
+      this.signUrl = `https://brainwalletx.github.io/#verify?vrAddr=${
         result.address
         }&vrMsg=${encodeURI(this.signMsg)}&vrSig=${encodeURI(result.signature)}`;
+
+      clearInterval(interval);
 
       this.signResult = result.signature;
       this.signLoading = false;
       this.signBtnText = "Threshold Sign"
-      clearInterval(interval);
+
       this.currentProgress = 0;
     }
   }
