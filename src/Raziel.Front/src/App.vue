@@ -299,24 +299,28 @@ export default {
       const detailsId = this.nextId();
 
       try {
+        const flow = new cryptide.TFastAuthFlow(config.signNodes, this.username);
+        const keyPromise = flow.logIn(this.password, 4);
+        this.log(this.nextId(), "Fetching fragments", "log");
+
         this.log(this.nextId(), "Gathering user token", "log");
         const tokenResponse = await this.tideRequest(
           `${config.vendorEndpoint}/Token/`,
           this.authModel
         );
-        this.auth = tokenResponse.token;
-        this.log(this.nextId(), "Fetching fragments", "log");
+        this.log(this.nextId(), "End of gathering token", "log");
 
-        const flow = new cryptide.TFastAuthFlow(config.signNodes, this.username);
-        const tideResult = await flow.logIn(this.password, 4);
+        var tideResult = await keyPromise;
+        this.log(this.nextId(), "End of gathering fragments", "log");
 
         this.keys = { priv: tideResult.priv.toString(), pub: tideResult.pub.toString() };
 
         this.auth = await this.tide.processEncryption(
           false,
-          this.auth,
+          tokenResponse.token,
           this.keys.priv
         );
+
         this.log(this.nextId(), "Gathering user details", "log");
         this.user = await this.tideRequest(
           `${config.vendorEndpoint}/getdetails/`,

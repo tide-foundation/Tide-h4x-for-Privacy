@@ -30161,6 +30161,23 @@ function () {
 
       var y = g.modPow(x, p);
       return [new ElGamalKey(true, p, q, g, x), new ElGamalKey(false, p, q, g, y)];
+    }
+    /**
+     * @returns {Promise<ElGamalKey[]>}
+     */
+
+  }, {
+    key: "generateAsync",
+    value: function generateAsync() {
+      var bits = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 256;
+      var confidence = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 32;
+      return new Promise(function (resolve, reject) {
+        try {
+          resolve(ElGamalKey.generate(bits, confidence));
+        } catch (error) {
+          reject(error);
+        }
+      });
     } //TODO: Improve this
 
   }, {
@@ -31155,35 +31172,36 @@ function () {
   }, {
     key: "logIn",
     value: function logIn(password, threshold) {
-      var ids, ais, cs, shrCs, allCs, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, shrCi, first, li, ciuili, _iteratorNormalCompletion2, _didIteratorError2, _iteratorError2, _iterator2, _step2, cj, rs, shrRs, allRs, _ElGamalKey$generate, _ElGamalKey$generate2, sec, pub, keyTags, priv, _keyTags$0$pub, p, q, g;
+      var keyPromise, ids, ais, cs, shrCs, allCs, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, shrCi, first, li, ciuili, _iteratorNormalCompletion2, _didIteratorError2, _iteratorError2, _iterator2, _step2, cj, rs, shrRs, allRs, _ref, _ref2, sec, pub, keyTags, priv, _keyTags$0$pub, p, q, g;
 
       return _regenerator.default.async(function logIn$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
               _context2.prev = 0;
-              _context2.next = 3;
+              keyPromise = _elGamalKey.default.generateAsync(128);
+              _context2.next = 4;
               return _regenerator.default.awrap(Promise.all(this.clients.map(function (cln) {
                 return cln.getId();
               })));
 
-            case 3:
+            case 4:
               _context2.t0 = function (id) {
                 return new _ecScalar.default(id);
               };
 
               ids = _context2.sent.map(_context2.t0);
-              _context2.next = 7;
+              _context2.next = 8;
               return _regenerator.default.awrap(getShares(getM(password), ids, threshold));
 
-            case 7:
+            case 8:
               ais = _context2.sent;
-              _context2.next = 10;
+              _context2.next = 11;
               return _regenerator.default.awrap(Promise.all(this.clients.map(function (cln, i) {
                 return cln.getFastCi(ais[i], threshold, ids);
               })));
 
-            case 10:
+            case 11:
               cs = _context2.sent;
               shrCs = cs.reduce(function (a, b) {
                 return a.concat(b);
@@ -31196,12 +31214,12 @@ function () {
               _iteratorNormalCompletion = true;
               _didIteratorError = false;
               _iteratorError = undefined;
-              _context2.prev = 16;
+              _context2.prev = 17;
               _iterator = cs[Symbol.iterator]();
 
-            case 18:
+            case 19:
               if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
-                _context2.next = 45;
+                _context2.next = 46;
                 break;
               }
 
@@ -31212,92 +31230,92 @@ function () {
               _iteratorNormalCompletion2 = true;
               _didIteratorError2 = false;
               _iteratorError2 = undefined;
-              _context2.prev = 26;
+              _context2.prev = 27;
 
               for (_iterator2 = shrCi[Symbol.iterator](); !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
                 cj = _step2.value;
                 cj.ciui = ciuili;
               }
 
-              _context2.next = 34;
+              _context2.next = 35;
               break;
 
-            case 30:
-              _context2.prev = 30;
-              _context2.t1 = _context2["catch"](26);
+            case 31:
+              _context2.prev = 31;
+              _context2.t1 = _context2["catch"](27);
               _didIteratorError2 = true;
               _iteratorError2 = _context2.t1;
 
-            case 34:
-              _context2.prev = 34;
+            case 35:
               _context2.prev = 35;
+              _context2.prev = 36;
 
               if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
                 _iterator2.return();
               }
 
-            case 37:
-              _context2.prev = 37;
+            case 38:
+              _context2.prev = 38;
 
               if (!_didIteratorError2) {
-                _context2.next = 40;
+                _context2.next = 41;
                 break;
               }
 
               throw _iteratorError2;
 
-            case 40:
-              return _context2.finish(37);
-
             case 41:
-              return _context2.finish(34);
+              return _context2.finish(38);
 
             case 42:
+              return _context2.finish(35);
+
+            case 43:
               _iteratorNormalCompletion = true;
-              _context2.next = 18;
+              _context2.next = 19;
               break;
 
-            case 45:
-              _context2.next = 51;
+            case 46:
+              _context2.next = 52;
               break;
 
-            case 47:
-              _context2.prev = 47;
-              _context2.t2 = _context2["catch"](16);
+            case 48:
+              _context2.prev = 48;
+              _context2.t2 = _context2["catch"](17);
               _didIteratorError = true;
               _iteratorError = _context2.t2;
 
-            case 51:
-              _context2.prev = 51;
+            case 52:
               _context2.prev = 52;
+              _context2.prev = 53;
 
               if (!_iteratorNormalCompletion && _iterator.return != null) {
                 _iterator.return();
               }
 
-            case 54:
-              _context2.prev = 54;
+            case 55:
+              _context2.prev = 55;
 
               if (!_didIteratorError) {
-                _context2.next = 57;
+                _context2.next = 58;
                 break;
               }
 
               throw _iteratorError;
 
-            case 57:
-              return _context2.finish(54);
-
             case 58:
-              return _context2.finish(51);
+              return _context2.finish(55);
 
             case 59:
-              _context2.next = 61;
+              return _context2.finish(52);
+
+            case 60:
+              _context2.next = 62;
               return _regenerator.default.awrap(Promise.all(this.clients.map(function (cln, i) {
                 return cln.getFastRj(allCs[i]);
               })));
 
-            case 61:
+            case 62:
               rs = _context2.sent;
               shrRs = rs.reduce(function (a, b) {
                 return a.concat(b);
@@ -31307,13 +31325,20 @@ function () {
                   return shr.to.equals(cln);
                 });
               });
-              _ElGamalKey$generate = _elGamalKey.default.generate(128), _ElGamalKey$generate2 = (0, _slicedToArray2.default)(_ElGamalKey$generate, 2), sec = _ElGamalKey$generate2[0], pub = _ElGamalKey$generate2[1];
               _context2.next = 67;
+              return _regenerator.default.awrap(keyPromise);
+
+            case 67:
+              _ref = _context2.sent;
+              _ref2 = (0, _slicedToArray2.default)(_ref, 2);
+              sec = _ref2[0];
+              pub = _ref2[1];
+              _context2.next = 73;
               return _regenerator.default.awrap(Promise.all(this.clients.map(function (cln, i) {
                 return cln.getFastKey(allRs[i], pub);
               })));
 
-            case 67:
+            case 73:
               keyTags = _context2.sent;
               priv = keyTags.map(function (cypher) {
                 return new _ecScalar.default(_elGamal.default.decrypt(cypher.priv, sec));
@@ -31326,17 +31351,17 @@ function () {
                 pub: keyTags[0].pub
               });
 
-            case 73:
-              _context2.prev = 73;
+            case 79:
+              _context2.prev = 79;
               _context2.t3 = _context2["catch"](0);
               return _context2.abrupt("return", Promise.reject(_context2.t3));
 
-            case 76:
+            case 82:
             case "end":
               return _context2.stop();
           }
         }
-      }, null, this, [[0, 73], [16, 47, 51, 59], [26, 30, 34, 42], [35,, 37, 41], [52,, 54, 58]]);
+      }, null, this, [[0, 79], [17, 48, 52, 60], [27, 31, 35, 43], [36,, 38, 42], [53,, 55, 59]]);
     }
   }]);
   return TFastAuthFlow;
