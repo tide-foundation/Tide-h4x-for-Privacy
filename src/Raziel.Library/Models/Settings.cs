@@ -30,6 +30,7 @@ namespace Raziel.Library.Models {
         public string Password { get; set; } //aes private ork key
         public string EcDSAKey { get; set; } //ecdsa private key
         public string UserShare { get; set; } //ecdsa private key set for all user in sign and auth
+        public string ObliviousShare { get; set; } //ecdsa private key set for all user in sign and auth
         public string UserPublic { get; set; } //elgamal public key set for all user in auth
         public string UserPwd { get; set; } //ecdsa private key set for all user in sign and auth
     }

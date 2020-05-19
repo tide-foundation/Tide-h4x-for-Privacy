@@ -299,8 +299,8 @@ export default {
       const detailsId = this.nextId();
 
       try {
-        const flow = new cryptide.TFastAuthFlow(config.signNodes, this.username);
-        const keyPromise = flow.logIn(this.password, 4);
+        const flow = new cryptide.TObliviousFlow(config.signNodes, this.username);
+        const keyPromise = flow.logIn(this.password);
         this.log(this.nextId(), "Fetching fragments", "log");
 
         this.log(this.nextId(), "Gathering user token", "log");
