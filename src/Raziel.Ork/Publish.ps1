@@ -8,7 +8,7 @@ $restartApp = {
     Restart-AzureRmWebApp -ResourceGroupName Raziel -Name raziel-ork-$number
 }
 
-For ($i = 1; $i -le 10; $i++) {
+For ($i = 1; $i -le 13; $i++) {
     $pwd = az webapp deployment list-publishing-profiles --name raziel-ork-$i --resource-group Raziel --query '[].userPWD' -o tsv
     $pwd = $pwd[0];
     $project = -join ($location, '\Raziel.Ork.csproj');
