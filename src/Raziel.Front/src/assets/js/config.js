@@ -21,8 +21,7 @@ var object = {
   portalEndpoint: "https://raziel-portal.azurewebsites.net/"
 };
 
-object.signNodes = object.orkNodes.slice(0, 6);
-object.signNodes.push(`https://raziel-ork-21.azurewebsites.net`);
+object.signNodes = object.orkNodes.slice(0, 10);
 
 export default object;
 
